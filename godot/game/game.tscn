@@ -39,6 +39,7 @@ render_target_update_mode = 4
 [node name="Environment" parent="EnvironmentTexture/EnvironmentViewport" instance=ExtResource("1_vykj5")]
 
 [node name="LevelTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -53,7 +54,6 @@ stretch_mode = 5
 
 [node name="LevelViewport" type="SubViewport" parent="LevelTexture"]
 unique_name_in_owner = true
-transparent_bg = true
 snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
 
