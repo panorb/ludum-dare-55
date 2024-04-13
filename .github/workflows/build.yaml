@@ -6,14 +6,9 @@ env:
   EXPORT_NAME: ludum-dare-55
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
   export-linux:
     name: Linux Export
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:4.2.1
     steps:
@@ -31,7 +26,7 @@ jobs:
           cd ./godot
           godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: linux
           path: build/linux
