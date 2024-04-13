@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wwe1ojobhi71"]
 
-[ext_resource type="Script" path="res://level/background.gd" id="1_c4stx"]
+[ext_resource type="Script" path="res://level/background/background.gd" id="1_c4stx"]
 
 [node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera_origin", "camera", "camera_focus")]
 script = ExtResource("1_c4stx")
