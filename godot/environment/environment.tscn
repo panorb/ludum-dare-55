@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://wwe1ojobhi71"]
 
-[ext_resource type="Script" path="res://level/background/background.gd" id="1_c4stx"]
+[ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywikl"]
 
@@ -11,10 +11,10 @@ sky_material = SubResource("ProceduralSkyMaterial_ywikl")
 background_mode = 2
 sky = SubResource("Sky_anvrc")
 
-[node name="background" type="Node3D" node_paths=PackedStringArray("camera_origin", "camera", "camera_focus")]
+[node name="Environment" type="Node3D" node_paths=PackedStringArray("camera_origin", "camera", "camera_focus")]
 script = ExtResource("1_c4stx")
 camera_origin = NodePath("CameraOrigin")
-camera = NodePath("CameraOrigin/Camera/SubViewportContainer/SubViewport/Camera3D")
+camera = NodePath("CameraOrigin/Camera/Camera3D")
 camera_focus = NodePath("CameraFocus")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -25,16 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554672, 0)
 [node name="Camera" type="Node3D" parent="CameraOrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CameraOrigin/Camera"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SubViewport" type="SubViewport" parent="CameraOrigin/Camera/SubViewportContainer"]
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="CameraOrigin/Camera/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+[node name="Camera3D" type="Camera3D" parent="CameraOrigin/Camera"]
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
