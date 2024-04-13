@@ -9,7 +9,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Godot
-        run: wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_linux.x86_64.zip && wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
+        run: |
+          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_linux.x86_64.zip 
+          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
 
       - name: Unzip Godot
         run: unzip Godot_v4.2.1-stable_export_templates.tpz && unzip Godot_v4.2.1-stable_linux.x86_64.zip
@@ -21,7 +23,9 @@ jobs:
         run: cp templates/* ~/.local/share/godot/export_templates/4.2.1.stable
 
       - name: Build for Web
-        run: ./Godot_v4.2.1-stable_linux.x86_64 --headless --export-release "Web" ./build/web/index.html
+        run: |
+          chmod +x Godot_v4.2.1-stable_linux.x86_64
+          ./Godot_v4.2.1-stable_linux.x86_64 --headless --export-release "Web" ./build/web/index.html
 
       #- run: ./Godot_v4.2.1-stable_linux.x86_64 --headless ./godot/project.godot --export-release "Web" ./build/web/index.html
 
