@@ -1,3 +1,4 @@
+
 extends Node2D
 
 
@@ -25,9 +26,9 @@ func _process(delta):
 		position += direction * 200 * delta
 		# when to the left, the sprite is flipped
 		if direction.x < 0:
-			$Node2D/Sprite2D.flip_v = true
+			$Sprite2D.flip_v = true
 		else:
-			$Node2D/Sprite2D.flip_v = false
+			$Sprite2D.flip_v = false
 
 		rotation = direction.angle()
 		
