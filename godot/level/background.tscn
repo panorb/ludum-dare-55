@@ -2,8 +2,24 @@
 
 [ext_resource type="Script" path="res://level/background.gd" id="1_c4stx"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera_origin", "camera", "camera_focus")]
 script = ExtResource("1_c4stx")
+camera_origin = NodePath("CameraOrigin")
+camera = NodePath("CameraOrigin/Camera/Camera3D")
+camera_focus = NodePath("CameraFocus")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554672, 0)
+
+[node name="CameraOrigin" type="Node3D" parent="."]
+
+[node name="Camera" type="Node3D" parent="CameraOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+
+[node name="Camera3D" type="Camera3D" parent="CameraOrigin/Camera"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+
+[node name="CameraFocus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
