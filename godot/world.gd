@@ -15,7 +15,8 @@ var scenes := {
 	get:
 		return current_scene_key
 	set(value):
-		self.remove_child(self.current_scene_node)
+		if self.current_scene != null:
+			self.remove_child(self.current_scene_node)
 		var next_scene: PackedScene = scenes[value]
 		var next_scene_node: Node = next_scene.instantiate()
 		self.add_child(next_scene_node)
