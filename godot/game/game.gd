@@ -19,8 +19,8 @@ func _input(event):
 	#		print(level_viewport.get_mouse_position())
 
 func _ready():
-	# _on_window_size_changed()
-	# get_tree().get_root().size_changed.connect(_on_window_size_changed)
+	_on_window_size_changed()
+	get_tree().get_root().size_changed.connect(_on_window_size_changed)
 	level.viewport_size = level_viewport.size
 	
 

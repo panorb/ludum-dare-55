@@ -57,10 +57,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.995021, 1)
 texture = SubResource("ViewportTexture_f6hiq")
 expand_mode = 3
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="LevelViewport" type="SubViewport" parent="LevelTexture"]
 unique_name_in_owner = true
