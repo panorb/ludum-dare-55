@@ -1,25 +1,38 @@
 name: Build
 on: [ push ]
+
+env:
+  GODOT_VERSION: 4.2.1
+  EXPORT_NAME: ludum-dare-55
+  PROJECT_PATH: ludum-dare-55
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Godot
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.2.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
         run: |
-          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_linux.x86_64.zip 
-          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
-      - name: Unzip Godot
-        run: unzip Godot_v4.2.1-stable_export_templates.tpz && unzip Godot_v4.2.1-stable_linux.x86_64.zip
-
-      - name: Make necessary directories
-        run: mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable && mkdir -p ./build/web/
-
-      - name: Copy export templates
-        run: cp templates/* ~/.local/share/godot/export_templates/4.2.1.stable
-
-      - name: Build for Web
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
         run: |
-          chmod +x Godot_v4.2.1-stable_linux.x86_64
-          ./Godot_v4.2.1-stable_linux.x86_64 --headless ./godot/project.godot --export-debug "Web" ./build/web/index.html
+          mkdir -v -p build/linux
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: linux
+          path: build/linux
