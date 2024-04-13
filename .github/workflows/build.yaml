@@ -22,4 +22,4 @@ jobs:
       - name: Build for Web
         run: |
           chmod +x Godot_v4.2.1-stable_linux.x86_64
-          ./Godot_v4.2.1-stable_linux.x86_64 --headless ./godot/project.godot --export "web" --export-debug ./build/web/index.html
+          ./Godot_v4.2.1-stable_linux.x86_64 --headless ./godot/project.godot --export-debug "Web" ./build/web/index.html
