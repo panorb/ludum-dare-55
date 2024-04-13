@@ -1,28 +1,28 @@
-name: Build
-on: [ push ]
+name: Build Godot Project
+
+on:
+  push: { }
+  pull_request: { }
 
 jobs:
-  build:
+  Godot:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        platform: [ linux, windows, mac ]
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Godot
-        run: |
-          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_linux.x86_64.zip 
-          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
-
-      - name: Unzip Godot
-        run: unzip Godot_v4.2.1-stable_export_templates.tpz && unzip Godot_v4.2.1-stable_linux.x86_64.zip
-
-      - name: Make necessary directories
-        run: mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable && mkdir -p ./build/web/
-
-      - name: Copy export templates
-        run: cp templates/* ~/.local/share/godot/export_templates/4.2.1.stable
-
-      - name: Build for Web
-        run: |
-          chmod +x Godot_v4.2.1-stable_linux.x86_64
-          ./Godot_v4.2.1-stable_linux.x86_64 --headless ./godot/project.godot --export-release "Web" ./build/web/index.html
+        with:
+          lfs: true
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@v1.4.1
+        with:
+          name: example
+          preset: ${{ matrix.platform }}
+          debugMode: "true"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Client - ${{ matrix.platform }}
+          path: "${{ github.workspace }}/${{ steps.build.outputs.build }}"
