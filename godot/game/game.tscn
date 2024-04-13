@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=5 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
 [ext_resource type="PackedScene" uid="uid://cwbdfcdw51eus" path="res://game/level.tscn" id="2_hvccx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbltk"]
+size = Vector2(80, 200)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_y27ob")
@@ -29,3 +32,15 @@ render_target_update_mode = 4
 [node name="Environment" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("1_vykj5")]
 
 [node name="Level" parent="." instance=ExtResource("2_hvccx")]
+
+[node name="MoveArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="Left" type="CollisionShape2D" parent="MoveArea"]
+position = Vector2(39, 92)
+shape = SubResource("RectangleShape2D_pbltk")
+
+[node name="Right" type="CollisionShape2D" parent="MoveArea"]
+position = Vector2(279, 92)
+shape = SubResource("RectangleShape2D_pbltk")

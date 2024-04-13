@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwbdfcdw51eus"]
+[gd_scene load_steps=3 format=3 uid="uid://cwbdfcdw51eus"]
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tympk"]
-size = Vector2(80, 200)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ou5fb")
@@ -23,14 +20,3 @@ render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 enabled = false
-
-[node name="MoveArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="Left" type="CollisionShape2D" parent="MoveArea"]
-position = Vector2(39, 92)
-shape = SubResource("RectangleShape2D_tympk")
-
-[node name="Right" type="CollisionShape2D" parent="MoveArea"]
-position = Vector2(279, 92)
-shape = SubResource("RectangleShape2D_tympk")
