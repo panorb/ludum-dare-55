@@ -28,6 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_tjoow")
+stretch_mode = 6
 
 [node name="EnvironmentViewport" type="SubViewport" parent="EnvironmentTexture"]
 unique_name_in_owner = true
@@ -44,13 +45,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.995021, 1)
 texture = SubResource("ViewportTexture_f6hiq")
-expand_mode = 2
+expand_mode = 3
 stretch_mode = 5
 
 [node name="LevelViewport" type="SubViewport" parent="LevelTexture"]
 unique_name_in_owner = true
 transparent_bg = true
+snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
 
 [node name="Level" parent="LevelTexture/LevelViewport" instance=ExtResource("2_hvccx")]
