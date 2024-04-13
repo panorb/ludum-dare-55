@@ -37,6 +37,7 @@ size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="Environment" parent="EnvironmentTexture/EnvironmentViewport" instance=ExtResource("1_vykj5")]
+unique_name_in_owner = true
 
 [node name="LevelTexture" type="TextureRect" parent="."]
 texture_filter = 1
@@ -58,3 +59,6 @@ snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
 
 [node name="Level" parent="LevelTexture/LevelViewport" instance=ExtResource("2_hvccx")]
+unique_name_in_owner = true
+
+[connection signal="gui_input" from="LevelTexture" to="." method="_on_level_texture_gui_input"]
