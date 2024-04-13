@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	if _is_displayed:
-		_dra_method.call()
+		_draw_method.call()
 
 func warn_about_laser(seconds: float):
 	_prepare_generic_properties(seconds)
