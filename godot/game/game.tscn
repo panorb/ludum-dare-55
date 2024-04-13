@@ -20,6 +20,15 @@ grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_y27ob")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="EnvironmentTexture" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -28,7 +37,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_tjoow")
-stretch_mode = 6
+expand_mode = 2
+stretch_mode = 5
 
 [node name="EnvironmentViewport" type="SubViewport" parent="EnvironmentTexture"]
 unique_name_in_owner = true

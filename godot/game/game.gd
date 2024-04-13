@@ -7,12 +7,8 @@ extends Control
 
 
 func _process(delta):
-	level.viewport_size = level_viewport.size
-
-	var x_offset = level.move_player_back_to_center()
-
-	print("level position:", level.position)
-	environment.move_view(x_offset * 0.0005)
+	var x_offset = level.move_player_back_to_center(delta)
+	environment.move_view(x_offset * delta * 0.015)
 
 
 
@@ -23,8 +19,8 @@ func _input(event):
 	#		print(level_viewport.get_mouse_position())
 
 func _ready():
-	_on_window_size_changed()
-	get_tree().get_root().size_changed.connect(_on_window_size_changed)
+	# _on_window_size_changed()
+	# get_tree().get_root().size_changed.connect(_on_window_size_changed)
 	level.viewport_size = level_viewport.size
 	
 
