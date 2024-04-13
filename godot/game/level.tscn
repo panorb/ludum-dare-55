@@ -1,12 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwbdfcdw51eus"]
+[gd_scene load_steps=2 format=3 uid="uid://cwbdfcdw51eus"]
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
-[ext_resource type="Script" path="res://entity/player.gd" id="1_xfmkh"]
 
-[node name="Foreground" type="Node2D"]
+[node name="Level" type="Node2D"]
 
-[node name="Node2D" parent="." instance=ExtResource("1_ex0qr")]
-script = ExtResource("1_xfmkh")
+[node name="Player" parent="." instance=ExtResource("1_ex0qr")]
+position = Vector2(157, 57)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 512.0

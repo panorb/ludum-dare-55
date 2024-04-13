@@ -1,9 +1,9 @@
 extends Node3D
 
 
-@export var camera_origin: Node3D
-@export var camera: Camera3D
-@export var camera_focus: Node3D
+@onready var camera_origin: Node3D = get_node("%CameraOrigin")
+@onready var camera: Camera3D = get_node("%Camera3D")
+@onready var camera_focus: Marker3D = get_node("%CameraFocus")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

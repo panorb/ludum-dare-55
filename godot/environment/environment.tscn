@@ -11,28 +11,28 @@ sky_material = SubResource("ProceduralSkyMaterial_ywikl")
 background_mode = 2
 sky = SubResource("Sky_anvrc")
 
-[node name="Environment" type="Node3D" node_paths=PackedStringArray("camera_origin", "camera", "camera_focus")]
+[node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
-camera_origin = NodePath("CameraOrigin")
-camera = NodePath("CameraOrigin/Camera/Camera3D")
-camera_focus = NodePath("CameraFocus")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554672, 0)
 
-[node name="CameraOrigin" type="Node3D" parent="."]
+[node name="Camera" type="Node" parent="."]
 
-[node name="Camera" type="Node3D" parent="CameraOrigin"]
+[node name="CameraOrigin" type="Node3D" parent="Camera"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
-
-[node name="Camera3D" type="Camera3D" parent="CameraOrigin/Camera"]
 current = true
+
+[node name="CameraFocus" type="Marker3D" parent="Camera"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
-
-[node name="CameraFocus" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_enxjm")
