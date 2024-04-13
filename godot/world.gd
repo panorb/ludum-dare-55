@@ -21,19 +21,13 @@ var scenes := {
 		self.add_child(next_scene_node)
 		self.current_scene_key = value
 		self.current_scene_node = next_scene_node
-		
+
 		if next_scene_node is MainMenu:
 			var main_menu_node = next_scene_node as MainMenu
 			main_menu_node.start_game.connect(_on_game_start)
-			
 
 func _ready():
 	self.current_scene = start_scene
 
 func _on_game_start():
-	print('start game')
-	self.current_scene = start_scene
-	
-func _on_game_start():
-	current_scene = 'game'
-
+	self.current_scene = 'game'
