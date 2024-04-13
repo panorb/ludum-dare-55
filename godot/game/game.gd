@@ -9,9 +9,10 @@ extends Control
 func _process(delta):
 	level.viewport_size = level_viewport.size
 
-	var offset = level.get_player_position()
+	var x_offset = level.move_player_back_to_center()
 
 	print("level position:", level.position)
+	environment.move_view(x_offset * 0.0005)
 
 
 

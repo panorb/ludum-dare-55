@@ -8,31 +8,33 @@
 script = ExtResource("1_ou5fb")
 
 [node name="Player" parent="." instance=ExtResource("1_ex0qr")]
+unique_name_in_owner = true
 position = Vector2(160, 90)
 
-[node name="Bullets" type="Node2D" parent="."]
+[node name="BulletContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(139, 29)
 
-[node name="Sprite2D" type="Sprite2D" parent="Bullets"]
+[node name="bullet" type="Sprite2D" parent="BulletContainer"]
 scale = Vector2(2.7912, -4.11901)
 texture = ExtResource("3_jxogx")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Bullets"]
+[node name="bullet2" type="Sprite2D" parent="BulletContainer"]
 position = Vector2(425, 333)
 scale = Vector2(2.7912, -4.11901)
 texture = ExtResource("3_jxogx")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Bullets"]
+[node name="bullet3" type="Sprite2D" parent="BulletContainer"]
 position = Vector2(333, 105)
 scale = Vector2(2.7912, -4.11901)
 texture = ExtResource("3_jxogx")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Bullets"]
+[node name="bullet4" type="Sprite2D" parent="BulletContainer"]
 position = Vector2(53, 282)
 scale = Vector2(2.7912, -4.11901)
 texture = ExtResource("3_jxogx")
 
-[node name="Sprite2D5" type="Sprite2D" parent="Bullets"]
+[node name="bullet5" type="Sprite2D" parent="BulletContainer"]
 position = Vector2(261, 220)
 scale = Vector2(2.7912, -4.11901)
 texture = ExtResource("3_jxogx")
