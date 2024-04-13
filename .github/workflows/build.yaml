@@ -4,7 +4,6 @@ on: [ push ]
 env:
   GODOT_VERSION: 4.2.1
   EXPORT_NAME: ludum-dare-55
-  PROJECT_PATH: ludum-dare-55
 
 jobs:
   build:
@@ -29,7 +28,6 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          cd $PROJECT_PATH
           godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
