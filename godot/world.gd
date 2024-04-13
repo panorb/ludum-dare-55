@@ -2,10 +2,11 @@ extends Node
 
 const start_scene := 'main_menu'
 
-const main_menu_scene := preload("res://gui/main_menu.tscn");
+const main_menu_scene := preload("res://gui/main_menu.tscn")
 
 var scenes := {
 	'main_menu': main_menu_scene,
+	'game': preload("res://game/game.tscn"),
 }
 
 @onready var current_scene_node: Node = null
@@ -31,3 +32,8 @@ func _ready():
 
 func _on_game_start():
 	print('start game')
+	self.current_scene = start_scene
+	
+func _on_game_start():
+	current_scene = 'game'
+
