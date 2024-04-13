@@ -39,6 +39,7 @@ render_target_update_mode = 4
 [node name="Environment" parent="EnvironmentTexture/EnvironmentViewport" instance=ExtResource("1_vykj5")]
 
 [node name="LevelTexture" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
