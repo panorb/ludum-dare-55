@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brvfogodmq4lt"]
+
+[ext_resource type="Script" path="res://game/obstacles/book.gd" id="1_qvh43"]
+[ext_resource type="Texture2D" uid="uid://c5etd2p6161dk" path="res://game/obstacles/book_placeholder.png" id="2_fslja"]
+
+[node name="Book" type="Area2D"]
+position = Vector2(1, -1)
+script = ExtResource("1_qvh43")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fslja")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-35, -32, 14, -64, 34, -64, 60, 10, 0, 59, -33, 62, -60, 56)
