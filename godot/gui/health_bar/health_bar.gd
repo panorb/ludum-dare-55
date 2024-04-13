@@ -15,11 +15,6 @@ func _ready():
 	_display_health = 100
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 # resets the health bar to its maximum. Providing a value allows setting the maximum directly
 func reset(value=null):
 	if value == null:
