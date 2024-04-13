@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=4 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
 [ext_resource type="PackedScene" uid="uid://cwbdfcdw51eus" path="res://game/level.tscn" id="2_hvccx"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_y27ob")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -19,6 +21,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+unique_name_in_owner = true
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4

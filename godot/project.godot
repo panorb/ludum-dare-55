@@ -26,6 +26,10 @@ window/size/window_height_override=720
 
 project/assembly_name="Ludum Dare 55"
 
+[layer_names]
+
+2d_physics/layer_1="player"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
