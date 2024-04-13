@@ -5,15 +5,15 @@ extends Control
 @onready var environment := %Environment
 @onready var level := %Level
 
-var run_no = 0
 
 func _process(delta):
-	var player_pos = level.get_player_position()
-	print(player_pos)
-	if abs(player_pos) > 0.6 and run_no < 17:
-		environment.move_view(player_pos)
-		level.move_view(player_pos)
-		run_no += 1
+	level.viewport_size = level_viewport.size
+
+	var offset = level.get_player_position()
+
+	print("level position:", level.position)
+
+
 
 func _input(event):
 	pass
