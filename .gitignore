@@ -9,3 +9,7 @@
 
 # Mac OS
 .DS_Store
+
+# build files
+
+godot/build/
