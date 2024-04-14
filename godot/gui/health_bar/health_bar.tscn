@@ -7,7 +7,10 @@
 
 [node name="HealthBar" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.101
+anchor_bottom = 0.033
+offset_right = -129.28
+offset_bottom = -23.76
 script = ExtResource("1_yvs56")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]

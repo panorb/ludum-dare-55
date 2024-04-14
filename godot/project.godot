@@ -21,19 +21,20 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/window_width_override=1280
 window/size/window_height_override=720
+window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="Ludum Dare 55"
 
-[layer_names]
-
-2d_physics/layer_1="player"
-
 [internationalization]
 
 locale/translations=PackedStringArray("res://translations.de.translation", "res://translations.en.translation")
 locale/test="de"
+
+[layer_names]
+
+2d_physics/layer_1="player"
 
 [rendering]
 

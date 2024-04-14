@@ -18,7 +18,7 @@ point_count = 4
 frames = 2
 frame_0/texture = ExtResource("2_olri8")
 frame_1/texture = ExtResource("3_wvbwr")
-frame_1/duration = 1.0
+frame_1/duration = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4v11"]
 transparency = 1
@@ -61,6 +61,7 @@ loop = false
 unique_name_in_owner = true
 transform = Transform3D(1.00001, 0, 0, 0, 0.997079, -0.076512, 0, 0.076512, 0.997079, 0, 0, 0)
 current = true
+fov = 37.8493
 
 [node name="CameraFocus" type="Marker3D" parent="Camera"]
 unique_name_in_owner = true

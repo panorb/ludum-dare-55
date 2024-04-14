@@ -6,9 +6,13 @@
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ou5fb")
 
-[node name="Player" parent="." instance=ExtResource("1_ex0qr")]
+[node name="EntityContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
 position = Vector2(160, 90)
 
-[node name="EntityContainer" type="Node2D" parent="."]
+[node name="Player2" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
+position = Vector2(160, 208)
