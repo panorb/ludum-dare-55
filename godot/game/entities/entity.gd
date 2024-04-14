@@ -10,13 +10,16 @@ func _ready():
 	body_entered.connect(on_body_entered)
 	pass # Replace with function body.
 
+func _move(delta):
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	_move(delta)
 
 func on_body_entered(body):
 	body.take_damage(damage)
+	body.inertia += (body.position-position).normalized()*700
 	#collision.emit(self)
 
 
