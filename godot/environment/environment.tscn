@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=7 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
+[ext_resource type="PackedScene" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="PackedScene" uid="uid://drcu04dhsxsyb" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywikl"]
 
@@ -13,9 +15,6 @@ sky = SubResource("Sky_anvrc")
 
 [node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554672, 0)
 
 [node name="Camera" type="Node" parent="."]
 
@@ -36,3 +35,9 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_enxjm")
+
+[node name="Wall" parent="." instance=ExtResource("2_dyitu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="Pentagram Table" parent="." instance=ExtResource("3_1oegr")]
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
