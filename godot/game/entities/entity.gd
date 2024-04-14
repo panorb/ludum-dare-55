@@ -3,6 +3,7 @@ extends Area2D
 
 signal collision(obstacle)
 
+var damage = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,8 +16,14 @@ func _process(delta):
 	pass
 
 func on_body_entered(body):
-	collision.emit(self)
+	body.take_damage(damage)
+	#collision.emit(self)
+
+
+#func on_player_entity_collision(hit_player, entity):
+	#hit_player.take_damage(50)
+	#pass
 
 func connect_signals(level):
-	collision.connect(level.on_player_entity_collision)
+	#collision.connect(level.on_player_entity_collision)
 	pass

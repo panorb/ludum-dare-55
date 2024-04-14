@@ -5,6 +5,10 @@ extends Control
 @onready var environment := %Environment
 @onready var level := %Level
 
+@onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
+@onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
+
+
 const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
 const BOOK = preload("res://game/entities/book.tscn")
@@ -30,7 +34,17 @@ func _ready():
 	_on_window_size_changed()
 	get_tree().get_root().size_changed.connect(_on_window_size_changed)
 	level.viewport_size = level_viewport.size
-	
+	var players = get_tree().get_nodes_in_group("player")
+	var health_bars = [health_bar_p1, health_bar_p2]
+	var player_count = 1
+	for i in range(player_count):
+		print("Activating player "+str(i+1))
+		players[i].set_active(true)
+		health_bars[i].set_player(players[i])
+	for i in range(player_count, len(health_bars)):
+		print("Deactivating player "+str(i+1))
+		players[i].set_active(false)
+		health_bars[i].set_player(null)
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
@@ -40,3 +54,4 @@ func _on_level_texture_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
 			print(event.position)
+
