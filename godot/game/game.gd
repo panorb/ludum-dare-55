@@ -4,6 +4,7 @@ extends Control
 @onready var environment_viewport := %EnvironmentViewport
 @onready var environment := %Environment
 @onready var level := %Level
+@onready var main_theme_sound = %MainThemeSound
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
