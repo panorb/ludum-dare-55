@@ -5,6 +5,9 @@ extends Node3D
 @onready var camera: Camera3D = get_node("%Camera3D")
 @onready var camera_focus: Marker3D = get_node("%CameraFocus")
 @onready var camera_follow: PathFollow3D = %PathFollow3D
+@onready var laser_origin = %LaserOrigin
+# TODO: eventually this needs to be removed
+@onready var laser = %Laser
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +38,7 @@ func rotate_cam_to_pos(angle: float):
 
 
 func move_camera_forward(delta:float):
+	return
 	camera_follow.progress_ratio += delta * 0.025
 	if camera_follow.progress_ratio >= 1:
 		camera_follow.progress_ratio = 1
