@@ -8,10 +8,6 @@ extends Control
 @onready var task_label := %TaskLabel
 @onready var persons_flow_container := %PersonsFlowContainer
 
-func _init(task_label: String, persons: PackedStringArray):
-	self.task_text = task_label
-	self.persons = persons
-
 func _ready():
 	task_label.text = tr(task_text)
 	for person: String in persons:
