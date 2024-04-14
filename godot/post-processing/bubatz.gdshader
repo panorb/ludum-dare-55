@@ -11,7 +11,7 @@ void vertex() {
 	modelViewMatrix = MODELVIEW_MATRIX;
 }
 
-const int NUMSTEPS = 16;
+const int NUMSTEPS = 6;
 const float MINHIT = 0.02;
 const float MAXDIST = 1000.0;
 const float infinity = 1.0 / 0.0;
@@ -256,7 +256,7 @@ vec4 raymarch(vec3 dir, vec3 origin, inout vec3 gnormal, inout bool ghit,inout v
 		pos = (rotationY(PI*.13*h+stime)*vec4(pos,1.)).xyz;
 
 		float time = TIME * stormStr*10.;
-		float nScale = 1.;
+		float nScale = 2.5;
 		float n = 2.5*fbm(pos.yx*4.*nScale+vec2(time*.2))*fbm(pos.yz*2.*nScale-vec2(.2*time));
 		//float n = fbm3f(pos+vec3(0.,0.,0.)*.02);
 		

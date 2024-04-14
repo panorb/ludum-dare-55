@@ -205,7 +205,7 @@ void fragment() {
 	
 	//ALPHA = max(0.,flameCol.x); //TODO
 	//flameCol.xyz = max(flameCol.xyz,col.www);
-	EMISSION = flameCol*.5;
+	EMISSION = col.xyz+flameCol;
 	ALPHA = max(col.w,flameCol.x);
 	ALBEDO = col.xyz+flameCol;//vec3(0.,1.,0.);
 	DEPTH = 1./length(gpos-CAMPOS+vec3(0.,-2.4,0.));
