@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
 [ext_resource type="PackedScene" uid="uid://cwbdfcdw51eus" path="res://game/level.tscn" id="2_hvccx"]
-[ext_resource type="Theme" path="res://gui/debug_theme.tres" id="4_1vvct"]
+[ext_resource type="Theme" uid="uid://b0ci0o4ry5ldo" path="res://gui/debug_theme.tres" id="4_1vvct"]
 [ext_resource type="PackedScene" uid="uid://colf3fgh55ffe" path="res://gui/health_bar/health_bar.tscn" id="5_0c5jd"]
 [ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
 

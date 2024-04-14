@@ -11,9 +11,6 @@ extends Control
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
-@onready var level = %Level
-@onready var environment = %Environment
-
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
