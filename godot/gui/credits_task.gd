@@ -14,6 +14,3 @@ func _ready():
 		var person_label := Label.new()
 		person_label.text = person
 		persons_flow_container.add_child(person_label)
-
-func _process(delta):
-	pass
