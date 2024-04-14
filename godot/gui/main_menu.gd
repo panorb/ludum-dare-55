@@ -34,7 +34,7 @@ func _on_quit_button_pressed() -> void:
 func _on_sound_slider_value_changed(volume_value: float) -> void:
 	var master_bus_index := AudioServer.get_bus_index('Master')
 	AudioServer.set_bus_volume_db (master_bus_index, linear_to_db(volume_value / 100))
-	sound_percent_label.text = "  %03d %%" % volume_value 
+	sound_percent_label.text = "  %d %%" % volume_value
 
 	#if volume_value <= 0 :
 	#	sound_image.texture = volume_mute_image
