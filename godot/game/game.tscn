@@ -151,5 +151,6 @@ size_flags_vertical = 2
 [node name="MainThemeSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_1xwjt")
+autoplay = true
 
 [connection signal="gui_input" from="LevelTexture" to="." method="_on_level_texture_gui_input"]

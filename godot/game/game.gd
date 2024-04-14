@@ -65,9 +65,6 @@ func _ready():
 		print("Deactivating player "+str(i+1))
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
-		
-	# Start game main theme
-	main_theme_sound.play()
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
