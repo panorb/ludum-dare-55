@@ -31,6 +31,10 @@ project/assembly_name="Ludum Dare 55"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://translations.de.translation", "res://translations.en.translation")

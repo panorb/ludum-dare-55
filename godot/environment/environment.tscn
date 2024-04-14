@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
+[ext_resource type="Texture2D" uid="uid://bnnewykijk300" path="res://environment/mage-outline1.png" id="2_7qpax"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
-[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
-[ext_resource type="Texture2D" uid="uid://xrna7f0m6g3e" path="res://environment/mage-outline2.png" id="3_wvbwr"]
+[ext_resource type="Texture2D" uid="uid://bhdmno1gm5kc4" path="res://environment/mage-outline2.png" id="3_xb2hv"]
 [ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
 [ext_resource type="PackedScene" uid="uid://cgh5s1sog4oqk" path="res://effects/laser.tscn" id="5_u8dhy"]
 [ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
@@ -19,8 +19,8 @@ point_count = 4
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_nn1f6"]
 frames = 2
-frame_0/texture = ExtResource("2_olri8")
-frame_1/texture = ExtResource("3_wvbwr")
+frame_0/texture = ExtResource("2_7qpax")
+frame_1/texture = ExtResource("3_xb2hv")
 frame_1/duration = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4v11"]
@@ -29,7 +29,7 @@ cull_mode = 2
 albedo_texture = SubResource("AnimatedTexture_nn1f6")
 billboard_mode = 1
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_pjsex"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_k2xbn"]
 material = SubResource("StandardMaterial3D_x4v11")
 size = Vector2(3.5, 7)
 orientation = 2
@@ -43,7 +43,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ywikl")
 background_mode = 2
 sky = SubResource("Sky_anvrc")
 tonemap_mode = 3
-ssao_enabled = true
 fog_enabled = true
 fog_light_energy = 0.11
 
@@ -92,7 +91,7 @@ omni_range = 14.905
 
 [node name="MageBillboard" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -3.2783e-07, 0, 3.2783e-07, 1, -4.13631, 3.18302, -3.82594)
-mesh = SubResource("PlaneMesh_pjsex")
+mesh = SubResource("PlaneMesh_k2xbn")
 skeleton = NodePath("")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
