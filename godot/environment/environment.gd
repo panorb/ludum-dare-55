@@ -19,6 +19,10 @@ func get_camera_position():
 var pos = 0.0
 
 
+func spawn_laser(game_coords:Vector2):
+	# TODO implement
+	pass
+
 func move_view(move_x: float):
 	var new_pos = get_camera_position() + move_x	
 	rotate_cam_to_pos(new_pos * 360.0)

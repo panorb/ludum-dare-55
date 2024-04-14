@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgh5s1sog4oqk"]
+[gd_scene load_steps=8 format=3 uid="uid://cgh5s1sog4oqk"]
 
+[ext_resource type="Script" path="res://effects/laser.gd" id="1_7h7w1"]
 [ext_resource type="Shader" path="res://laser.gdshader" id="1_j7niu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_15j5h"]
@@ -32,6 +33,7 @@ material = SubResource("StandardMaterial3D_4llxy")
 size = Vector2(0.2, 0.2)
 
 [node name="Laser" type="Node3D"]
+script = ExtResource("1_7h7w1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -15)

@@ -18,17 +18,26 @@ const BOOK = preload("res://game/entities/book.tscn")
 
 var delay = 0.0
 
+func window_to_game_coords(window_pos:Vector2)->Vector2:
+	var scaled_mouse_pos = window_pos / get_viewport_rect().size
+	
+	var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
+	var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
+
+	var res = Vector2(mouse_x, mouse_y)
+	print(res)
+
+	return res
+
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			var scaled_mouse_pos = event.position / get_viewport_rect().size
-			# scaled_mouse_pos = (scaled_mouse_pos) * 2.0 - Vector2(1.0, 1.0)
-			
-			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
-			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
-			level.move_indicator(Vector2(mouse_x, mouse_y))
-			aim_laser(event.position)
+			var mouse = window_to_game_coords(event.position)
+			var indicator = level.create_indicator(mouse)
+			aim_laser(event.position, indicator)
+
+			print(screen_to_game_coords(event.position))
 			
 
 func _process(delta):
@@ -93,12 +102,16 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 
 	return world_point
 
-func aim_laser(screen_space: Vector2):
-	var coords = project_screen_to_world(screen_space)
-	print("Coords: ", coords)
+func screen_to_game_coords(screen_pos: Vector2) -> Vector2:
+	var game_size = Vector2(level_viewport.size)
+	var screen_size = get_viewport_rect().size
+	return game_size * (screen_pos / screen_size)
+
+func aim_laser(screen_space: Vector2, indicator: Node2D):
 
 	# rotate the laser to point at the click
-	environment.laser.look_at(coords)
+	environment.laser.target = indicator
+	environment.laser.calculate_lookat = project_screen_to_world
 
 
 
