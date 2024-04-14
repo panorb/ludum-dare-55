@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1ntvyjxu8wn0"]
+
+[ext_resource type="Script" path="res://gui/logo/logo.gd" id="1_tc6vx"]
+[ext_resource type="Texture2D" uid="uid://bpqufuc7mceyg" path="res://gui/logo/logo.png" id="1_wfhr3"]
+[ext_resource type="Texture2D" uid="uid://bhwvntdjd1ysw" path="res://gui/logo/logo_swat.png" id="2_t2fv0"]
+[ext_resource type="Texture2D" uid="uid://do56wyklii6xg" path="res://gui/logo/logo_wand.png" id="3_m68ry"]
+[ext_resource type="Texture2D" uid="uid://tcgevbmwav7h" path="res://gui/logo/logo_i.png" id="4_a0fam"]
+
+[node name="Logo" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tc6vx")
+
+[node name="Swat" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 840.0
+offset_right = 1260.0
+offset_bottom = 1260.0
+texture = ExtResource("2_t2fv0")
+
+[node name="Wand" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -840.0
+offset_top = 840.0
+offset_right = -420.0
+offset_bottom = 1260.0
+texture = ExtResource("3_m68ry")
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 420.0
+texture = ExtResource("1_wfhr3")
+
+[node name="I" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 420.0
+texture = ExtResource("4_a0fam")
