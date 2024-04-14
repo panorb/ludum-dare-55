@@ -17,6 +17,7 @@ var pos = 0.0
 
 func move_view(move_x: float):
 	rotate_cam_to_pos((get_camera_position() + move_x) * 360.0)
+	return get_camera_position()
 
 func _process(delta):
 	pass

@@ -14,3 +14,6 @@ func get_player_offset(delta: float):
 func move_view(move_x: float):
 	player.position.x += move_x
 	bullets.position.x += move_x
+
+func get_level_view_x():
+	return bullets.position.x
