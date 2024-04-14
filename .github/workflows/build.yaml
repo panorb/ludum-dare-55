@@ -1,0 +1,43 @@
+name: Build
+on: [ push ]
+
+env:
+  GODOT_VERSION: 4.3-dev5
+  EXPORT_NAME: ludum-dare-55
+
+jobs:
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Build Docker image
+        run: docker build -t godot:latest .
+
+      - name: Setup and Linux Build
+        run: |
+          docker run --name godot-container -v "${{ github.workspace }}:/workspace" godot:latest /bin/bash -c "
+          mkdir -vp ~/.local/share/godot/export_templates/ &&
+            ls /root/.local/share/godot/export_templates/ &&
+            mv /root/.local/share/godot/export_templates/${GODOT_VERSION} ~/.local/share/godot/export_templates/${GODOT_VERSION} &&
+            mkdir -vp /workspace/build/linux &&
+            cd /workspace/godot &&
+            output=\$(godot --headless --verbose --export-release \"Linux/X11\" /workspace/build/linux/$EXPORT_NAME.x86_64) &&
+            echo \"\$output\" &&
+            echo \"\$output\" | grep 'with error' &&
+            if [ \$? -eq 0 ]; then
+              echo 'Error detected' &&
+              exit 1;
+            fi
+          "
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: build/linux
