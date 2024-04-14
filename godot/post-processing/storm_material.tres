@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cca7a0l7ulmd"]
+
+[ext_resource type="Shader" path="res://post-processing/bubatz.gdshader" id="1_v3p0k"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v3p0k")

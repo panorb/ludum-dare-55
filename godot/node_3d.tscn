@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnkyala4l432j"]
+
+[ext_resource type="PackedScene" uid="uid://clsu6t4ffof1y" path="res://room/room.tscn" id="1_gokgb"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.65259, 3.81232)
+
+[node name="room" parent="." instance=ExtResource("1_gokgb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.534286, 0, -0.0737271)

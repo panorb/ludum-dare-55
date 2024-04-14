@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=13 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
-[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
+[ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
+[ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
+[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="Texture2D" uid="uid://xrna7f0m6g3e" path="res://environment/mage-outline2.png" id="3_wvbwr"]
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
@@ -39,6 +41,14 @@ sky_material = SubResource("ProceduralSkyMaterial_ywikl")
 [sub_resource type="Environment" id="Environment_enxjm"]
 background_mode = 2
 sky = SubResource("Sky_anvrc")
+tonemap_mode = 3
+ssao_enabled = true
+fog_enabled = true
+fog_light_energy = 0.11
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qw3t7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3vo8l"]
 
 [node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
@@ -67,6 +77,18 @@ fov = 37.8493
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50482, 0)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5306, 0)
+light_color = Color(1, 0.396078, 0.329412, 1)
+light_energy = 5.097
+light_indirect_energy = 1.415
+light_volumetric_fog_energy = 1.646
+light_size = 9.32
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 14.905
+
 [node name="MageBillboard" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -3.2783e-07, 0, 3.2783e-07, 1, -4.13631, 3.18302, -3.82594)
 mesh = SubResource("PlaneMesh_pjsex")
@@ -86,3 +108,17 @@ transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Wall" parent="." instance=ExtResource("2_dyitu")]
 transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
+
+[node name="vfx" type="Node" parent="."]
+
+[node name="Pentagram" type="MeshInstance3D" parent="vfx"]
+transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, 4.23614, 0)
+material_override = ExtResource("5_4y8s5")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_qw3t7")
+
+[node name="Storm" type="MeshInstance3D" parent="vfx"]
+transform = Transform3D(19, 0, 0, 0, 5, 0, 0, 0, 19, 0, 5.1, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_3vo8l")
+surface_material_override/0 = ExtResource("6_804ct")
