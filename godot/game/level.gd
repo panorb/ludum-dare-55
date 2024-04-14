@@ -3,6 +3,7 @@ extends Node2D
 var viewport_size = Vector2.ONE
 @onready var player := %EntityContainer/Player
 @onready var entities := %EntityContainer
+@onready var indicator := %Indicator
 
 var total_level_width := 0.0
 
@@ -37,3 +38,6 @@ func _process(delta):
 		if dir == 0:
 			dir = -1
 		_add_book(dir*700+640, randi()%500, -dir*(300+randi()%200), randi() % 200-200)
+
+func move_indicator(pos):
+	indicator.position = pos
