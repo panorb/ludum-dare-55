@@ -23,7 +23,7 @@ func _input(event):
 			var scaled_mouse_pos = event.position / get_viewport_rect().size
 			# scaled_mouse_pos = (scaled_mouse_pos) * 2.0 - Vector2(1.0, 1.0)
 			
-			var mouse_x = level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
+			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			print(mouse_y)
 			level.move_indicator(Vector2(mouse_x, mouse_y))

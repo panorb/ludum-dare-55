@@ -18,7 +18,7 @@ position = Vector2(160, 90)
 unique_name_in_owner = true
 position = Vector2(160, 208)
 
-[node name="Indicator" type="Sprite2D" parent="."]
+[node name="Indicator" type="Sprite2D" parent="EntityContainer"]
 unique_name_in_owner = true
 scale = Vector2(0.0703125, 0.0703125)
 texture = ExtResource("3_2rxd3")
