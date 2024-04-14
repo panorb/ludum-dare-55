@@ -42,7 +42,6 @@ func set_health(value):
 	var old_value = _health
 	_health = value
 	health_changed.emit(old_value, value)
-	print(self.name+" "+str(old_value)+" -> "+str(_health))
 	if _health <= 0 and old_value > 0:
 		died.emit()
 		set_active(false)
