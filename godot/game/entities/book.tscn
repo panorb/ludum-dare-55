@@ -8,7 +8,9 @@ position = Vector2(1, -1)
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_1g6qc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
 texture = ExtResource("2_p4cxu")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

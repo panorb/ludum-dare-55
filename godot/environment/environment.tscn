@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=14 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
+[ext_resource type="Texture2D" uid="uid://xrna7f0m6g3e" path="res://environment/mage-outline2.png" id="3_wvbwr"]
 [ext_resource type="PackedScene" uid="uid://byhhke1gorudf" path="res://effects/laser.tscn" id="5_u8dhy"]
+[ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
 _data = {
@@ -12,6 +15,23 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_nn1f6"]
+frames = 2
+frame_0/texture = ExtResource("2_olri8")
+frame_1/texture = ExtResource("3_wvbwr")
+frame_1/duration = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4v11"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("AnimatedTexture_nn1f6")
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pjsex"]
+material = SubResource("StandardMaterial3D_x4v11")
+size = Vector2(3.5, 7)
+orientation = 2
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywikl"]
 
@@ -36,7 +56,7 @@ curve = SubResource("Curve3D_pj54b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Camera/CameraOrigin/CameraPath"]
 unique_name_in_owner = true
-transform = Transform3D(0.999964, 0, 0, 0, 0.99703, 0.0765084, 0, -0.076508, 0.997035, 0.00366211, 2.23651, 9.49927)
+transform = Transform3D(0.999976, 0, 0, 0, 0.997044, 0.0765091, 0, -0.0765091, 0.997045, 0.00366211, 2.23651, 9.49927)
 loop = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin/CameraPath/PathFollow3D"]
@@ -48,6 +68,11 @@ near = 0.1
 [node name="CameraFocus" type="Marker3D" parent="Camera"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50482, 0)
+
+[node name="MageBillboard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -3.2783e-07, 0, 3.2783e-07, 1, -4.13631, 3.18302, -3.82594)
+mesh = SubResource("PlaneMesh_pjsex")
+skeleton = NodePath("")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)

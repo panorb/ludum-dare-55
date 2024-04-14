@@ -3,16 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
 [ext_resource type="PackedScene" uid="uid://bnlpxmrn14w1p" path="res://effects/outline_renderer.tscn" id="3_8o68x"]
+[ext_resource type="Texture2D" uid="uid://i671xsa0afrl" path="res://effects/spark.tga" id="3_2rxd3"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ou5fb")
 
-[node name="Player" parent="." instance=ExtResource("1_ex0qr")]
+[node name="EntityContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
 position = Vector2(160, 90)
 
-[node name="EntityContainer" type="Node2D" parent="."]
+[node name="Player2" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
+position = Vector2(160, 208)
+
+[node name="Indicator" type="Sprite2D" parent="EntityContainer"]
+unique_name_in_owner = true
+scale = Vector2(0.0703125, 0.0703125)
+texture = ExtResource("3_2rxd3")
 
 [node name="OutlineRenderer" parent="." instance=ExtResource("3_8o68x")]
 position = Vector2(110, 59)
