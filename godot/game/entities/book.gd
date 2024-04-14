@@ -16,7 +16,7 @@ func init(start_x, start_y, speed_x, speed_y):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	body_entered.connect(on_body_entered)
+	super()
 
 func _move(delta):
 	position += speed*delta

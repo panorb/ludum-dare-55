@@ -44,9 +44,9 @@ func _process(delta):
 		velocity += direction * 200# * delta
 		# when to the left, the sprite is flipped
 		if direction.x < 0:
-			$Sprite2D.flip_v = true
+			$AnimatedSprite2D.flip_v = true
 		else:
-			$Sprite2D.flip_v = false
+			$AnimatedSprite2D.flip_v = false
 
 		rotation = direction.angle()
 	move_and_slide()
@@ -60,7 +60,6 @@ func set_health(value):
 	var old_value = _health
 	_health = value
 	health_changed.emit(old_value, value)
-	print(self.name+" "+str(old_value)+" -> "+str(_health))
 	if _health <= 0 and old_value > 0:
 		set_active(false)
 		died.emit()

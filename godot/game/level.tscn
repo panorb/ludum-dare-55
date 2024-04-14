@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
-[ext_resource type="Texture2D" uid="uid://b4a2cybfkbclq" path="res://gui/health_bar/hp_bar.png" id="3_jxogx"]
+[ext_resource type="Texture2D" uid="uid://i671xsa0afrl" path="res://effects/spark.tga" id="3_2rxd3"]
+[ext_resource type="PackedScene" uid="uid://bnlpxmrn14w1p" path="res://effects/outline_renderer.tscn" id="3_8o68x"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qfpql"]
 b = Vector2(1281, 0)
@@ -24,39 +25,15 @@ shape = SubResource("SegmentShape2D_qfpql")
 position = Vector2(0, 180)
 shape = SubResource("SegmentShape2D_qfpql")
 
-[node name="entity" type="Sprite2D" parent="EntityContainer"]
-visible = false
-scale = Vector2(2.7912, -4.11901)
-texture = ExtResource("3_jxogx")
-
-[node name="entity2" type="Sprite2D" parent="EntityContainer"]
-visible = false
-position = Vector2(425, 333)
-scale = Vector2(2.7912, -4.11901)
-texture = ExtResource("3_jxogx")
-
-[node name="entity3" type="Sprite2D" parent="EntityContainer"]
-visible = false
-position = Vector2(333, 105)
-scale = Vector2(2.7912, -4.11901)
-texture = ExtResource("3_jxogx")
-
-[node name="entity4" type="Sprite2D" parent="EntityContainer"]
-visible = false
-position = Vector2(53, 282)
-scale = Vector2(2.7912, -4.11901)
-texture = ExtResource("3_jxogx")
-
-[node name="entity5" type="Sprite2D" parent="EntityContainer"]
-visible = false
-position = Vector2(261, 220)
-scale = Vector2(2.7912, -4.11901)
-texture = ExtResource("3_jxogx")
-
 [node name="Player" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
 position = Vector2(160, 90)
 
 [node name="Player2" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
-position = Vector2(159, 145)
+position = Vector2(160, 208)
+
+[node name="Indicator" type="Sprite2D" parent="EntityContainer"]
+unique_name_in_owner = true
+scale = Vector2(0.0703125, 0.0703125)
+texture = ExtResource("3_2rxd3")
