@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
-[ext_resource type="SpriteFrames" uid="uid://ncbdtcp2yhn8" path="res://entity/fly.aseprite" id="3_rgm3d"]
+[ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mvob"]
 radius = 30.0
@@ -15,8 +15,6 @@ script = ExtResource("1_swjmm")
 shape = SubResource("CircleShape2D_4mvob")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("3_rgm3d")
+sprite_frames = ExtResource("2_t1qj1")
 animation = &"Flying"
 autoplay = "Flying"
-frame = 2
-frame_progress = 0.104763
