@@ -29,7 +29,11 @@ project/assembly_name="Ludum Dare 55"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray()
+
+[filesystem]
+
+import/blender/enabled=false
 
 [internationalization]
 

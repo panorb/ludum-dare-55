@@ -1,3 +1,11 @@
 keys,en,de
 WIN_MESSAGE,"You have won!","Du hast gewonnen!"
 LOSS_MESSAGE,"Unfortunately you died!","Du bist leider gestorben!"
+PROJECT_MANAGER,"Project manager","Projektmanager"
+PROGRAMMERS,"Programmers","Programmierer"
+ARTISTS,"Artists","Künstler"
+SOUND_DESIGNERS,"Sound designers","Sounddesigner"
+VFX,"VFX artists","VFX-Künstler"
+START_BUTTON,"Start","Starten"
+CREDITS_BUTTON,"Credits","Lorbeeren"
+QUIT_BUTTON,"Quit","Schließen"

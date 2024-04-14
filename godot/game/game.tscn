@@ -8,10 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
-viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
+viewport_path = NodePath("EnvironmentViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f6hiq"]
-viewport_path = NodePath("LevelTexture/LevelViewport")
+viewport_path = NodePath("LevelViewport")
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -24,6 +24,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_y27ob")
+
+[node name="LevelViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+size = Vector2i(640, 360)
+
+[node name="Level" parent="LevelViewport" instance=ExtResource("2_hvccx")]
+unique_name_in_owner = true
+
+[node name="EnvironmentViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Environment" parent="EnvironmentViewport" instance=ExtResource("1_vykj5")]
+unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -44,15 +62,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_tjoow")
 
-[node name="EnvironmentViewport" type="SubViewport" parent="EnvironmentTexture"]
-unique_name_in_owner = true
-handle_input_locally = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 4
-
-[node name="Environment" parent="EnvironmentTexture/EnvironmentViewport" instance=ExtResource("1_vykj5")]
-unique_name_in_owner = true
-
 [node name="LevelTexture" type="TextureRect" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
@@ -63,15 +72,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_f6hiq")
-
-[node name="LevelViewport" type="SubViewport" parent="LevelTexture"]
-unique_name_in_owner = true
-transparent_bg = true
-snap_2d_transforms_to_pixel = true
-size = Vector2i(640, 360)
-
-[node name="Level" parent="LevelTexture/LevelViewport" instance=ExtResource("2_hvccx")]
-unique_name_in_owner = true
 
 [node name="DebugContainer" type="VBoxContainer" parent="."]
 visible = false
