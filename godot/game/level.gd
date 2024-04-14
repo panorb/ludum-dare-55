@@ -37,3 +37,14 @@ func _process(delta):
 
 func on_player_entity_collision(entity):
 	pass
+
+func _input(event):
+	if event is InputEventMouseButton:
+		var mouse_pos = event.position
+
+		# get global coordinates on the near plane
+		var from = camera.project_ray_origin(mouse_pos)
+		var to = from + camera.project_ray_normal(mouse_pos)
+
+		print(from)
+		print(to)

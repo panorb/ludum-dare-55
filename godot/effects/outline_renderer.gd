@@ -13,5 +13,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# rotate
-	# element_to_render.rotation_degrees += Vector3(1, 1, 1) * 100 * delta
+	element_to_render.rotation_degrees += Vector3(1, 1, 1) * 100 * delta
 	pass

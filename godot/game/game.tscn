@@ -70,6 +70,7 @@ size = Vector2i(320, 180)
 
 [node name="Level" parent="LevelTexture/LevelViewport" instance=ExtResource("2_hvccx")]
 unique_name_in_owner = true
+visible = false
 
 [node name="DebugContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

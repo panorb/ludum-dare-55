@@ -22,6 +22,7 @@ transparent_bg = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 environment = ExtResource("2_285gu")
 projection = 1
+current = true
 size = 5.0
 
 [node name="ElementToRender" parent="Sprite2D/OutlineSubviewport" instance=ExtResource("3_xlqap")]

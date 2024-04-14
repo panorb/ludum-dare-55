@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=10 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
-[ext_resource type="PackedScene" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
+[ext_resource type="PackedScene" uid="uid://byhhke1gorudf" path="res://effects/laser.tscn" id="5_u8dhy"]
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
 _data = {
@@ -35,13 +36,14 @@ curve = SubResource("Curve3D_pj54b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Camera/CameraOrigin/CameraPath"]
 unique_name_in_owner = true
-transform = Transform3D(0.999976, 0, 0, 0, 0.997044, 0.0765094, 0, -0.0765093, 0.997045, 0.00366211, 2.23651, 9.49927)
+transform = Transform3D(0.999964, 0, 0, 0, 0.99703, 0.0765084, 0, -0.076508, 0.997035, 0.00366211, 2.23651, 9.49927)
 loop = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin/CameraPath/PathFollow3D"]
 unique_name_in_owner = true
 transform = Transform3D(1.00001, 0, 0, 0, 0.997079, -0.076512, 0, 0.076512, 0.997079, 0, 0, 0)
 current = true
+near = 0.1
 
 [node name="CameraFocus" type="Marker3D" parent="Camera"]
 unique_name_in_owner = true
@@ -61,3 +63,8 @@ transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Wall" parent="." instance=ExtResource("2_dyitu")]
 transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
+
+[node name="Laser" parent="." instance=ExtResource("5_u8dhy")]
+transform = Transform3D(0.00499924, 0.0165602, 2.75442e-05, 0, 0.315649, -0.00474438, -8.7262e-05, 0.948732, 0.001578, -0.118534, 1.67289, 0.177858)
+
+[node name="LaserSpawner" type="Marker3D" parent="."]
