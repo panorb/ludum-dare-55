@@ -8,7 +8,8 @@ radius = 30.0
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.367489, 0.367489)
-collision_mask = 0
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_swjmm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

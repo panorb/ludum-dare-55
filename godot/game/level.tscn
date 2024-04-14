@@ -3,13 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
 [ext_resource type="Texture2D" uid="uid://i671xsa0afrl" path="res://effects/spark.tga" id="3_2rxd3"]
-[ext_resource type="PackedScene" uid="uid://bnlpxmrn14w1p" path="res://effects/outline_renderer.tscn" id="3_8o68x"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qfpql"]
+b = Vector2(1281, 0)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ou5fb")
 
 [node name="EntityContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="VerticalBoundaries" type="StaticBody2D" parent="EntityContainer"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 4
+
+[node name="TopBorder" type="CollisionShape2D" parent="EntityContainer/VerticalBoundaries"]
+shape = SubResource("SegmentShape2D_qfpql")
+
+[node name="BottomBorder" type="CollisionShape2D" parent="EntityContainer/VerticalBoundaries"]
+position = Vector2(0, 295)
+shape = SubResource("SegmentShape2D_qfpql")
 
 [node name="Player" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
 unique_name_in_owner = true
@@ -23,8 +37,3 @@ position = Vector2(160, 208)
 unique_name_in_owner = true
 scale = Vector2(0.0703125, 0.0703125)
 texture = ExtResource("3_2rxd3")
-
-[node name="OutlineRenderer" parent="." instance=ExtResource("3_8o68x")]
-visible = false
-position = Vector2(110, 59)
-scale = Vector2(-0.266628, -0.266628)
