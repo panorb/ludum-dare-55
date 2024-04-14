@@ -1,6 +1,4 @@
-extends Area2D
-
-signal collision(obstacle)
+extends Entity
 
 const GRAVITY = 9
 
@@ -26,12 +24,7 @@ func _ready():
 func _process(delta):
 	if not initiated:
 		return
-	position.x += speed.x*delta
-	position.y += speed.y*delta
+	position += speed*delta
 	speed.y += GRAVITY
 	if position.y > 2000:
 		queue_free()
-
-
-func on_body_entered(body):
-	collision.emit(body, self)

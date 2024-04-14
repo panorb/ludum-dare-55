@@ -9,16 +9,23 @@ extends Node3D
 func _ready():
 	pass
 
+func get_camera_position():
+	return camera_origin.rotation_degrees.y / 360.0
 
 var pos = 0.0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pos += delta * 100
 
-	rotate_cam_to_pos(pos)
-	if pos > 360:
-		pos = 0
+func move_view(move_x: float):
+	rotate_cam_to_pos((get_camera_position() + move_x) * 360.0)
+	return get_camera_position()
+
+func _process(delta):
+	pass
+	#pos += delta * 100
+#
+#	rotate_cam_to_pos(pos)
+#	if pos > 360:
+#		pos = 0
 
 # angle in rads
 func rotate_cam_to_pos(angle: float):

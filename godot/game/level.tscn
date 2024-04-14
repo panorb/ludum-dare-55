@@ -2,39 +2,42 @@
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
-[ext_resource type="Script" path="res://game/obstacles/obstacles.gd" id="3_pnd1f"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tympk"]
-size = Vector2(80, 200)
+[ext_resource type="Script" path="res://game/entities/obstacles.gd" id="3_ako4q"]
+[ext_resource type="Texture2D" uid="uid://b4a2cybfkbclq" path="res://gui/health_bar/hp_bar.png" id="3_jxogx"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ou5fb")
 
 [node name="Player" parent="." instance=ExtResource("1_ex0qr")]
-position = Vector2(157, 57)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 512.0
-offset_bottom = 512.0
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-enabled = false
-
-[node name="MoveArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="Left" type="CollisionShape2D" parent="MoveArea"]
-position = Vector2(39, 92)
-shape = SubResource("RectangleShape2D_tympk")
-
-[node name="Right" type="CollisionShape2D" parent="MoveArea"]
-position = Vector2(279, 92)
-shape = SubResource("RectangleShape2D_tympk")
+unique_name_in_owner = true
+position = Vector2(160, 90)
 
 [node name="Obstacles" type="Node2D" parent="."]
-script = ExtResource("3_pnd1f")
+script = ExtResource("3_ako4q")
+
+[node name="EntityContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="entity" type="Sprite2D" parent="EntityContainer"]
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="entity2" type="Sprite2D" parent="EntityContainer"]
+position = Vector2(425, 333)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="entity3" type="Sprite2D" parent="EntityContainer"]
+position = Vector2(333, 105)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="entity4" type="Sprite2D" parent="EntityContainer"]
+position = Vector2(53, 282)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="entity5" type="Sprite2D" parent="EntityContainer"]
+position = Vector2(261, 220)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
