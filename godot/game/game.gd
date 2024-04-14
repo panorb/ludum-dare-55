@@ -28,7 +28,7 @@ func _input(event):
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			level.move_indicator(Vector2(mouse_x, mouse_y))
-			convert_screen_space_to_world_space(event.position)
+			aim_laser(event.position)
 			
 
 func _process(delta):
@@ -93,22 +93,13 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 
 	return world_point
 
-func convert_screen_space_to_world_space(screen_space: Vector2) -> Vector3:
+func aim_laser(screen_space: Vector2):
 	var coords = project_screen_to_world(screen_space)
 	print("Coords: ", coords)
 
-	var from = environment.laser_origin.position
-	var target_on_clip_plane = coords
+	# rotate the laser to point at the click
+	environment.laser.look_at(coords)
 
-	var transform = Transform3D.IDENTITY
-	# change the transforms rotation to point from the origin to the target
-
-	environment.laser.look_at(target_on_clip_plane)
-
-
-
-
-	return Vector3.ZERO
 
 
 

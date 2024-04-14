@@ -6,6 +6,7 @@ extends Node3D
 @onready var camera_focus: Marker3D = get_node("%CameraFocus")
 @onready var camera_follow: PathFollow3D = %PathFollow3D
 @onready var laser_origin = %LaserOrigin
+# TODO: eventually this needs to be removed
 @onready var laser = %Laser
 
 # Called when the node enters the scene tree for the first time.
