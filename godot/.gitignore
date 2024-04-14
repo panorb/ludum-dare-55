@@ -1,6 +1,0 @@
-# Godot 4+ specific ignores
-.godot/
-.vscode
-addons/
-translations.en.translation
-translations.de.translation
