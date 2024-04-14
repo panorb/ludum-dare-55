@@ -1,5 +1,9 @@
 {
-	"programmers":[
+	"PROJECT_MANAGER":[],
+	"PROGRAMMERS":[
 		"winie"
-	]
+	],
+	"ARTISTS":[],
+	"SOUND_DESIGNERS":[],
+	"VFX": [],
 }
