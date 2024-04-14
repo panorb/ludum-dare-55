@@ -7,9 +7,10 @@ extends Control
 
 
 func _process(delta):
-	var x_offset = level.move_player_back_to_center(delta)
-	environment.move_view(x_offset * delta * 0.015)
-
+	var x_offset = level.get_player_offset(delta)
+	if abs(x_offset) > 45.0:
+		level.move_view(x_offset * -delta * 1.45)
+		environment.move_view(x_offset * delta * 0.0005)
 
 
 func _input(event):
