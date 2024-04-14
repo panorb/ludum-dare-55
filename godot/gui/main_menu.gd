@@ -1,7 +1,6 @@
 class_name MainMenu extends Control
 
 signal start_game
-signal show_credits
 
 @onready var start_button := %StartButton
 @onready var credits_button := %CreditsButton
@@ -10,6 +9,7 @@ signal show_credits
 @onready var sound_percent_label := %SoundPercentLabel
 
 @onready var master_bus_name := 'Master'
+const credits_scene := preload("res://gui/credits.tscn")
 
 func _ready():	
 	start_button.pressed.connect(self._on_start_button_pressed);
@@ -23,7 +23,8 @@ func _ready():
 	sound_slider.value = 80;
 
 func _on_credits_button_pressed() -> void:
-	show_credits.emit()
+	var credits := credits_scene.instantiate()
+	add_child(credits)
 
 func _on_start_button_pressed() -> void:
 	start_game.emit()
