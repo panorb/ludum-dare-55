@@ -12,10 +12,10 @@
 shader = ExtResource("2_3sohm")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
-viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
+viewport_path = NodePath("EnvironmentViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f6hiq"]
-viewport_path = NodePath("LevelTexture/LevelViewport")
+viewport_path = NodePath("LevelViewport")
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -33,6 +33,27 @@ script = ExtResource("1_y27ob")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_70ec0")
+
+[node name="LevelViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+size = Vector2i(640, 360)
+
+[node name="Level" parent="LevelViewport" instance=ExtResource("2_hvccx")]
+unique_name_in_owner = true
+
+[node name="EnvironmentViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Environment" parent="EnvironmentViewport" instance=ExtResource("1_vykj5")]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,14 +77,12 @@ scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_tjoow")
 
 [node name="EnvironmentViewport" type="SubViewport" parent="EnvironmentTexture"]
-unique_name_in_owner = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="Environment" parent="EnvironmentTexture/EnvironmentViewport" instance=ExtResource("1_vykj5")]
-unique_name_in_owner = true
 
 [node name="LevelTexture" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -75,15 +94,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_f6hiq")
-
-[node name="LevelViewport" type="SubViewport" parent="LevelTexture"]
-unique_name_in_owner = true
-transparent_bg = true
-snap_2d_transforms_to_pixel = true
-size = Vector2i(640, 360)
-
-[node name="Level" parent="LevelTexture/LevelViewport" instance=ExtResource("2_hvccx")]
-unique_name_in_owner = true
 
 [node name="DebugContainer" type="VBoxContainer" parent="."]
 visible = false
