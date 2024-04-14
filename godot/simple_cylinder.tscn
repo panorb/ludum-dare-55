@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cddj04wilsj3k"]
+
+[ext_resource type="PackedScene" uid="uid://qw264onx1ih5" path="res://simple_cylinder.glb" id="1_xxr2u"]
+
+[node name="simple_cylinder" instance=ExtResource("1_xxr2u")]
