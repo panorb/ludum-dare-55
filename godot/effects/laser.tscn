@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://byhhke1gorudf"]
+[gd_scene load_steps=7 format=3 uid="uid://cgh5s1sog4oqk"]
 
 [ext_resource type="Shader" path="res://laser.gdshader" id="1_j7niu"]
 
@@ -34,6 +34,7 @@ size = Vector2(0.2, 0.2)
 [node name="Laser" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 mesh = SubResource("CapsuleMesh_il74j")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]

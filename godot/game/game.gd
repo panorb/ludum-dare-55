@@ -2,6 +2,7 @@ extends Control
 
 @onready var level_viewport := %LevelViewport
 @onready var environment_viewport := %EnvironmentViewport
+@onready var environment_texture: TextureRect = $EnvironmentTexture
 @onready var level_texture: TextureRect = $LevelTexture
 @onready var level_subviewport: SubViewport = %LevelViewport
 
@@ -29,6 +30,7 @@ func _input(event):
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			print(mouse_y)
 			level.move_indicator(Vector2(mouse_x, mouse_y))
+			convert_screen_space_to_world_space(event.position)
 			
 
 func _process(delta):
@@ -67,14 +69,40 @@ func _ready():
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
 
+func project_screen_to_world(screen_pos: Vector2) -> Vector3:
+	var camera = environment_viewport.get_camera_3d()
 
-func convert_screen_space_to_playworld_space(screen_space_position: Vector2) -> Vector2:
-	var a = (level_texture.size.x - level_texture.size.y / 180 * 320)/-2
+	var viewport_size = camera.get_viewport().get_visible_rect().size
+	var nx = (screen_pos.x / viewport_size.x) * 2.0 - 1.0
+	var ny = (1.0 - screen_pos.y / viewport_size.y) * 2.0 - 1.0  # Invert Y
 
-	var x_factor = (level_subviewport.size.x + a) / level_texture.size.x
-	var y_factor = level_subviewport.size.y / level_texture.size.y
+	# NDC to 3D point in camera space
+	# var near_plane_z = -camera.near  # Use negative near plane distance
+	var p_ndc = Vector4(nx, ny, -1, 1.0)
 
-	return (level_texture.get_global_transform().affine_inverse() * screen_space_position + Vector2(a, 0)) * 180 / level_texture.size.y
+	# Get the projection matrix and its inverse
+	var projection = camera.get_camera_projection()
+	var inv_projection = projection.inverse()
+
+	# Transform the NDC point by the inverse projection matrix
+	var p_camera = inv_projection * p_ndc
+
+	# Divide by w to get correct coordinates (perspective divide)
+	p_camera /= p_camera.w
+
+	# Transform the camera space point to world space
+	var world_point = camera.global_transform * Vector3(p_camera.x, p_camera.y, p_camera.z)
+
+	return world_point
+
+func convert_screen_space_to_world_space(screen_space: Vector2) -> Vector3:
+	var coords = project_screen_to_world(screen_space)
+	environment.indicator3d.position = coords
+	print("Coords: ", coords)
+
+	return Vector3.ZERO
+
+
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
