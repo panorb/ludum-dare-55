@@ -1,7 +1,6 @@
 extends Control
 
 const credits_persons := preload("res://gui/credits_persons.json")
-const credits_task := preload("res://gui/credits_task.tscn")
 
 @onready var main_v_box_container := %MainVBoxContainer
 
