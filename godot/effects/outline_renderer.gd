@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var outline_subviewport = %OutlineSubviewport
-@onready var outline_texture = %OutlineTexture
+# @onready var outline_texture = %OutlineTexture
 
 @onready var element_to_render = %ElementToRender
 

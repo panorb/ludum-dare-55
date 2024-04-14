@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnlpxmrn14w1p"]
 
 [ext_resource type="Script" path="res://effects/outline_renderer.gd" id="1_8mmff"]
-[ext_resource type="Environment" uid="uid://clrx4phn57gkf" path="res://effects/outline_renderer_env.tres" id="2_285gu"]
+[ext_resource type="Environment" uid="uid://crdrlosu51i0p" path="res://effects/outline_renderer_env.tres" id="2_285gu"]
 [ext_resource type="PackedScene" uid="uid://cddj04wilsj3k" path="res://simple_cylinder.tscn" id="3_xlqap"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_rljhj"]
