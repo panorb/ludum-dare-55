@@ -14,7 +14,6 @@ const BOOK = preload("res://game/entities/book.tscn")
 func _process(delta):
 	if vertical_boundaries:
 		vertical_boundaries.position.x = %Player.position.x - viewport_size.x
-		print("hi")
 
 func get_player_offset():
 	var center = Vector2(viewport_size / 2)

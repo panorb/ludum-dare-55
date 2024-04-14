@@ -8,7 +8,6 @@ var _max_health
 var _health
 var _display_health
 var _player
-var _initialized
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
