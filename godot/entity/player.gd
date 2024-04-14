@@ -27,9 +27,9 @@ func _process(delta):
 		position += direction * 200 * delta
 		# when to the left, the sprite is flipped
 		if direction.x < 0:
-			$Sprite2D.flip_v = true
+			$AnimatedSprite2D.flip_v = true
 		else:
-			$Sprite2D.flip_v = false
+			$AnimatedSprite2D.flip_v = false
 
 		rotation = direction.angle()
 
