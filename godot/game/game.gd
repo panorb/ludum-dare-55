@@ -66,7 +66,6 @@ func _ready():
 	#get_tree().get_root().size_changed.connect(_on_window_size_changed)
 	level.viewport_size = level_viewport.size
 	level.total_level_width = abs(get_level_x_from_environment_camera_pos(1.0))
-	level.set_world_size(Vector2(level.total_level_width, 180))
 	%TotalLevelWidthLabel.text = "Total level width: " + str(get_level_x_from_environment_camera_pos(1.0))
 	
 	var players = get_tree().get_nodes_in_group("player")
