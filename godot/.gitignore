@@ -2,4 +2,5 @@
 .godot/
 .vscode
 addons/
-
+translations.en.translation
+translations.de.translation
