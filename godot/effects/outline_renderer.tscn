@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnlpxmrn14w1p"]
+
+[ext_resource type="Script" path="res://effects/outline_renderer.gd" id="1_8mmff"]
+[ext_resource type="Environment" uid="uid://clrx4phn57gkf" path="res://effects/outline_renderer_env.tres" id="2_285gu"]
+[ext_resource type="PackedScene" uid="uid://cddj04wilsj3k" path="res://simple_cylinder.tscn" id="3_xlqap"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rljhj"]
+viewport_path = NodePath("Sprite2D/OutlineSubviewport")
+
+[node name="OutlineRenderer" type="Node2D"]
+script = ExtResource("1_8mmff")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_rljhj")
+
+[node name="OutlineSubviewport" type="SubViewport" parent="Sprite2D"]
+unique_name_in_owner = true
+own_world_3d = true
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="Sprite2D/OutlineSubviewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+environment = ExtResource("2_285gu")
+projection = 1
+current = true
+size = 5.0
+
+[node name="ElementToRender" parent="Sprite2D/OutlineSubviewport" instance=ExtResource("3_xlqap")]
+unique_name_in_owner = true
+transform = Transform3D(0.25, -0.433013, -0.866025, 0.866025, 0.5, 0, 0.433013, -0.75, 0.5, 0, 0, 0)

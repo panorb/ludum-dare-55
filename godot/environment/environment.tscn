@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=19 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
-[ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
-[ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
-[ext_resource type="Texture2D" uid="uid://c3srnspyaxxyk" path="res://environment/mage-outline1.png" id="2_olri8"]
 [ext_resource type="Texture2D" uid="uid://xrna7f0m6g3e" path="res://environment/mage-outline2.png" id="3_wvbwr"]
+[ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
+[ext_resource type="PackedScene" uid="uid://cgh5s1sog4oqk" path="res://effects/laser.tscn" id="5_u8dhy"]
+[ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
 _data = {
@@ -71,7 +72,7 @@ loop = false
 unique_name_in_owner = true
 transform = Transform3D(1.00001, 0, 0, 0, 0.997079, -0.076512, 0, 0.076512, 0.997079, 0, 0, 0)
 current = true
-fov = 37.8493
+near = 0.1
 
 [node name="CameraFocus" type="Marker3D" parent="Camera"]
 unique_name_in_owner = true
@@ -122,3 +123,11 @@ transform = Transform3D(19, 0, 0, 0, 5, 0, 0, 0, 19, 0, 5.1, 0)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_3vo8l")
 surface_material_override/0 = ExtResource("6_804ct")
+
+[node name="LaserOrigin" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39499, 0)
+
+[node name="Laser" parent="LaserOrigin" instance=ExtResource("5_u8dhy")]
+unique_name_in_owner = true
+transform = Transform3D(-0.00124345, -0.00484292, -8.46762e-08, -0.00469077, 0.00120438, -0.24869, 0.00120438, -0.000309233, -0.968583, 0, 0, 0)

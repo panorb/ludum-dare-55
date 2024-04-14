@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
 [ext_resource type="PackedScene" uid="uid://cwbdfcdw51eus" path="res://game/level.tscn" id="2_hvccx"]
-[ext_resource type="Theme" path="res://gui/debug_theme.tres" id="4_1vvct"]
+[ext_resource type="Theme" uid="uid://b0ci0o4ry5ldo" path="res://gui/debug_theme.tres" id="4_1vvct"]
 [ext_resource type="PackedScene" uid="uid://colf3fgh55ffe" path="res://gui/health_bar/health_bar.tscn" id="5_0c5jd"]
 [ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
 
@@ -18,6 +18,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -33,6 +35,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="EnvironmentTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,6 +54,7 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 
 [node name="LevelTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
