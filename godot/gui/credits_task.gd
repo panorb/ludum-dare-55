@@ -1,6 +1,7 @@
+@tool
 class_name CreditsTask
-
 extends Control
+
 
 @export var task_text: String
 @export var persons: PackedStringArray
@@ -9,7 +10,7 @@ extends Control
 @onready var persons_flow_container := %PersonsFlowContainer
 
 func _ready():
-	task_label.text = tr(task_text)
+	task_label.text = "[center][b]%s[/b][/center]" % tr(task_text)
 	for person: String in persons:
 		var person_label := Label.new()
 		person_label.text = person

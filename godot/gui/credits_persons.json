@@ -1,9 +1,18 @@
 {
-	"PROJECT_MANAGER":[],
-	"PROGRAMMERS":[
-		"winie"
+	"PROJECT_MANAGER":[
+		"Paul @panor"
 	],
-	"ARTISTS":[],
-	"SOUND_DESIGNERS":[],
+	"PROGRAMMERS":[
+		"Winie",
+		"Paul @panor",
+		"Stefan",
+		"Nick @niposch"
+	],
+	"ARTISTS":[
+		"GumiBear"
+	],
+	"SOUND_DESIGNERS":[
+		"@rougebluemulan"
+	],
 	"VFX": [],
 }

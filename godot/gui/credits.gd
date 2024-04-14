@@ -3,6 +3,8 @@ extends Control
 const credits_persons := preload("res://gui/credits_persons.json")
 const credits_task := preload("res://gui/credits_task.tscn")
 
+@onready var main_v_box_container := %MainVBoxContainer
+
 func _ready():
 	if credits_persons.data is Dictionary:
 		var persons = credits_persons.data as Dictionary
@@ -11,4 +13,4 @@ func _ready():
 			var credits_task_instance := credits_task.instantiate()
 			credits_task_instance.task_text = task_key
 			credits_task_instance.persons = persons_name
-			add_child(credits_task_instance)
+			main_v_box_container.add_child(credits_task_instance)
