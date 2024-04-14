@@ -7,6 +7,8 @@ extends Control
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
+@onready var level = %Level
+@onready var environment = %Environment
 
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
@@ -73,12 +75,6 @@ func convert_screen_space_to_playworld_space(screen_space_position: Vector2) -> 
 	var y_factor = level_subviewport.size.y / level_texture.size.y
 
 	return (level_texture.get_global_transform().affine_inverse() * screen_space_position + Vector2(a, 0)) * 180 / level_texture.size.y
-
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			var mouse_pos = event.position
-			print(convert_screen_space_to_playworld_space(mouse_pos))
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
