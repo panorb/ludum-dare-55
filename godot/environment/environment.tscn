@@ -1,6 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=9 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
+[ext_resource type="PackedScene" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
+[ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
+
+[sub_resource type="Curve3D" id="Curve3D_pj54b"]
+_data = {
+"points": PackedVector3Array(0, 0.233789, 3.04667, 0, -0.233789, -3.04667, 0.00366211, 2.23651, 9.49927, 0, 0.341045, 0.852647, 0, -0.341045, -0.852647, -0.000610352, 1.42455, 5.06643, 0, 0.426818, 1.2686, 0, -0.426818, -1.2686, -0.026123, 0.34983, 2.83204, 0, 0, 0, 0, 0, 0, 0.000456247, -1.90735e-06, 0.296077),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywikl"]
 
@@ -14,25 +24,40 @@ sky = SubResource("Sky_anvrc")
 [node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554672, 0)
-
 [node name="Camera" type="Node" parent="."]
 
 [node name="CameraOrigin" type="Node3D" parent="Camera"]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin"]
+[node name="CameraPath" type="Path3D" parent="Camera/CameraOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7229, 0.546591)
+curve = SubResource("Curve3D_pj54b")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Camera/CameraOrigin/CameraPath"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+transform = Transform3D(0.999976, 0, 0, 0, 0.997044, 0.0765094, 0, -0.0765093, 0.997045, 0.00366211, 2.23651, 9.49927)
+loop = false
+
+[node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin/CameraPath/PathFollow3D"]
+unique_name_in_owner = true
+transform = Transform3D(1.00001, 0, 0, 0, 0.997079, -0.076512, 0, 0.076512, 0.997079, 0, 0, 0)
 current = true
 
 [node name="CameraFocus" type="Marker3D" parent="Camera"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50482, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_enxjm")
+
+[node name="floor" parent="." instance=ExtResource("2_wtw0m")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 10, 0)
+
+[node name="Pentagram Table" parent="." instance=ExtResource("3_1oegr")]
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Wall" parent="." instance=ExtResource("2_dyitu")]
+transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
