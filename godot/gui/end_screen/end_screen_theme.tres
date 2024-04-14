@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dcf3ucut4uyki"]
+
+[ext_resource type="FontFile" uid="uid://nwbgykkf6qrk" path="res://gui/roboto-medium.ttf" id="1_wmwvi"]
+
+[resource]
+HBoxContainer/constants/separation = 10
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("1_wmwvi")
+VBoxContainer/constants/separation = 10

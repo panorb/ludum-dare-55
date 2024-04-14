@@ -1,20 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwbdfcdw51eus"]
+[gd_scene load_steps=4 format=3 uid="uid://cwbdfcdw51eus"]
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
+[ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
+[ext_resource type="Texture2D" uid="uid://b4a2cybfkbclq" path="res://gui/health_bar/hp_bar.png" id="3_jxogx"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_ou5fb")
 
 [node name="Player" parent="." instance=ExtResource("1_ex0qr")]
-position = Vector2(157, 57)
+unique_name_in_owner = true
+position = Vector2(160, 90)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 512.0
-offset_bottom = 512.0
+[node name="BulletContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
+[node name="bullet" type="Sprite2D" parent="BulletContainer"]
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
 
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-enabled = false
+[node name="bullet2" type="Sprite2D" parent="BulletContainer"]
+position = Vector2(425, 333)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="bullet3" type="Sprite2D" parent="BulletContainer"]
+position = Vector2(333, 105)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="bullet4" type="Sprite2D" parent="BulletContainer"]
+position = Vector2(53, 282)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")
+
+[node name="bullet5" type="Sprite2D" parent="BulletContainer"]
+position = Vector2(261, 220)
+scale = Vector2(2.7912, -4.11901)
+texture = ExtResource("3_jxogx")

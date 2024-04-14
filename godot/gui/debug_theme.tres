@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b0ci0o4ry5ldo"]
+
+[ext_resource type="FontFile" uid="uid://nwbgykkf6qrk" path="res://gui/roboto-medium.ttf" id="1_cvrt1"]
+
+[resource]
+Label/font_sizes/font_size = 42
+Label/fonts/font = ExtResource("1_cvrt1")
