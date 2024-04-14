@@ -17,24 +17,24 @@ var pos = 0.0
 
 
 func move_view(move_x: float):
-	rotate_cam_to_pos((get_camera_position() + move_x) * 360.0)
-	return get_camera_position()
+	var new_pos = get_camera_position() + move_x	
+	rotate_cam_to_pos(new_pos * 360.0)
 
 func _process(delta):
 	move_camera_forward(delta)
 	camera.look_at(camera_focus.global_transform.origin, Vector3(0, 1, 0))
 	#pos += delta * 100
-#
-#	rotate_cam_to_pos(pos)
-#	if pos > 360:
-#		pos = 0
+
+	# rotate_cam_to_pos(pos)
+	if pos > 360:
+		pos = 0
 
 # angle in rads
 func rotate_cam_to_pos(angle: float):
-	camera_origin.rotation = Vector3(0,deg_to_rad(angle),0)
+	camera_origin.rotation = Vector3(0,deg_to_rad(fmod(angle, 360.0)),0)
 
 
 func move_camera_forward(delta:float):
-	camera_follow.progress_ratio += delta * 0.1
+	camera_follow.progress_ratio += delta * 0.025
 	if camera_follow.progress_ratio >= 1:
 		camera_follow.progress_ratio = 1
