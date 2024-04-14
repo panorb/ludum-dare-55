@@ -4,6 +4,7 @@ extends Control
 @onready var environment_viewport := %EnvironmentViewport
 @onready var environment := %Environment
 @onready var level := %Level
+@onready var main_theme_sound = %MainThemeSound
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
@@ -64,6 +65,9 @@ func _ready():
 		print("Deactivating player "+str(i+1))
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
+		
+	# Start game main theme
+	main_theme_sound.play()
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
