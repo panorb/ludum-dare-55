@@ -5,7 +5,8 @@ extends Node3D
 @onready var camera: Camera3D = get_node("%Camera3D")
 @onready var camera_focus: Marker3D = get_node("%CameraFocus")
 @onready var camera_follow: PathFollow3D = %PathFollow3D
-@onready var indicator3d = %Indicator3D
+@onready var laser_origin = %LaserOrigin
+@onready var laser = %Laser
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

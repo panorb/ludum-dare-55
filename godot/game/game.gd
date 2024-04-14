@@ -97,8 +97,18 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 
 func convert_screen_space_to_world_space(screen_space: Vector2) -> Vector3:
 	var coords = project_screen_to_world(screen_space)
-	environment.indicator3d.position = coords
 	print("Coords: ", coords)
+
+	var from = environment.laser_origin.position
+	var target_on_clip_plane = coords
+
+	var transform = Transform3D.IDENTITY
+	# change the transforms rotation to point from the origin to the target
+
+	environment.laser.look_at(target_on_clip_plane)
+
+
+
 
 	return Vector3.ZERO
 

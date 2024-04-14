@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=15 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
@@ -40,10 +40,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ywikl")
 [sub_resource type="Environment" id="Environment_enxjm"]
 background_mode = 2
 sky = SubResource("Sky_anvrc")
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_m1frd"]
-radius = 0.08
-height = 0.2
 
 [node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
@@ -92,12 +88,10 @@ transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
 [node name="Wall" parent="." instance=ExtResource("2_dyitu")]
 transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
 
-[node name="LaserSpawner" type="Marker3D" parent="."]
+[node name="LaserOrigin" type="Marker3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39499, 0)
 
-[node name="Laser" parent="LaserSpawner" instance=ExtResource("5_u8dhy")]
-transform = Transform3D(0.005, 0, 0, 0, 0.24869, -0.00484291, 0, 0.968584, 0.00124345, 0, 0, 0)
-
-[node name="Indicator3D" type="MeshInstance3D" parent="."]
+[node name="Laser" parent="LaserOrigin" instance=ExtResource("5_u8dhy")]
 unique_name_in_owner = true
-mesh = SubResource("CapsuleMesh_m1frd")
+transform = Transform3D(-0.00124345, -0.00484292, -8.46762e-08, -0.00469077, 0.00120438, -0.24869, 0.00120438, -0.000309233, -0.968583, 0, 0, 0)

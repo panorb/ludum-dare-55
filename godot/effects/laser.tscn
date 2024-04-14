@@ -34,7 +34,7 @@ size = Vector2(0.2, 0.2)
 [node name="Laser" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -15)
 mesh = SubResource("CapsuleMesh_il74j")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
