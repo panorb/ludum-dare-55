@@ -1,6 +1,7 @@
 class_name MainMenu extends Control
 
 signal start_game
+signal show_credits
 
 @onready var start_button := %StartButton
 @onready var credits_button := %CreditsButton
@@ -12,6 +13,7 @@ signal start_game
 
 func _ready():	
 	start_button.pressed.connect(self._on_start_button_pressed);
+	credits_button.pressed.connect(self._on_credits_button_pressed)
 	quit_button.pressed.connect(self._on_quit_button_pressed);
 	sound_slider.value_changed.connect(self._on_sound_slider_value_changed);
 	
@@ -19,6 +21,9 @@ func _ready():
 		quit_button.visible = false
 		
 	sound_slider.value = 80;
+
+func _on_credits_button_pressed() -> void:
+	show_credits.emit()
 
 func _on_start_button_pressed() -> void:
 	start_game.emit()
