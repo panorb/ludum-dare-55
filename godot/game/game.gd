@@ -7,6 +7,7 @@ extends Control
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
+const BOOK = preload("res://game/entities/book.tscn")
 
 func _process(delta):
 	var x_offset = level.get_player_offset(delta)
