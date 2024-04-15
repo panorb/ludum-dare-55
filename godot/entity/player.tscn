@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
-[ext_resource type="Texture2D" uid="uid://bcsurtirug22h" path="res://entity/Iron_fly.png" id="2_f7rtm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
+[ext_resource type="Texture2D" uid="uid://c4u477p1xchnc" path="res://entity/Iron_fly_2 (1) small.png" id="2_v8w17"]
 [ext_resource type="Texture2D" uid="uid://dtpg4tye45us4" path="res://entity/invulnerability_shield.png" id="4_ygynb"]
 [ext_resource type="Texture2D" uid="uid://bjyvn7dlflxgk" path="res://entity/Fly_dash.png" id="5_p78o1"]
 [ext_resource type="AudioStream" uid="uid://btswe2ycoh2xs" path="res://gui/dialog/hurt.ogg" id="6_o6s4r"]
@@ -60,7 +60,7 @@ script = ExtResource("1_swjmm")
 visible = false
 position = Vector2(4.76837e-07, 0)
 scale = Vector2(0.723715, 0.723715)
-texture = ExtResource("2_f7rtm")
+texture = ExtResource("2_v8w17")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
