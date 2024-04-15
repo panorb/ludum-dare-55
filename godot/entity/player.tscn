@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://36yf2lknh4wl"]
+[gd_scene load_steps=13 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
 [ext_resource type="Texture2D" uid="uid://bcsurtirug22h" path="res://entity/Iron_fly.png" id="2_f7rtm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 [ext_resource type="Texture2D" uid="uid://dtpg4tye45us4" path="res://entity/invulnerability_shield.png" id="4_ygynb"]
 [ext_resource type="Texture2D" uid="uid://bjyvn7dlflxgk" path="res://entity/Fly_dash.png" id="5_p78o1"]
+[ext_resource type="AudioStream" uid="uid://btswe2ycoh2xs" path="res://gui/dialog/hurt.ogg" id="6_o6s4r"]
+[ext_resource type="AudioStream" uid="uid://b41v1fgkr3pm5" path="res://gui/dialog/healing.ogg" id="7_isv2o"]
+[ext_resource type="AudioStream" uid="uid://cs78s1gedr715" path="res://gui/dialog/boost.ogg" id="7_thunn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
 radius = 21.7694
@@ -92,3 +95,18 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_2mia2")
 }
+
+[node name="DamageTaken" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_o6s4r")
+bus = &"SFX"
+
+[node name="Healing" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_isv2o")
+volume_db = 4.0
+
+[node name="Boost" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_thunn")
+volume_db = 4.0
