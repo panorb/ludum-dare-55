@@ -28,7 +28,7 @@ func _process(delta):
 
 func on_body_entered(body):
 	body.take_damage(damage)
-	body.inertia += (body.position-position).normalized()*700
+	body.inertia += (body.position-position).normalized()*1000
 	#collision.emit(self)
 
 

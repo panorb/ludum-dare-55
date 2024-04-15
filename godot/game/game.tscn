@@ -110,7 +110,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="UIOverlay" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Grid" type="GridContainer" parent="UIOverlay"]
 anchors_preset = 15

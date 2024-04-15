@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4mvob"]
-radius = 30.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
+radius = 21.7694
+height = 81.6351
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.367489, 0.367489)
@@ -13,9 +14,15 @@ collision_mask = 3
 script = ExtResource("1_swjmm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_4mvob")
+shape = SubResource("CapsuleShape2D_ds8wa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(15, 25)
+rotation = -0.785398
+scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_t1qj1")
 animation = &"Flying"
 autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
