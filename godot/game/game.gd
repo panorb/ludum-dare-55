@@ -132,7 +132,7 @@ func _ready():
 	game_timer = Timer.new()
 	add_child(game_timer)
 	game_timer.start(180)
-	game_timer.connect("timeout", on_game_timeout)
+	game_timer.timeout.connect(on_game_timeout)
 
 func on_game_timeout():
 	print("you win")
