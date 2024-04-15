@@ -36,7 +36,6 @@ func _input(event):
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			level.move_indicator(Vector2(mouse_x, mouse_y))
-			aim_laser(event.position)
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
@@ -148,6 +147,10 @@ func _ready():
 		players[i].health_changed.connect(environment.on_player_health_changed)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
+	environment.laser.laser_target = level.indicator
+	environment.laser.environment_viewport = environment_viewport
+	environment.laser.level_viewport = level_viewport
+
 func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
@@ -162,40 +165,6 @@ func _on_player_death():
 		game_timer.stop()
 		print("you lose")
 		show_lose_screen.emit()
-
-func project_screen_to_world(screen_pos: Vector2) -> Vector3:
-	var camera = environment_viewport.get_camera_3d()
-	var viewport_size = camera.get_viewport().get_visible_rect().size
-	var nx = (screen_pos.x / viewport_size.x) * 2.0 - 1.0
-	var ny = (1.0 - screen_pos.y / viewport_size.y) * 2.0 - 1.0  # Invert Y
-
-	# NDC to 3D point in camera space
-	# var near_plane_z = -camera.near  # Use negative near plane distance
-	var p_ndc = Vector4(nx, ny, -1, 1.0)
-
-	# Get the projection matrix and its inverse
-	var projection = camera.get_camera_projection()
-	var inv_projection = projection.inverse()
-
-	# Transform the NDC point by the inverse projection matrix
-	var p_camera = inv_projection * p_ndc
-
-	# Divide by w to get correct coordinates (perspective divide)
-	p_camera /= p_camera.w
-
-	# Transform the camera space point to world space
-	var world_point = camera.global_transform * Vector3(p_camera.x, p_camera.y, p_camera.z)
-
-	return world_point
-
-func aim_laser(screen_space: Vector2):
-	var environment_dimensions = Vector2(environment_viewport.size)
-	var environment_coords = screen_space * environment_dimensions / get_viewport_rect().size
-	var coords = project_screen_to_world(environment_coords)
-	print("Coords: ", coords)
-
-	# rotate the laser to point at the click
-	environment.laser.look_at(coords)
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
