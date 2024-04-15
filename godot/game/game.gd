@@ -75,7 +75,7 @@ func _process(delta):
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
 	var r = randi()%300
-	if r > 0 and r <= 10:
+	if r > 0 and r <= 7:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
@@ -87,6 +87,9 @@ func _process(delta):
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 		environment.feedback("spawn_object")
+	if r == 8 and level.get_laser_count() < 4:
+		var player_pos = get_tree().get_nodes_in_group("player")[0].position
+		spawn_laser(player_pos+Vector2(randi()%1280-640, randi()%720-360))
 	
 	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
 	

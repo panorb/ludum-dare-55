@@ -69,6 +69,9 @@ func _add_powerup(x, y, speed_x, speed_y, type=PowerUps.HEAL):
 	powerup.connect_signals(self)
 	entities.add_child(powerup)
 
+func get_laser_count():
+	return laser_target_container.get_child_count()
+
 func page_spawn(book):
 	var page = PAGE.instantiate()
 	page.position = book.position
