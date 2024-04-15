@@ -86,6 +86,8 @@ func _process(delta):
 		var laser_pos = Vector2(randi()%1280-640, randi()%720-360)
 		if (player_pos-laser_pos).length() > 100:
 			spawn_laser(player_pos+laser_pos)
+			var impactSound: AudioStreamPlayer = %LaserImpactSound
+			impactSound.play()
 	
 	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
 	
