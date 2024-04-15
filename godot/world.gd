@@ -34,6 +34,11 @@ var scenes := {
 		elif next_scene_node is WinScreen:
 			var win_node = next_scene_node as WinScreen
 			win_node.show_main_menu.connect(_on_show_main_menu)
+		elif next_scene_node is Game:
+			var game_node = next_scene_node as Game
+			game_node.show_lose_screen.connect(_on_show_lose_screen)
+			game_node.show_win_screen.connect(_on_show_win_screen)
+
 
 func _ready():
 	self.current_scene = start_scene
@@ -44,3 +49,9 @@ func _on_game_start():
 
 func _on_show_main_menu():
 	self.current_scene = 'main_menu'
+
+func _on_show_lose_screen():
+	self.current_scene = 'lose_screen'
+
+func _on_show_win_screen():
+	self.current_scene = 'win_screen'

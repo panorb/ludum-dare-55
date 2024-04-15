@@ -31,5 +31,4 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("restart_game"):
-		pass
-		# Hier Umschalten!
+		show_main_menu.emit()
