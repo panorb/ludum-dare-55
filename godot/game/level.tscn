@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwbdfcdw51eus"]
+[gd_scene load_steps=4 format=3 uid="uid://cwbdfcdw51eus"]
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
-[ext_resource type="PackedScene" uid="uid://dhvpqf3nu5r35" path="res://game/laser_indicator.tscn" id="3_v5rsi"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qfpql"]
 b = Vector2(1281, 0)
@@ -48,6 +47,4 @@ color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 8.16351, -8.16351, 16.327, 0, 8.16351, 8.16351)
 
 [node name="LaserTargetContainer" type="Node2D" parent="EntityContainer"]
-
-[node name="Indicator" parent="EntityContainer/LaserTargetContainer" instance=ExtResource("3_v5rsi")]
 unique_name_in_owner = true

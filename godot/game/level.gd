@@ -4,7 +4,7 @@ var viewport_size := Vector2.ONE
 var size
 #@onready var player := %EntityContainer/Player
 @onready var entities := %EntityContainer
-@onready var indicator := %Indicator
+@onready var laser_target_container := %LaserTargetContainer
 @onready var vertical_boundaries := %VerticalBoundaries
 @onready var player = %Player
 @onready var player_2 = %Player2
@@ -67,6 +67,3 @@ func _add_powerup(x, y, speed_x, speed_y, type=PowerUps.HEAL):
 	powerup.init(x, y, speed_x, speed_y)
 	powerup.connect_signals(self)
 	entities.add_child(powerup)
-
-func move_indicator(pos):
-	indicator.position = pos
