@@ -99,7 +99,7 @@ func _process(delta):
 	direction = target - position
 	
 	
-	if direction.length() > 2:
+	if direction.length() > 10:
 		direction = direction.normalized()
 	
 		velocity += direction * speed * delta
