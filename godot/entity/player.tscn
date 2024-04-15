@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://36yf2lknh4wl"]
+[gd_scene load_steps=15 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
 [ext_resource type="Texture2D" uid="uid://bcsurtirug22h" path="res://entity/Iron_fly.png" id="2_f7rtm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 [ext_resource type="Texture2D" uid="uid://dtpg4tye45us4" path="res://entity/invulnerability_shield.png" id="4_ygynb"]
 [ext_resource type="Texture2D" uid="uid://bjyvn7dlflxgk" path="res://entity/Fly_dash.png" id="5_p78o1"]
+[ext_resource type="AudioStream" uid="uid://dcc3c2np7j4pe" path="res://entity/fly_sounds/gotHit.ogg" id="6_68seq"]
+[ext_resource type="AudioStream" uid="uid://cnsireueolsxn" path="res://entity/fly_sounds/flyHitVoice-01.ogg" id="7_xdjtj"]
+[ext_resource type="AudioStream" uid="uid://b6b3x8ooy86t7" path="res://entity/fly_sounds/flyHitVoice-02.ogg" id="8_xg4aj"]
+[ext_resource type="AudioStream" uid="uid://cfqt73c5duw4r" path="res://entity/fly_sounds/flyHitVoice-03.ogg" id="9_lto8q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
 radius = 21.7694
@@ -46,6 +50,15 @@ _data = {
 "RESET": SubResource("Animation_3w6pp"),
 "dash": SubResource("Animation_6r10s")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k30c7"]
+streams_count = 3
+stream_0/stream = ExtResource("7_xdjtj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_xg4aj")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_lto8q")
+stream_2/weight = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.367489, 0.367489)
@@ -92,3 +105,13 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_2mia2")
 }
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_68seq")
+bus = &"SFX"
+
+[node name="HitSoundVoice" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_k30c7")
+bus = &"SFX"

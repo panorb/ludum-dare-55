@@ -7,7 +7,6 @@ extends CharacterBody2D
 @onready var main_sprite = $AnimatedSprite2D
 @onready var dash_sprite = $DashSprite
 
-
 signal health_changed(old_health, new_health)
 signal max_health_changed(old_maximum, new_maximum)
 signal died
@@ -150,6 +149,11 @@ func take_damage(value):
 	i_frame_timer.start(I_FRAME_DURATION)
 	i_frame_sprite.visible = true
 	target = position
+	
+	var hitSound: AudioStreamPlayer = %HitSound
+	hitSound.play()
+	var hitVoice: AudioStreamPlayer = %HitSoundVoice
+	hitVoice.play()
 
 func increase_dash_time(value):
 	dash_time_max += value
