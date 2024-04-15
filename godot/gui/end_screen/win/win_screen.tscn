@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnfu52ejctfq4"]
+[gd_scene load_steps=21 format=3 uid="uid://dnfu52ejctfq4"]
 
 [ext_resource type="Script" path="res://gui/end_screen/win/win_screen.gd" id="1_3t4h3"]
 [ext_resource type="Texture2D" uid="uid://76o38yy42vn7" path="res://gui/end_screen/win/win_bg.png" id="2_rpi2w"]
@@ -9,6 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://cmaymuuwcm5ob" path="res://gui/end_screen/win/win_trophy_2.png" id="7_jwx00"]
 [ext_resource type="Texture2D" uid="uid://ccdbpju6rw4ho" path="res://gui/end_screen/win/win_trophy_3.png" id="8_4jv72"]
 [ext_resource type="Texture2D" uid="uid://ciouugeqpq0yh" path="res://gui/end_screen/win/win_trophy_4.png" id="9_lmqor"]
+[ext_resource type="AudioStream" uid="uid://caeffrgfy6muy" path="res://gui/end_screen/win/win_music.ogg" id="10_5j6f2"]
+[ext_resource type="AudioStream" uid="uid://dqeac60k1ac6x" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-01.ogg" id="11_3nhq2"]
+[ext_resource type="AudioStream" uid="uid://blpuy8bn35ui2" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-02.ogg" id="12_j2tpn"]
+[ext_resource type="AudioStream" uid="uid://din4vnfdvvwhb" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-03.ogg" id="13_prnth"]
+[ext_resource type="AudioStream" uid="uid://hchj56miih6q" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-04.ogg" id="14_uc075"]
+[ext_resource type="AudioStream" uid="uid://bcls58ibgkmhr" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-05.ogg" id="15_3nd1f"]
+[ext_resource type="AudioStream" uid="uid://bil7ebhvbm0uy" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-06.ogg" id="16_0no2l"]
+[ext_resource type="AudioStream" uid="uid://cnwde57647g3g" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-07.ogg" id="17_36gd1"]
+[ext_resource type="AudioStream" uid="uid://ci3ca1epxot1u" path="res://gui/end_screen/win/win_fanfare_audio/powerUp-08.ogg" id="18_bwk7r"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_1xdyh"]
 frames = 4
@@ -20,6 +29,25 @@ frame_2/texture = ExtResource("8_4jv72")
 frame_2/duration = 1.0
 frame_3/texture = ExtResource("9_lmqor")
 frame_3/duration = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qixql"]
+streams_count = 8
+stream_0/stream = ExtResource("11_3nhq2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_j2tpn")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("13_prnth")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("14_uc075")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("15_3nd1f")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("16_0no2l")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("17_36gd1")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("18_bwk7r")
+stream_7/weight = 1.0
 
 [node name="WinScreen" type="Control"]
 texture_filter = 1
@@ -82,3 +110,12 @@ offset_top = -10.0
 offset_right = 1093.0
 offset_bottom = 206.0
 texture = SubResource("AnimatedTexture_1xdyh")
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5j6f2")
+autoplay = true
+
+[node name="WinSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qixql")
+autoplay = true
+bus = &"SFX"

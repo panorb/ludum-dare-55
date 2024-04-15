@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ddwbuwu7gq8h6" path="res://game/harbinger.tscn" id="5_vkoai"]
 [ext_resource type="AudioStream" uid="uid://o4m1rueexvjv" path="res://game/main_theme.ogg" id="8_epd81"]
 [ext_resource type="AudioStream" uid="uid://dbtmc16rwu01l" path="res://game/bone_rattle.ogg" id="9_0r2lr"]
-[ext_resource type="AudioStream" uid="uid://ex6tdseyyhud" path="res://game/threatens_to_lose.ogg" id="9_rs726"]
+[ext_resource type="AudioStream" uid="uid://ex6tdseyyhud" path="res://gui/main_menu_theme.ogg" id="9_rs726"]
 [ext_resource type="AudioStream" uid="uid://dp143f5im5tqh" path="res://game/wizard-audio/wizard-01.ogg" id="11_61ga1"]
 [ext_resource type="AudioStream" uid="uid://dofi6fj6foemm" path="res://game/wizard-audio/wizard-02.ogg" id="12_k6u8l"]
 [ext_resource type="AudioStream" uid="uid://bdo4llh8i24c6" path="res://game/wizard-audio/wizard-11.ogg" id="13_08x4h"]
