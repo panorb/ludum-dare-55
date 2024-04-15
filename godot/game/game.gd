@@ -15,6 +15,9 @@ extends Control
 
 @onready var post_processing_rect := $CanvasLayer/ColorRect
 
+@onready var laser_scene: PackedScene = preload("res://effects/laser.tscn")
+@onready var laser_indicator_scene: PackedScene = preload("res://game/laser_indicator.tscn")
+
 var game_timer
 const max_game_time = 180.
 
@@ -35,7 +38,7 @@ func _input(event):
 			
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
-			level.move_indicator(Vector2(mouse_x, mouse_y))
+			spawn_laser(Vector2(mouse_x, mouse_y))
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
@@ -147,9 +150,22 @@ func _ready():
 		players[i].health_changed.connect(environment.on_player_health_changed)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
-	environment.laser.laser_target = level.indicator
-	environment.laser.environment_viewport = environment_viewport
-	environment.laser.level_viewport = level_viewport
+func initialize_laser(laser:Node3D, indicator: Node2D):
+	laser.laser_target = indicator
+	laser.environment_viewport = environment_viewport
+	laser.level_viewport = level_viewport
+	laser.rotation_degrees = Vector3(14.4, 180, -75.6)
+	laser.scale = Vector3(0.02, 0.02, 1)
+
+func spawn_laser(game_coords: Vector2):
+	var laser = laser_scene.instantiate()
+	var indicator = laser_indicator_scene.instantiate()
+
+	environment.laser_origin.add_child(laser)
+	initialize_laser(laser, indicator)
+
+	level.laser_target_container.add_child(indicator)
+	indicator.position = game_coords
 
 func on_game_timeout():
 	print("you win")
