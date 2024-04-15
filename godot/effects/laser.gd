@@ -92,9 +92,6 @@ func resize_laser():
 
 	var laser_center_global = project_screen_to_world(laser_target.global_position)
 
-	print("Scale: ", scale)
-	print("Indicator Size: ", indicator_size)
-
 	var new_scale = rightmost_pos_global.distance_to(laser_center_global) / original_size.x
 
 	var some_random_value_that_makes_it_fit = 2.6

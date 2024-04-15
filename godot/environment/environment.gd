@@ -70,7 +70,7 @@ func _process(delta):
 	if int(global_time) % 5 < .25:
 		uniform_changed.emit("u_invert",abs(sin(global_time*10.))*.15)
 	else:
-		uniform_changed.emit("u_invert",-abs(sin(global_time))*.25)
+		uniform_changed.emit("u_invert",-abs(sin(global_time))*.05)
 	
 	uniform_changed.emit("u_filmgrain",0.5+game_progress*.5)
 	uniform_changed.emit("u_vignette",-game_progress)

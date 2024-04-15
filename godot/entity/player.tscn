@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://36yf2lknh4wl"]
+[gd_scene load_steps=17 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 [ext_resource type="Texture2D" uid="uid://c4u477p1xchnc" path="res://entity/Iron_fly_2 (1) small.png" id="2_v8w17"]
 [ext_resource type="Texture2D" uid="uid://dtpg4tye45us4" path="res://entity/invulnerability_shield.png" id="4_ygynb"]
 [ext_resource type="Texture2D" uid="uid://bjyvn7dlflxgk" path="res://entity/Fly_dash.png" id="5_p78o1"]
-[ext_resource type="AudioStream" uid="uid://btswe2ycoh2xs" path="res://gui/dialog/hurt.ogg" id="6_o6s4r"]
+[ext_resource type="AudioStream" uid="uid://dcc3c2np7j4pe" path="res://entity/fly_sounds/gotHit.ogg" id="6_68seq"]
 [ext_resource type="AudioStream" uid="uid://b41v1fgkr3pm5" path="res://gui/dialog/healing.ogg" id="7_isv2o"]
 [ext_resource type="AudioStream" uid="uid://cs78s1gedr715" path="res://gui/dialog/boost.ogg" id="7_thunn"]
+[ext_resource type="AudioStream" uid="uid://cnsireueolsxn" path="res://entity/fly_sounds/flyHitVoice-01.ogg" id="7_xdjtj"]
+[ext_resource type="AudioStream" uid="uid://b6b3x8ooy86t7" path="res://entity/fly_sounds/flyHitVoice-02.ogg" id="8_xg4aj"]
+[ext_resource type="AudioStream" uid="uid://cfqt73c5duw4r" path="res://entity/fly_sounds/flyHitVoice-03.ogg" id="9_lto8q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
 radius = 21.7694
@@ -50,6 +53,15 @@ _data = {
 "dash": SubResource("Animation_6r10s")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k30c7"]
+streams_count = 3
+stream_0/stream = ExtResource("7_xdjtj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_xg4aj")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_lto8q")
+stream_2/weight = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.367489, 0.367489)
 collision_layer = 4
@@ -91,22 +103,49 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_p78o1")
 hframes = 5
 
+[node name="ClonedFly" type="AnimatedSprite2D" parent="DashSprite"]
+modulate = Color(0, 0.219608, 1, 0.72549)
+texture_filter = 1
+position = Vector2(-84.6629, 115.449)
+sprite_frames = ExtResource("2_t1qj1")
+animation = &"Flying"
+autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
+
+[node name="ClonedFly2" type="AnimatedSprite2D" parent="DashSprite"]
+modulate = Color(0.490196, 0.654902, 1, 0.439216)
+texture_filter = 1
+position = Vector2(-146.236, 177.022)
+sprite_frames = ExtResource("2_t1qj1")
+animation = &"Flying"
+autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2mia2")
 }
 
-[node name="DamageTaken" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("6_o6s4r")
-bus = &"SFX"
-
 [node name="Healing" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_isv2o")
 volume_db = 4.0
+bus = &"SFX"
 
 [node name="Boost" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_thunn")
 volume_db = 4.0
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_68seq")
+bus = &"SFX"
+
+[node name="HitSoundVoice" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_k30c7")
+bus = &"SFX"

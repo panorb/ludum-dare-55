@@ -19,9 +19,11 @@ extends Control
 @onready var laser_scene: PackedScene = preload("res://effects/laser.tscn")
 @onready var laser_indicator_scene: PackedScene = preload("res://game/laser_indicator.tscn")
 
+@onready var death_timer := %DeathTimer
+
 var game_end : bool = false
 
-var game_timer
+var game_timer: Timer
 const max_game_time = 180.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
@@ -34,15 +36,6 @@ var sec_since_last_magician_sfx = 0.0
 signal show_lose_screen
 signal show_win_screen
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			var scaled_mouse_pos = event.position / get_viewport_rect().size
-			# scaled_mouse_pos = (scaled_mouse_pos) * 2.0 - Vector2(1.0, 1.0)
-
-			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
-			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
-			spawn_laser(Vector2(mouse_x, mouse_y))
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
@@ -140,34 +133,33 @@ func _ready():
 	level.viewport_size = level_viewport.size
 	level.total_level_width = abs(get_level_x_from_environment_camera_pos(1.0))
 	%TotalLevelWidthLabel.text = "Total level width: " + str(get_level_x_from_environment_camera_pos(1.0))
-	
+
 	var players = get_tree().get_nodes_in_group("player")
 	var health_bars = [health_bar_p1, health_bar_p2]
 	var player_count = 1
 
 	environment.set_game_progress_ratio(0.)
-	
+
 	for i in range(player_count):
-		print("Activating player "+str(i+1))
 		players[i].set_active(true)
 		health_bars[i].set_player(players[i])
 		players[i].set_health(players[i]._max_health)
-	
+
 	for i in range(player_count, len(health_bars)):
-		print("Deactivating player "+str(i+1))
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
-	
+
 	for player in players:
 		player.died.connect(_on_player_death)
-	
+
 	game_timer = Timer.new()
 	game_timer.one_shot = true
 	add_child(game_timer)
 
 	game_timer.start(max_game_time)
 	game_timer.timeout.connect(on_game_timeout)
-	
+	death_timer.timeout.connect(_on_game_end)
+
 	for i in range(player_count):
 		players[i].health_changed.connect(environment.on_player_health_changed)
 		players[i].health_changed.connect(music_switcher)
@@ -193,8 +185,6 @@ func spawn_laser(game_coords: Vector2):
 	indicator.position = game_coords
 
 func on_game_timeout():
-	print("you win")
-
 	game_end = true
 	get_tree().get_nodes_in_group("player").all(func(player): player.can_take_damage = false)
 	get_tree().get_nodes_in_group("player").all(func(player): player.can_user_controll_vertical = false)
@@ -207,14 +197,11 @@ func music_switcher(_old_health, new_health):
 		%ThreatensToLoseSound.play()
 
 func _on_player_death():
-	var player_alive_count = 0
-	for player in get_tree().get_nodes_in_group("player"):
-		if player._active:
-			player_alive_count += 1
-	if player_alive_count <= 0:
-		game_timer.stop()
-		print("you lose")
-		show_lose_screen.emit()
+	game_timer.paused = true
+	death_timer.start()
+
+func _on_game_end():
+	show_lose_screen.emit()
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
