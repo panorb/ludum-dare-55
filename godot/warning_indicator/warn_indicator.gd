@@ -17,11 +17,11 @@ func update_blinking_speed(distance: float) -> void:
 		visible = true
 	_blinking_speed = 0.5
 	
-	var max_distance := 1280
-	var pct: float = 1 - min(1, distance / max_distance)
+	var max_distance := 1000
+	var pct: float = (1 - min(1, distance / max_distance))
 	_blinking_speed = max(0.1, 0.2 * (1 - pct ** min(1.5, max_distance)))
-	scale = (0.4 + pct) * Vector2.ONE
-	#print(round(distance), " ", pct, " ", scale)
+	scale = (0.3 + (pct / 2.0)) * Vector2.ONE
+	print(round(distance), " ", pct, " ", scale)
 
 func disable() -> void:
 	_blinking_speed = 0

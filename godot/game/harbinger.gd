@@ -26,11 +26,17 @@ func _update_edge_warns(viewport_size: Vector2, screen_center_level_position: Ve
 	
 	for i in range(get_child_count()):
 		var warn_indicator = get_child(i)
-		if i < warn_entities.size() && !viewport_rect.has_point(warn_entities[i].position):
-			var center_to_entity_vector : Vector2 = (warn_entities[i].position - screen_center_level_position)
-			warn_indicator.position = _point_on_rect(center_to_entity_vector * 10000.0, get_viewport_rect().grow(-35))
-			var distance = warn_indicator.position.distance_to(warn_entities[i].position)
-			warn_indicator.update_blinking_speed(distance)
+		if i < warn_entities.size():
+			if viewport_rect.has_point(warn_entities[i].position):
+				warn_entities[i].entered_screen_once = true
+				warn_indicator.disable()
+			elif not warn_entities[i].entered_screen_once:
+				var center_to_entity_vector : Vector2 = (warn_entities[i].position - screen_center_level_position)
+				warn_indicator.position = _point_on_rect(center_to_entity_vector * 10000.0, get_viewport_rect().grow(-35))
+				var nearest_edge_pos = _point_on_rect(center_to_entity_vector * 10000.0, viewport_rect)
+				
+				var distance = nearest_edge_pos.distance_to(warn_entities[i].position)
+				warn_indicator.update_blinking_speed(distance)
 		else:
 			warn_indicator.disable()
 
