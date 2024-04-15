@@ -41,6 +41,7 @@ func _process(delta):
 	if not is_instance_valid(laser_target) or \
 		not is_instance_valid(environment_viewport) or \
 		not is_instance_valid(level_viewport):
+		queue_free()
 		return
 
 	# get the position of this laser_target.global_position
