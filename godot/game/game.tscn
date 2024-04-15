@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwbdfcdw51eus" path="res://game/level.tscn" id="2_hvccx"]
 [ext_resource type="Theme" uid="uid://b0ci0o4ry5ldo" path="res://gui/debug_theme.tres" id="4_1vvct"]
 [ext_resource type="PackedScene" uid="uid://colf3fgh55ffe" path="res://gui/health_bar/health_bar.tscn" id="5_0c5jd"]
+[ext_resource type="PackedScene" uid="uid://ddwbuwu7gq8h6" path="res://game/harbinger.tscn" id="5_vkoai"]
 [ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
@@ -120,14 +121,16 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="UIOverlay" type="CanvasLayer" parent="."]
-visible = false
+
+[node name="Harbinger" parent="UIOverlay" instance=ExtResource("5_vkoai")]
+unique_name_in_owner = true
 
 [node name="Grid" type="GridContainer" parent="UIOverlay"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -960.0
-offset_bottom = -540.0
+offset_right = -36.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2

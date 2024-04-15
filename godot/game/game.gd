@@ -13,8 +13,9 @@ extends Control
 
 var game_timer
 
-const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
+const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
+const FREE_MOVEMENT_ZONE_WIDTH = 100
 
 var delay = 0.0
 
@@ -29,18 +30,25 @@ func _input(event):
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			level.move_indicator(Vector2(mouse_x, mouse_y))
 			aim_laser(event.position)
-			
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
-
-	environment.move_view(x_offset * delta * ENVIRONMENT_CAMERA_MOVEMENT_SCALE)
-	level.move_view(x_offset * -delta * LEVEL_VIEW_MOVEMENT_SCALE)
+	
+	if abs(x_offset) > FREE_MOVEMENT_ZONE_WIDTH:
+		if x_offset > 0:
+			x_offset -= FREE_MOVEMENT_ZONE_WIDTH
+		else:
+			x_offset += FREE_MOVEMENT_ZONE_WIDTH
+		x_offset += x_offset
+		environment.move_view(x_offset * delta * ENVIRONMENT_CAMERA_MOVEMENT_SCALE)
+		level.move_view(x_offset * -delta * LEVEL_VIEW_MOVEMENT_SCALE)
 	
 	%CameraPosLabel.text = "Camera: " + str(environment.get_camera_position())
 	%CalculatedCameraLabel.text = "Calc. Camera: " + str(get_environment_camera_pos_from_level_x(level.get_level_view_x()))
 	%LevelViewLabel.text = "Level: " + str(level.get_level_view_x())
 	%CalculatedLevelViewLabel.text = "Calc. Level: " + str(get_level_x_from_environment_camera_pos(environment.get_camera_position()))
+	
+	%Harbinger.update(level.viewport_size, get_level_position_from_normalized_screen_position(Vector2(0.5, 0.5)))
 	
 	if randi()%30 == 0:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
@@ -48,9 +56,10 @@ func _process(delta):
 		var y = randi()%180
 		if dir == 0:
 			dir = -1
-		var x = (dir*300+player_pos.x)
-		var speed_x = -dir*(100+randi()%100)
-		var speed_y = randi() % 100-100
+		#var x = (dir*600+player_pos.x+level.get_player_offset())
+		var x = player_pos.x-level.get_player_offset()+dir*350
+		var speed_x = -dir*(100+randi()%300)
+		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 
 func get_level_x_from_environment_camera_pos(camera_pos: float):
@@ -58,6 +67,16 @@ func get_level_x_from_environment_camera_pos(camera_pos: float):
 
 func get_environment_camera_pos_from_level_x(level_x: float):
 	return -(level_x / LEVEL_VIEW_MOVEMENT_SCALE) * ENVIRONMENT_CAMERA_MOVEMENT_SCALE
+
+
+func get_level_position_from_normalized_screen_position(scaled_pos: Vector2):
+	var level_x = -level.get_level_view_x() + (scaled_pos.x * level_viewport.size.x)
+	var level_y = scaled_pos.y * level_viewport.size.y
+	return Vector2(level_x, level_y)
+
+func get_level_position_from_screen_pixel_coords(pixel_coords : Vector2):
+	var scaled_pos = pixel_coords / get_viewport_rect().size
+	return get_level_position_from_normalized_screen_position(scaled_pos)
 
 func _ready():
 	#_on_window_size_changed()
@@ -69,17 +88,21 @@ func _ready():
 	var players = get_tree().get_nodes_in_group("player")
 	var health_bars = [health_bar_p1, health_bar_p2]
 	var player_count = 1
+	
 	for i in range(player_count):
 		print("Activating player "+str(i+1))
 		players[i].set_active(true)
 		health_bars[i].set_player(players[i])
 		players[i].set_health(players[i]._max_health)
+	
 	for i in range(player_count, len(health_bars)):
 		print("Deactivating player "+str(i+1))
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
+	
 	for player in players:
 		player.died.connect(_on_player_death)
+	
 	game_timer = Timer.new()
 	add_child(game_timer)
 	game_timer.start(60)
@@ -133,9 +156,6 @@ func aim_laser(screen_space: Vector2):
 
 	# rotate the laser to point at the click
 	environment.laser.look_at(coords)
-
-
-
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
