@@ -135,6 +135,7 @@ func _ready():
 
 	environment.laser.laser_target = level.indicator
 	environment.laser.environment_viewport = environment_viewport
+	environment.laser.level_viewport = level_viewport
 
 func on_game_timeout():
 	print("you win")

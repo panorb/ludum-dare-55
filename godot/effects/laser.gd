@@ -5,6 +5,7 @@ extends Node3D
 # the laser will track this target
 @onready var laser_target: Node2D
 @onready var environment_viewport: SubViewport
+@onready var level_viewport: SubViewport
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,9 +38,21 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if laser_target == null || environment_viewport == null:
+	if not is_instance_valid(laser_target) or \
+		not is_instance_valid(environment_viewport) or \
+		not is_instance_valid(level_viewport):
 		return
 
-	var level_coords = project_screen_to_world(laser_target.global_position)
+	# get the position of this laser_target.global_position
+	# with regards to the level_viewport
 
-	look_at(level_coords)
+	var level_coords = laser_target.global_position
+
+	var level_vp_size = Vector2(level_viewport.get_size())
+	var environment_vp_size = Vector2(environment_viewport.get_size())
+
+	var environment_screenspace_coords = environment_vp_size * level_coords / level_vp_size
+
+	var target_coords = project_screen_to_world(environment_screenspace_coords)
+
+	look_at(target_coords)
