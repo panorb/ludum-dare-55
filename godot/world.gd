@@ -12,7 +12,7 @@ var scenes := {
 }
 
 @onready var current_scene_node: Node = null
-@onready var current_scene_key: String 
+@onready var current_scene_key: String
 @onready var current_scene: String:
 	get:
 		return current_scene_key
