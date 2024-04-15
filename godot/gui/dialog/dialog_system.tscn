@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ke3r4veuskql"]
+[gd_scene load_steps=12 format=3 uid="uid://ke3r4veuskql"]
 
 [ext_resource type="Script" path="res://gui/dialog/dialog_system.gd" id="1_khsgs"]
 [ext_resource type="Theme" uid="uid://cseiffhoq55yj" path="res://gui/dialog/dialog_theme.tres" id="2_b38sv"]
@@ -7,6 +7,7 @@
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="4_jayp4"]
 [ext_resource type="AudioStream" uid="uid://tmhoshcxyhtg" path="res://gui/dialog/audio/fly_speaking.ogg" id="4_jxw2r"]
 [ext_resource type="AudioStream" uid="uid://wpgm4sdfovhf" path="res://gui/dialog/audio/wizard_speaking-01.ogg" id="5_pilpn"]
+[ext_resource type="Texture2D" uid="uid://c2ent1ht4hu0w" path="res://gui/button_prompt/explainer.png" id="6_1x2ti"]
 [ext_resource type="AudioStream" uid="uid://boh2drpw2k48w" path="res://gui/dialog/audio/wizard_speaking-02.ogg" id="6_ohmcv"]
 [ext_resource type="AudioStream" uid="uid://xb5yl05t5rjb" path="res://gui/dialog/audio/wizard_speaking-03.ogg" id="7_hy66p"]
 
@@ -40,7 +41,6 @@ theme = ExtResource("2_b38sv")
 
 [node name="WizardPanel" parent="MarginContainer" instance=ExtResource("3_82c11")]
 unique_name_in_owner = true
-z_index = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
@@ -53,7 +53,6 @@ autoplay = "default"
 
 [node name="FlyPanel" parent="MarginContainer" instance=ExtResource("3_82c11")]
 unique_name_in_owner = true
-z_index = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
@@ -68,6 +67,58 @@ animation = &"Flying"
 autoplay = "Flying"
 frame = 8
 frame_progress = 0.792901
+
+[node name="ExplainerPanel" type="Panel" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="BackgroundRect" type="TextureRect" parent="MarginContainer/ExplainerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_1x2ti")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelMove" type="Label" parent="MarginContainer/ExplainerPanel/BackgroundRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.0
+offset_top = -185.0
+offset_right = 20.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "EXPLAINER_MOVE"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelDash" type="Label" parent="MarginContainer/ExplainerPanel/BackgroundRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.0
+offset_top = 156.0
+offset_right = 20.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "EXPLAINER_DASH"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="FlySpeakingSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
