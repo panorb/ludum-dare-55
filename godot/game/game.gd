@@ -9,6 +9,7 @@ extends Control
 @onready var environment := %EnvironmentTexture/EnvironmentViewport/Environment
 @onready var level := %Level
 @onready var main_theme_sound = %MainThemeSound
+@onready var timer_label = %TimerLabel
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
@@ -55,7 +56,12 @@ func _process(delta):
 	%CalculatedLevelViewLabel.text = "Calc. Level: " + str(get_level_x_from_environment_camera_pos(environment.get_camera_position()))
 	
 	%Harbinger.update(level.viewport_size, get_level_position_from_normalized_screen_position(Vector2(0.5, 0.5)))
-	
+
+	# Calculcate und display left times
+	var left_minutes : int = game_timer.time_left / 60
+	var left_seconds : int = int(game_timer.time_left) % 60
+	timer_label.text = "%d:%02d" % [left_minutes, left_seconds]
+
 	var r = randi()%300
 	if r > 0 and r <= 10:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
