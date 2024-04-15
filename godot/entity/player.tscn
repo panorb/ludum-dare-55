@@ -101,6 +101,26 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_p78o1")
 hframes = 5
 
+[node name="ClonedFly" type="AnimatedSprite2D" parent="DashSprite"]
+modulate = Color(0, 0.219608, 1, 0.72549)
+texture_filter = 1
+position = Vector2(-84.6629, 115.449)
+sprite_frames = ExtResource("2_t1qj1")
+animation = &"Flying"
+autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
+
+[node name="ClonedFly2" type="AnimatedSprite2D" parent="DashSprite"]
+modulate = Color(0.490196, 0.654902, 1, 0.439216)
+texture_filter = 1
+position = Vector2(-146.236, 177.022)
+sprite_frames = ExtResource("2_t1qj1")
+animation = &"Flying"
+autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2mia2")
