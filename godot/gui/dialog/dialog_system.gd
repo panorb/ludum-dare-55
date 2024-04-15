@@ -37,10 +37,12 @@ func next_dialog_line():
 			wizard_panel.text = "DIALOG_" + str(cur_dialog_index)
 			fly_panel.text = ""
 			phrase_len = len(tr(wizard_panel.text))
+			%WizardSpeakingSound.play()
 		else:
 			wizard_panel.text = ""
 			fly_panel.text = "DIALOG_" + str(cur_dialog_index)
 			phrase_len = len(tr(fly_panel.text))
+			%FlySpeakingSound.play()
 		hide_in = phrase_len / SYMBOLS_PER_SECOND
 	else:
 		fly_panel.text = ""
