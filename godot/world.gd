@@ -30,10 +30,16 @@ var scenes := {
 			main_menu_node.start_game.connect(_on_game_start)
 		elif next_scene_node is LoseScreen:
 			var lose_node = next_scene_node as LoseScreen
-			lose_node.start_game.connect(_on_game_start)
+			lose_node.show_main_menu.connect(_on_show_main_menu)
+		elif next_scene_node is WinScreen:
+			var win_node = next_scene_node as WinScreen
+			win_node.show_main_menu.connect(_on_show_main_menu)
 
 func _ready():
 	self.current_scene = start_scene
 
 func _on_game_start():
 	self.current_scene = 'game'
+
+func _on_show_main_menu():
+	self.current_scene = 'main_menu'

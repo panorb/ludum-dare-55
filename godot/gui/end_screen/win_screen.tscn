@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnfu52ejctfq4"]
+[gd_scene load_steps=3 format=3 uid="uid://dnfu52ejctfq4"]
 
 [ext_resource type="Theme" uid="uid://dcf3ucut4uyki" path="res://gui/end_screen/end_screen_theme.tres" id="1_kn6sr"]
+[ext_resource type="Script" path="res://gui/end_screen/win_screen.gd" id="2_b48dq"]
 
 [node name="WinScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_kn6sr")
+script = ExtResource("2_b48dq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
