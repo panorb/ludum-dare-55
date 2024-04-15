@@ -7,8 +7,8 @@ signal max_health_changed(old_maximum, new_maximum)
 signal died
 
 var _active = false
-var _health = 100000000
-var _max_health = 100000000
+var _health = 1000
+var _max_health = 1000
 var inertia = Vector2.ZERO
 var i_frame_timer = null
 var target = Vector2.ZERO
