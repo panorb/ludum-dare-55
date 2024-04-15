@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var i_frame_sprite = $IFrame
+@onready var invul_shield = $InvulShield
+@onready var animation_player = $AnimationPlayer
+@onready var main_sprite = $AnimatedSprite2D
+@onready var dash_sprite = $DashSprite
+
 
 signal health_changed(old_health, new_health)
 signal max_health_changed(old_maximum, new_maximum)
@@ -37,6 +42,7 @@ func _ready():
 	speed_boost_timer.one_shot = true
 	add_child(speed_boost_timer)
 	invul_timer = Timer.new()
+	invul_timer.timeout.connect(_on_invul_timeout)
 	invul_timer.one_shot = true
 	add_child(invul_timer)
 
@@ -48,11 +54,21 @@ func _process(delta):
 	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
 	var speed = fly_speed
 	var target_speed = 300
+	if Input.is_action_just_pressed("fly1_dash"):
+		animation_player.play("dash")
+		dash_sprite.visible = true
+		main_sprite.visible = false
+	if Input.is_action_just_released("fly1_dash"):
+		dash_sprite.visible = false
+		main_sprite.visible = true
 	if Input.is_action_pressed("fly1_dash"):
 		if dash_time > 0.0:
 			dash_time -= delta
 			speed += dash_increase
 			target_speed += 100
+		if dash_time <= 0.0:
+			dash_sprite.visible = false
+			main_sprite.visible = true
 	else:
 		if dash_time < dash_time_max:
 			dash_time += delta*0.5
@@ -79,6 +95,7 @@ func _process(delta):
 		velocity += direction * speed * delta
 		rotation = direction.angle()
 	i_frame_sprite.rotation = -rotation
+	invul_shield.rotation = -rotation
 	move_and_slide()
 	
 	if target_marker != null:
@@ -105,6 +122,7 @@ func heal(value):
 func become_invulnerable(value):
 	invul_timer.start(value)
 	print("became invulnerable")
+	invul_shield.visible = true
 
 func boost_speed(value):
 	speed_boost_timer.start(value)
@@ -130,6 +148,9 @@ func increase_dash_time(value):
 func _on_i_frame_timeout():
 	i_frame_timer.stop()
 	i_frame_sprite.visible = false
+
+func _on_invul_timeout():
+	invul_shield.visible = false
 
 func set_active(active):
 	_active = active
