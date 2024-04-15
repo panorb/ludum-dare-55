@@ -5,6 +5,7 @@ extends Node2D
 @onready var logo_fly := %LogoFly
 
 signal win_animation_finisched
+signal win_animation_started
 
 var spawned = false
 var won = false
@@ -25,6 +26,7 @@ func play_win_animation():
 		won = true
 		logo_fly.visible = true
 		animation_player.play("win")
+		win_animation_started.emit()
 
 func on_win_animation_finisched(anim_name: StringName):
 	if anim_name == 'win':

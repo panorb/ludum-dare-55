@@ -22,7 +22,7 @@ extends Control
 var game_end : bool = false
 
 var game_timer
-const max_game_time = 180.
+const max_game_time = 5.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
