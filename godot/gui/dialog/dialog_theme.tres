@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cseiffhoq55yj"]
+
+[ext_resource type="FontFile" uid="uid://nwbgykkf6qrk" path="res://gui/roboto-medium.ttf" id="1_b6t1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6eve"]
+bg_color = Color(1, 1, 1, 0.768627)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 42
+Label/fonts/font = ExtResource("1_b6t1t")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+Panel/styles/panel = SubResource("StyleBoxFlat_h6eve")

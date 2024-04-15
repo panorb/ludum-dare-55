@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://ke3r4veuskql"]
+
+[ext_resource type="Script" path="res://gui/dialog/dialog_system.gd" id="1_khsgs"]
+[ext_resource type="Theme" uid="uid://cseiffhoq55yj" path="res://gui/dialog/dialog_theme.tres" id="2_b38sv"]
+[ext_resource type="PackedScene" uid="uid://bmeubyfe2tyky" path="res://gui/dialog/dialog_panel.tscn" id="3_82c11"]
+[ext_resource type="AudioStream" uid="uid://tmhoshcxyhtg" path="res://gui/dialog/audio/fly_speaking.ogg" id="4_jxw2r"]
+[ext_resource type="AudioStream" uid="uid://wpgm4sdfovhf" path="res://gui/dialog/audio/wizard_speaking-01.ogg" id="5_pilpn"]
+[ext_resource type="AudioStream" uid="uid://boh2drpw2k48w" path="res://gui/dialog/audio/wizard_speaking-02.ogg" id="6_ohmcv"]
+[ext_resource type="AudioStream" uid="uid://xb5yl05t5rjb" path="res://gui/dialog/audio/wizard_speaking-03.ogg" id="7_hy66p"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qavdl"]
+streams_count = 3
+stream_0/stream = ExtResource("5_pilpn")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_ohmcv")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_hy66p")
+stream_2/weight = 1.0
+
+[node name="DialogSystem" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_khsgs")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_b38sv")
+
+[node name="WizardPanel" parent="MarginContainer" instance=ExtResource("3_82c11")]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FlyPanel" parent="MarginContainer" instance=ExtResource("3_82c11")]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="FlySpeakingSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_jxw2r")
+bus = &"SFX"
+
+[node name="WizardSpeakingSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_qavdl")
+bus = &"SFX"
