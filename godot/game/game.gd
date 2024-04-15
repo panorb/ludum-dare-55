@@ -9,11 +9,15 @@ extends Control
 @onready var environment := %EnvironmentTexture/EnvironmentViewport/Environment
 @onready var level := %Level
 @onready var main_theme_sound = %MainThemeSound
+@onready var timer_label = %TimerLabel
 
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
 
 @onready var post_processing_rect := $CanvasLayer/ColorRect
+
+@onready var laser_scene: PackedScene = preload("res://effects/laser.tscn")
+@onready var laser_indicator_scene: PackedScene = preload("res://game/laser_indicator.tscn")
 
 var game_timer
 const max_game_time = 180.
@@ -36,8 +40,7 @@ func _input(event):
 			
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
-			level.move_indicator(Vector2(mouse_x, mouse_y))
-			aim_laser(event.position)
+			spawn_laser(Vector2(mouse_x, mouse_y))
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
@@ -57,6 +60,11 @@ func _process(delta):
 	%CalculatedLevelViewLabel.text = "Calc. Level: " + str(get_level_x_from_environment_camera_pos(environment.get_camera_position()))
 	
 	%Harbinger.update(level.viewport_size, get_level_position_from_normalized_screen_position(Vector2(0.5, 0.5)))
+
+	# Calculcate und display left times
+	var left_minutes : int = game_timer.time_left / 60
+	var left_seconds : int = int(game_timer.time_left) % 60
+	timer_label.text = "%d:%02d" % [left_minutes, left_seconds]
 	
 	sec_since_last_magician_sfx += delta
 	if sec_since_last_magician_sfx > 5 && randi()%50 == 0:
@@ -156,6 +164,23 @@ func _ready():
 		players[i].health_changed.connect(music_switcher)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
+func initialize_laser(laser:Node3D, indicator: Node2D):
+	laser.laser_target = indicator
+	laser.environment_viewport = environment_viewport
+	laser.level_viewport = level_viewport
+	laser.rotation_degrees = Vector3(14.4, 180, -75.6)
+	laser.scale = Vector3(0.02, 0.02, 1)
+
+func spawn_laser(game_coords: Vector2):
+	var laser = laser_scene.instantiate()
+	var indicator = laser_indicator_scene.instantiate()
+
+	environment.laser_origin.add_child(laser)
+	initialize_laser(laser, indicator)
+
+	level.laser_target_container.add_child(indicator)
+	indicator.position = game_coords
+
 func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
@@ -175,40 +200,6 @@ func _on_player_death():
 		game_timer.stop()
 		print("you lose")
 		show_lose_screen.emit()
-
-func project_screen_to_world(screen_pos: Vector2) -> Vector3:
-	var camera = environment_viewport.get_camera_3d()
-	var viewport_size = camera.get_viewport().get_visible_rect().size
-	var nx = (screen_pos.x / viewport_size.x) * 2.0 - 1.0
-	var ny = (1.0 - screen_pos.y / viewport_size.y) * 2.0 - 1.0  # Invert Y
-
-	# NDC to 3D point in camera space
-	# var near_plane_z = -camera.near  # Use negative near plane distance
-	var p_ndc = Vector4(nx, ny, -1, 1.0)
-
-	# Get the projection matrix and its inverse
-	var projection = camera.get_camera_projection()
-	var inv_projection = projection.inverse()
-
-	# Transform the NDC point by the inverse projection matrix
-	var p_camera = inv_projection * p_ndc
-
-	# Divide by w to get correct coordinates (perspective divide)
-	p_camera /= p_camera.w
-
-	# Transform the camera space point to world space
-	var world_point = camera.global_transform * Vector3(p_camera.x, p_camera.y, p_camera.z)
-
-	return world_point
-
-func aim_laser(screen_space: Vector2):
-	var environment_dimensions = Vector2(environment_viewport.size)
-	var environment_coords = screen_space * environment_dimensions / get_viewport_rect().size
-	var coords = project_screen_to_world(environment_coords)
-	print("Coords: ", coords)
-
-	# rotate the laser to point at the click
-	environment.laser.look_at(coords)
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size

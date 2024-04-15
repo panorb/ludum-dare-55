@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhvpqf3nu5r35"]
+
+[ext_resource type="Script" path="res://game/laser_indicator.gd" id="1_4b2of"]
+[ext_resource type="Texture2D" uid="uid://d1twb8ft0ldv3" path="res://game/laser666.png" id="1_dm5nm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1f1m5"]
+radius = 21.0238
+
+[node name="LaserIndicator" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_4b2of")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.0703125, 0.0703125)
+texture = ExtResource("1_dm5nm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1f1m5")

@@ -36,7 +36,7 @@ shader_parameter/u_invert = 0.0
 shader_parameter/u_vignette = 0.5
 shader_parameter/u_filmgrain = 1.0
 shader_parameter/u_abbrLevel = 0.5
-shader_parameter/u_abbrEnv = 1.0
+shader_parameter/u_abbrEnv = 1.5
 shader_parameter/u_shakeX = null
 shader_parameter/u_shakeY = null
 
@@ -68,6 +68,13 @@ stream_11/stream = ExtResource("14_e76w2")
 stream_11/weight = 1.0
 stream_12/stream = ExtResource("15_3ubq4")
 stream_12/weight = 1.0
+
+[sub_resource type="Theme" id="Theme_o4fla"]
+Label/colors/font_color = Color(0.635294, 0.243137, 0.54902, 1)
+Label/colors/font_outline_color = Color(0.145098, 0.337255, 0.180392, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 41
+Label/fonts/font = null
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -211,6 +218,26 @@ offset_bottom = 0.0
 scale = Vector2(-4, 4)
 size_flags_horizontal = 10
 size_flags_vertical = 2
+
+[node name="TimeMarginContainer" type="MarginContainer" parent="UIOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_o4fla")
+theme_override_constants/margin_top = 50
+
+[node name="TimerCenterContainer" type="CenterContainer" parent="UIOverlay/TimeMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="TimerLabel" type="Label" parent="UIOverlay/TimeMarginContainer/TimerCenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MainThemeSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

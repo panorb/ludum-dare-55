@@ -4,7 +4,7 @@ var viewport_size := Vector2.ONE
 var size
 #@onready var player := %EntityContainer/Player
 @onready var entities := %EntityContainer
-@onready var indicator := %Indicator
+@onready var laser_target_container := %LaserTargetContainer
 @onready var vertical_boundaries := %VerticalBoundaries
 @onready var player = %Player
 @onready var player_2 = %Player2
@@ -19,6 +19,7 @@ const POWERUP_HEALTH_BOOST = preload("res://game/entities/powerup_health_boost.t
 const POWERUP_DASH_INCREASE = preload("res://game/entities/powerup_dash_boost.tscn")
 const POWERUP_SPEED_BOOST = preload("res://game/entities/powerup_speed_boost.tscn")
 const POWERUP_INVULNERABILITY = preload("res://game/entities/powerup_invulnerability.tscn")
+const PAGE = preload("res://game/entities/page.tscn")
 
 enum PowerUps {HEAL, HEALTH_BOOST, DASH_INCREASE, SPEED_BOOST, INVULNERABILITY}
 
@@ -68,5 +69,10 @@ func _add_powerup(x, y, speed_x, speed_y, type=PowerUps.HEAL):
 	powerup.connect_signals(self)
 	entities.add_child(powerup)
 
-func move_indicator(pos):
-	indicator.position = pos
+func page_spawn(book):
+	var page = PAGE.instantiate()
+	page.position = book.position
+	page.position += (Vector2(49.0, 86.0)/4).rotated(book.rotation)
+	page.rotation = book.rotation
+	page.speed = book.speed
+	entities.add_child(page)

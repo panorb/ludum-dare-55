@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwbdfcdw51eus"]
+[gd_scene load_steps=4 format=3 uid="uid://cwbdfcdw51eus"]
 
 [ext_resource type="PackedScene" uid="uid://36yf2lknh4wl" path="res://entity/player.tscn" id="1_ex0qr"]
 [ext_resource type="Script" path="res://game/level.gd" id="1_ou5fb"]
-[ext_resource type="Texture2D" uid="uid://i671xsa0afrl" path="res://effects/spark.tga" id="3_2rxd3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qfpql"]
 b = Vector2(1281, 0)
@@ -33,11 +32,6 @@ position = Vector2(160, 90)
 unique_name_in_owner = true
 position = Vector2(160, 208)
 
-[node name="Indicator" type="Sprite2D" parent="EntityContainer"]
-unique_name_in_owner = true
-scale = Vector2(0.0703125, 0.0703125)
-texture = ExtResource("3_2rxd3")
-
 [node name="TargetMarkerP1" type="Polygon2D" parent="EntityContainer"]
 unique_name_in_owner = true
 position = Vector2(-8.16351, 0)
@@ -51,3 +45,6 @@ position = Vector2(-8.16351, 0)
 scale = Vector2(0.367, 0.367)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 8.16351, -8.16351, 16.327, 0, 8.16351, 8.16351)
+
+[node name="LaserTargetContainer" type="Node2D" parent="EntityContainer"]
+unique_name_in_owner = true
