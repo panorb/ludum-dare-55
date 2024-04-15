@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://36yf2lknh4wl"]
+[gd_scene load_steps=5 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
+[ext_resource type="Texture2D" uid="uid://bcsurtirug22h" path="res://entity/Iron_fly.png" id="2_f7rtm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
@@ -12,6 +13,12 @@ scale = Vector2(0.367489, 0.367489)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_swjmm")
+
+[node name="IFrame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(0.723715, 0.723715)
+texture = ExtResource("2_f7rtm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

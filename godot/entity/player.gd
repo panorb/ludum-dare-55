@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var i_frame_sprite = $IFrame
 
 signal health_changed(old_health, new_health)
 signal max_health_changed(old_maximum, new_maximum)
@@ -77,6 +78,7 @@ func _process(delta):
 	
 		velocity += direction * speed * delta
 		rotation = direction.angle()
+	i_frame_sprite.rotation = -rotation
 	move_and_slide()
 	
 	if target_marker != null:
@@ -118,6 +120,7 @@ func take_damage(value):
 		return
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
+	i_frame_sprite.visible = true
 	target = position
 
 func increase_dash_time(value):
@@ -126,6 +129,7 @@ func increase_dash_time(value):
 
 func _on_i_frame_timeout():
 	i_frame_timer.stop()
+	i_frame_sprite.visible = false
 
 func set_active(active):
 	_active = active
