@@ -58,7 +58,7 @@ fog_light_energy = 0.11
 script = ExtResource("1_c4stx")
 
 [node name="WinAnimationBillboard" type="Sprite3D" parent="."]
-transform = Transform3D(-18, -0.00142123, -0.00640439, -3.52003e-09, 17.5718, -3.89975, 0.00656019, -3.8996, -17.5725, 0, 2.73, 0)
+transform = Transform3D(-18, -0.00142123, -0.00640438, -3.12891e-09, 17.5718, -3.89975, 0.00656018, -3.89959, -17.5725, 0, 2.73, 0)
 flip_h = true
 pixel_size = 0.0001
 texture = SubResource("ViewportTexture_l3c4r")

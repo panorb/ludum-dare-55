@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnfu52ejctfq4"]
+
+[ext_resource type="Script" path="res://gui/end_screen/win/win_screen.gd" id="1_3t4h3"]
+[ext_resource type="Texture2D" uid="uid://76o38yy42vn7" path="res://gui/end_screen/win/win_bg.png" id="2_rpi2w"]
+[ext_resource type="Texture2D" uid="uid://c5ba825vgr4w7" path="res://gui/end_screen/win/win_title_top.png" id="3_y5phr"]
+[ext_resource type="Texture2D" uid="uid://elump6nutnin" path="res://gui/end_screen/win/win_title_bottom.png" id="4_gxyqw"]
+
+[node name="WinScreen" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3t4h3")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rpi2w")
+
+[node name="TitleTop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_y5phr")
+
+[node name="TitleBottom" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gxyqw")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfetkja7nbol2"
-path="res://.godot/imported/game_over_halo.png-4d3ef035bd0b176067400a24801320d0.ctex"
+uid="uid://ia0aln3qa5ww"
+path="res://.godot/imported/game_over_bg.png-7ee39c25f2f1aee04379005e137d442f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gui/end_screen/game_over_halo.png"
-dest_files=["res://.godot/imported/game_over_halo.png-4d3ef035bd0b176067400a24801320d0.ctex"]
+source_file="res://gui/end_screen/lose/game_over_bg.png"
+dest_files=["res://.godot/imported/game_over_bg.png-7ee39c25f2f1aee04379005e137d442f.ctex"]
 
 [params]
 
