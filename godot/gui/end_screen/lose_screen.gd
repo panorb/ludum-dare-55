@@ -28,3 +28,8 @@ func _ready():
 	restart_info_tween.tween_property(restart_info, "modulate", restart_info_tween_transparency, 0.8)
 	restart_info_tween.tween_property(restart_info, "modulate", Color.WHITE, 0.8)
 	restart_info_tween.set_loops()
+
+func _input(event):
+	if event.is_action_pressed("restart_game"):
+		pass
+		# Hier Umschalten!
