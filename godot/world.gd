@@ -7,10 +7,12 @@ const main_menu_scene := preload("res://gui/main_menu.tscn")
 var scenes := {
 	'main_menu': main_menu_scene,
 	'game': preload("res://game/game.tscn"),
+	'lose_screen': preload("res://gui/end_screen/lose/lose_screen.tscn"),
+	'win_screen':  preload("res://gui/end_screen/win/win_screen.tscn"),
 }
 
 @onready var current_scene_node: Node = null
-@onready var current_scene_key: String 
+@onready var current_scene_key: String
 @onready var current_scene: String:
 	get:
 		return current_scene_key
@@ -26,9 +28,30 @@ var scenes := {
 		if next_scene_node is MainMenu:
 			var main_menu_node = next_scene_node as MainMenu
 			main_menu_node.start_game.connect(_on_game_start)
+		elif next_scene_node is LoseScreen:
+			var lose_node = next_scene_node as LoseScreen
+			lose_node.show_main_menu.connect(_on_show_main_menu)
+		elif next_scene_node is WinScreen:
+			var win_node = next_scene_node as WinScreen
+			win_node.show_main_menu.connect(_on_show_main_menu)
+		elif next_scene_node is Game:
+			var game_node = next_scene_node as Game
+			game_node.show_lose_screen.connect(_on_show_lose_screen)
+			game_node.show_win_screen.connect(_on_show_win_screen)
+
 
 func _ready():
 	self.current_scene = start_scene
+	TranslationServer.set_locale("en")
 
 func _on_game_start():
 	self.current_scene = 'game'
+
+func _on_show_main_menu():
+	self.current_scene = 'main_menu'
+
+func _on_show_lose_screen():
+	self.current_scene = 'lose_screen'
+
+func _on_show_win_screen():
+	self.current_scene = 'win_screen'

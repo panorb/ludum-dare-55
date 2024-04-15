@@ -61,3 +61,6 @@ func set_bus_volume(bus_name: String, volume_percent: float, label_node: Label )
 	#	sound_image.texture = volume_75_image
 	#elif volume_value > 75 && volume_value <=100:
 	#	sound_image.texture = volume_full_image
+
+func change_language(locale: String) -> void:
+	TranslationServer.set_locale(locale)

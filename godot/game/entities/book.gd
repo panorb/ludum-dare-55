@@ -4,9 +4,6 @@ const GRAVITY = 9
 
 var speed
 
-@onready var collision_polygon_2d = $CollisionPolygon2D
-
-
 func init(start_x, start_y, speed_x, speed_y):
 	damage = 300
 	position.x = start_x
@@ -23,6 +20,10 @@ func _move(delta):
 	speed.y += GRAVITY
 	if position.y > 2000:
 		queue_free()
+
+func on_player_collision(player):
+	player.take_damage(damage)
+	player.inertia += (player.position-position).normalized()*1000
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

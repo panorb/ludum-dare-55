@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bimr6vox3j4xt"]
+
+[ext_resource type="Script" path="res://gui/end_screen/lose/lose_screen.gd" id="1_0371o"]
+[ext_resource type="Texture2D" uid="uid://ia0aln3qa5ww" path="res://gui/end_screen/lose/game_over_bg.png" id="2_wvvrp"]
+[ext_resource type="Texture2D" uid="uid://dfetkja7nbol2" path="res://gui/end_screen/lose/game_over_halo.png" id="3_tjlcx"]
+[ext_resource type="Texture2D" uid="uid://pe6vh4skjrbx" path="res://gui/end_screen/lose/game_over_title_top.png" id="4_makxd"]
+[ext_resource type="Texture2D" uid="uid://dmig62geveost" path="res://gui/end_screen/lose/game_over_title_bottom.png" id="5_gqvii"]
+[ext_resource type="Texture2D" uid="uid://du5olmj3fmpgs" path="res://gui/end_screen/lose/game_over_wings.png" id="6_1rt7m"]
+[ext_resource type="Texture2D" uid="uid://nmw5spcggjku" path="res://gui/end_screen/lose/game_over_text_restart.png" id="7_dmmjp"]
+
+[node name="LoseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0371o")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wvvrp")
+expand_mode = 2
+
+[node name="Halo" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tjlcx")
+expand_mode = 2
+
+[node name="TitleTop" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_makxd")
+expand_mode = 2
+
+[node name="TitleBottom" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_gqvii")
+expand_mode = 2
+
+[node name="Wings" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_1rt7m")
+expand_mode = 2
+
+[node name="RestartInfo" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_dmmjp")

@@ -26,9 +26,11 @@ func _create_copies(level_width):
 func _process(delta):
 	_move(delta)
 
+func on_player_collision(player):
+	pass
+
 func on_body_entered(body):
-	body.take_damage(damage)
-	body.inertia += (body.position-position).normalized()*1000
+	on_player_collision(body)
 
 func connect_signals(level):
 	pass

@@ -1,3 +1,5 @@
+class_name Game
+
 extends Control
 
 @onready var level_viewport := %LevelViewport
@@ -11,14 +13,20 @@ extends Control
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
 
+@onready var post_processing_rect := $CanvasLayer/ColorRect
+
 var game_timer
+const max_game_time = 180.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
-const FREE_MOVEMENT_ZONE_WIDTH = 100
+const FREE_MOVEMENT_ZONE_WIDTH = 50
 
 var delay = 0.0
 var sec_since_last_magician_sfx = 0.0
+
+signal show_lose_screen
+signal show_win_screen
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -56,7 +64,8 @@ func _process(delta):
 		sound.play()
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
-	if randi()%30 == 0:
+	var r = randi()%300
+	if r > 0 and r <= 10:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
@@ -67,6 +76,31 @@ func _process(delta):
 		var speed_x = -dir*(100+randi()%300)
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
+		environment.feedback("spawn_object")
+	
+	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
+	
+	if r == 0:
+		var player_pos = get_tree().get_nodes_in_group("player")[0].position
+		var dir = (randi() % 2)
+		var y = randi()%180
+		if dir == 0:
+			dir = -1
+		#var x = (dir*600+player_pos.x+level.get_player_offset())
+		var x = player_pos.x-level.get_player_offset()+dir*350
+		var speed_x = -dir*(50+randi()%150)
+		var speed_y = randi() % 100-100
+		var type = randi()%10
+		if type == 0:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.HEALTH_BOOST)
+		elif type == 1:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.DASH_INCREASE)
+		elif type == 2:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.SPEED_BOOST)
+		elif type == 3:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.INVULNERABILITY)
+		else:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.HEAL)
 
 func get_level_x_from_environment_camera_pos(camera_pos: float):
 	return -(camera_pos / ENVIRONMENT_CAMERA_MOVEMENT_SCALE) * LEVEL_VIEW_MOVEMENT_SCALE
@@ -94,6 +128,8 @@ func _ready():
 	var players = get_tree().get_nodes_in_group("player")
 	var health_bars = [health_bar_p1, health_bar_p2]
 	var player_count = 1
+
+	environment.set_game_progress_ratio(0.)
 	
 	for i in range(player_count):
 		print("Activating player "+str(i+1))
@@ -111,13 +147,18 @@ func _ready():
 	
 	game_timer = Timer.new()
 	add_child(game_timer)
-	game_timer.start(60)
-	game_timer.connect("timeout", on_game_timeout)
+
+	game_timer.start(max_game_time)
+	game_timer.timeout.connect(on_game_timeout)
+	
+	for i in range(player_count):
+		players[i].health_changed.connect(environment.on_player_health_changed)
+	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
 func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
-	get_tree().change_scene_to_file("res://gui/end_screen/win_screen.tscn")
+	show_win_screen.emit()
 
 func _on_player_death():
 	var player_alive_count = 0
@@ -127,9 +168,7 @@ func _on_player_death():
 	if player_alive_count <= 0:
 		game_timer.stop()
 		print("you lose")
-		get_tree().call_deferred("change_scene","res://gui/end_screen/lose_screen.tscn" )
-		
-
+		show_lose_screen.emit()
 
 func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 	var camera = environment_viewport.get_camera_3d()
@@ -157,7 +196,9 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 	return world_point
 
 func aim_laser(screen_space: Vector2):
-	var coords = project_screen_to_world(screen_space)
+	var environment_dimensions = Vector2(environment_viewport.size)
+	var environment_coords = screen_space * environment_dimensions / get_viewport_rect().size
+	var coords = project_screen_to_world(environment_coords)
 	print("Coords: ", coords)
 
 	# rotate the laser to point at the click
@@ -165,3 +206,6 @@ func aim_laser(screen_space: Vector2):
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
+
+func on_post_processing_uniform_changed(name: String, value: Variant):
+	post_processing_rect.material.set_shader_parameter(name,value)

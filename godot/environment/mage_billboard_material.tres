@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cnnhv5mwin3tm"]
+
+[ext_resource type="Texture2D" uid="uid://bnnewykijk300" path="res://environment/mage-outline1.png" id="1_dsp27"]
+[ext_resource type="Texture2D" uid="uid://bhdmno1gm5kc4" path="res://environment/mage-outline2.png" id="2_twgim"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_nn1f6"]
+frames = 2
+frame_0/texture = ExtResource("1_dsp27")
+frame_1/texture = ExtResource("2_twgim")
+frame_1/duration = 1.5
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("AnimatedTexture_nn1f6")
+billboard_mode = 1
