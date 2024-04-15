@@ -119,6 +119,7 @@ mesh = SubResource("CylinderMesh_qw3t7")
 
 [node name="Storm" type="MeshInstance3D" parent="vfx"]
 transform = Transform3D(19, 0, 0, 0, 5, 0, 0, 0, 19, 0, 5.1, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_3vo8l")
 surface_material_override/0 = ExtResource("6_804ct")

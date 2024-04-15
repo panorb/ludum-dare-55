@@ -26,7 +26,7 @@ func move_view(move_x: float):
 func _process(delta):
 	move_camera_forward(delta)
 	camera.look_at(camera_focus.global_transform.origin, Vector3(0, 1, 0))
-	#pos += delta * 100
+	#pos += de,lta * 100
 
 	# rotate_cam_to_pos(pos)
 	if pos > 360:
