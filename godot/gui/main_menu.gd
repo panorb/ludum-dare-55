@@ -16,6 +16,9 @@ signal start_game
 @onready var music_bus_name := 'Music'
 
 const credits_scene := preload("res://gui/credits.tscn")
+const START_SFX_VOLUME_PERCENTAGE = 60
+const START_MUSIC_VOLUME_PERCENTAGE = 20
+
 
 func _ready():
 	start_button.pressed.connect(self._on_start_button_pressed);
@@ -27,8 +30,10 @@ func _ready():
 	if OS.has_feature('web'):
 		quit_button.visible = false
 
-	sfx_sound_slider.value = 80
-	music_sound_slider.value = 80
+	sfx_sound_slider.value = START_SFX_VOLUME_PERCENTAGE
+	music_sound_slider.value = START_MUSIC_VOLUME_PERCENTAGE
+	set_bus_volume(sfx_bus_name, START_SFX_VOLUME_PERCENTAGE, sfx_sound_percent_label)
+	set_bus_volume(music_bus_name, START_MUSIC_VOLUME_PERCENTAGE, music_sound_percent_label)
 
 func _on_credits_button_pressed() -> void:
 	var credits := credits_scene.instantiate()
