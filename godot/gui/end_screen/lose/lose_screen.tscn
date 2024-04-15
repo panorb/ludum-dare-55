@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bimr6vox3j4xt"]
+[gd_scene load_steps=9 format=3 uid="uid://bimr6vox3j4xt"]
 
 [ext_resource type="Script" path="res://gui/end_screen/lose/lose_screen.gd" id="1_0371o"]
 [ext_resource type="Texture2D" uid="uid://ia0aln3qa5ww" path="res://gui/end_screen/lose/game_over_bg.png" id="2_wvvrp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dmig62geveost" path="res://gui/end_screen/lose/game_over_title_bottom.png" id="5_gqvii"]
 [ext_resource type="Texture2D" uid="uid://du5olmj3fmpgs" path="res://gui/end_screen/lose/game_over_wings.png" id="6_1rt7m"]
 [ext_resource type="Texture2D" uid="uid://nmw5spcggjku" path="res://gui/end_screen/lose/game_over_text_restart.png" id="7_dmmjp"]
+[ext_resource type="AudioStream" uid="uid://dolg0bm4c612g" path="res://gui/end_screen/lose/lose_music.ogg" id="8_f72hg"]
 
 [node name="LoseScreen" type="Control"]
 layout_mode = 3
@@ -82,3 +83,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_dmmjp")
+
+[node name="LoseMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_f72hg")
+autoplay = true
