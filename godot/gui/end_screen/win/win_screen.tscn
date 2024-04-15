@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnfu52ejctfq4"]
+[gd_scene load_steps=12 format=3 uid="uid://dnfu52ejctfq4"]
 
 [ext_resource type="Script" path="res://gui/end_screen/win/win_screen.gd" id="1_3t4h3"]
 [ext_resource type="Texture2D" uid="uid://76o38yy42vn7" path="res://gui/end_screen/win/win_bg.png" id="2_rpi2w"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cmaymuuwcm5ob" path="res://gui/end_screen/win/win_trophy_2.png" id="7_jwx00"]
 [ext_resource type="Texture2D" uid="uid://ccdbpju6rw4ho" path="res://gui/end_screen/win/win_trophy_3.png" id="8_4jv72"]
 [ext_resource type="Texture2D" uid="uid://ciouugeqpq0yh" path="res://gui/end_screen/win/win_trophy_4.png" id="9_lmqor"]
+[ext_resource type="Texture2D" uid="uid://nmw5spcggjku" path="res://gui/end_screen/lose/game_over_text_restart.png" id="10_nae6o"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_1xdyh"]
 frames = 4
@@ -82,3 +83,14 @@ offset_top = -10.0
 offset_right = 1093.0
 offset_bottom = 206.0
 texture = SubResource("AnimatedTexture_1xdyh")
+
+[node name="RestartInfo" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_nae6o")
