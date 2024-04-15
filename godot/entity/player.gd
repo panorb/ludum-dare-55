@@ -150,6 +150,7 @@ func take_damage(value):
 	print(invul_timer.time_left, invul_timer.is_stopped())
 	if not invul_timer.is_stopped():
 		return
+
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
 	i_frame_sprite.visible = true
