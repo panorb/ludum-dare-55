@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2pn0ww5aqdo5"]
+[gd_scene load_steps=6 format=3 uid="uid://d2pn0ww5aqdo5"]
 
 [ext_resource type="Script" path="res://gui/main_menu.gd" id="1_ssco8"]
 [ext_resource type="PackedScene" uid="uid://c1ntvyjxu8wn0" path="res://gui/logo.tscn" id="2_0rxef"]
 [ext_resource type="Texture2D" uid="uid://ddn1jixfqlq3v" path="res://gui/main_menu_bg.png" id="2_10sic"]
 [ext_resource type="AudioStream" uid="uid://ex6tdseyyhud" path="res://gui/main_menu_theme.ogg" id="3_4nags"]
+[ext_resource type="AudioStream" uid="uid://cq608b3e1pu67" path="res://gui/test_sound.wav" id="5_y62p6"]
 
 [node name="MainMenu" type="Control"]
 texture_filter = 1
@@ -134,6 +135,10 @@ text = "Deutsch"
 stream = ExtResource("3_4nags")
 autoplay = true
 bus = &"Music"
+
+[node name="TestSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_y62p6")
+bus = &"SFX"
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/SelectEn" to="." method="change_language" binds= ["en"]]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/SelectDe" to="." method="change_language" binds= ["de"]]
