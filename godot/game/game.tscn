@@ -263,4 +263,9 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_fi7l6")
 bus = &"SFX"
 
+[node name="DeathTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
 [connection signal="gui_input" from="LevelTexture" to="." method="_on_level_texture_gui_input"]
