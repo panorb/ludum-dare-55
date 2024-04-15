@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2pn0ww5aqdo5"]
+[gd_scene load_steps=4 format=3 uid="uid://d2pn0ww5aqdo5"]
 
 [ext_resource type="Script" path="res://gui/main_menu.gd" id="1_ssco8"]
 [ext_resource type="PackedScene" uid="uid://c1ntvyjxu8wn0" path="res://gui/logo.tscn" id="2_0rxef"]
+[ext_resource type="AudioStream" uid="uid://ex6tdseyyhud" path="res://gui/main_menu_theme.ogg" id="3_4nags"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -116,6 +117,11 @@ text = "English"
 [node name="SelectDe" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Deutsch"
+
+[node name="MainMenuThemeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4nags")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/SelectEn" to="." method="change_language" binds= ["en"]]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer/SelectDe" to="." method="change_language" binds= ["de"]]
