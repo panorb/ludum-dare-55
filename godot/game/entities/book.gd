@@ -12,7 +12,7 @@ var page_spawn_timer = null
 var has_spawned = false
 
 func init(start_x, start_y, speed_x, speed_y):
-	damage = 300
+	damage = 200
 	position.x = start_x
 	position.y = start_y
 	speed = Vector2(speed_x, speed_y)
@@ -33,7 +33,7 @@ func _move(delta):
 	position += speed*delta
 	speed.y += GRAVITY
 	rotation += rot_speed
-	if position.y > 2000:
+	if position.y > 400:
 		queue_free()
 	if randi()%50 == 0 and not has_spawned:
 		#page_spawn.emit(self)

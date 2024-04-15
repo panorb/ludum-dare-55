@@ -76,6 +76,7 @@ func _process(delta):
 		#var x = (dir*600+player_pos.x+level.get_player_offset())
 		var x = player_pos.x-level.get_player_offset()+dir*350
 		var speed_x = -dir*(100+randi()%300)
+		x -= speed_x/4
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 		environment.feedback("spawn_object")

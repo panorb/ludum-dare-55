@@ -20,7 +20,7 @@ func _ready():
 
 func _move(delta):
 	position += speed*delta
-	if position.y > 2000:
+	if position.y > 400:
 		queue_free()
 
 func on_player_collision(player):
