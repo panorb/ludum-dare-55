@@ -41,6 +41,7 @@ polygon = PackedVector2Array(0, 0, 8.16351, -8.16351, 16.327, 0, 8.16351, 8.1635
 
 [node name="TargetMarkerP2" type="Polygon2D" parent="EntityContainer"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(-8.16351, 0)
 scale = Vector2(0.367, 0.367)
 color = Color(1, 0, 0, 1)
