@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ke3r4veuskql"]
+[gd_scene load_steps=11 format=3 uid="uid://ke3r4veuskql"]
 
 [ext_resource type="Script" path="res://gui/dialog/dialog_system.gd" id="1_khsgs"]
 [ext_resource type="Theme" uid="uid://cseiffhoq55yj" path="res://gui/dialog/dialog_theme.tres" id="2_b38sv"]
 [ext_resource type="PackedScene" uid="uid://bmeubyfe2tyky" path="res://gui/dialog/dialog_panel.tscn" id="3_82c11"]
+[ext_resource type="SpriteFrames" uid="uid://bdpn4xqbndjli" path="res://gui/dialog/mage.tres" id="4_7u0sf"]
+[ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="4_jayp4"]
 [ext_resource type="AudioStream" uid="uid://tmhoshcxyhtg" path="res://gui/dialog/audio/fly_speaking.ogg" id="4_jxw2r"]
 [ext_resource type="AudioStream" uid="uid://wpgm4sdfovhf" path="res://gui/dialog/audio/wizard_speaking-01.ogg" id="5_pilpn"]
 [ext_resource type="AudioStream" uid="uid://boh2drpw2k48w" path="res://gui/dialog/audio/wizard_speaking-02.ogg" id="6_ohmcv"]
@@ -43,12 +45,29 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/WizardPanel"]
+position = Vector2(44, 40)
+scale = Vector2(0.0785713, 0.0785713)
+sprite_frames = ExtResource("4_7u0sf")
+autoplay = "default"
+
 [node name="FlyPanel" parent="MarginContainer" instance=ExtResource("3_82c11")]
 unique_name_in_owner = true
 z_index = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="MarginContainer/FlyPanel"]
+texture_filter = 1
+position = Vector2(45, 62)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("4_jayp4")
+animation = &"Flying"
+autoplay = "Flying"
+frame = 8
+frame_progress = 0.792901
 
 [node name="FlySpeakingSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
