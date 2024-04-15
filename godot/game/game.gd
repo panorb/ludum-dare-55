@@ -74,7 +74,8 @@ func _process(delta):
 		sound.play()
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
-	var r = randi()%300
+	
+	var r = randi()%(300+int(game_timer.time_left))
 	if r > 0 and r <= 7:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
