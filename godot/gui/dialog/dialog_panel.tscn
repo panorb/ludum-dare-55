@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://gui/dialog/dialog_panel.gd" id="1_a764p"]
 
 [node name="DialogPanel" type="Panel"]
+z_index = 1
 size_flags_vertical = 3
 script = ExtResource("1_a764p")
 
