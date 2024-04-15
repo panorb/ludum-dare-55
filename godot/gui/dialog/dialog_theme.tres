@@ -3,7 +3,11 @@
 [ext_resource type="FontFile" uid="uid://nwbgykkf6qrk" path="res://gui/roboto-medium.ttf" id="1_b6t1t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6eve"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(1, 1, 1, 0.768627)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
