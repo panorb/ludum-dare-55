@@ -17,6 +17,14 @@ var dashing = false
 var dash_time = 3.0
 var dash_time_max = 3.0
 
+var fly_speed = 12000
+var dash_increase = 12000
+var speed_boost = 12000
+var speed_boost_target = 200
+
+var speed_boost_timer = null
+var invul_timer = null
+
 const I_FRAME_DURATION = 0.5
 
 func _ready():
@@ -24,27 +32,25 @@ func _ready():
 	i_frame_timer.timeout.connect(_on_i_frame_timeout)
 	add_child(i_frame_timer)
 	target = position
+	speed_boost_timer = Timer.new()
+	speed_boost_timer.one_shot = true
+	add_child(speed_boost_timer)
+	invul_timer = Timer.new()
+	invul_timer.one_shot = true
+	add_child(invul_timer)
 
 func _process(delta):
 	if not _active:
 		return
 	var direction = Vector2()
 	
-	#if Input.is_action_pressed("fly1_right"):
-		#direction.x += 1
-	#if Input.is_action_pressed("fly1_left"):
-		#direction.x -= 1
-	#if Input.is_action_pressed("fly1_down"):
-		#direction.y += 1
-	#if Input.is_action_pressed("fly1_up"):
-		#direction.y -= 1
 	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
-	var speed = 12000
+	var speed = fly_speed
 	var target_speed = 300
 	if Input.is_action_pressed("fly1_dash"):
 		if dash_time > 0.0:
 			dash_time -= delta
-			speed += 12000
+			speed += dash_increase
 			target_speed += 100
 	else:
 		if dash_time < dash_time_max:
@@ -54,6 +60,10 @@ func _process(delta):
 	#velocity = Vector2.ZERO
 	inertia /= 1.1
 	velocity = Vector2.ZERO + inertia
+	
+	if speed_boost_timer.time_left > 0:
+		speed += speed_boost
+		target_speed += speed_boost_target
 	
 	direction = direction.normalized()
 	target += direction * target_speed * delta * 1/(direction.length()/250+1)
@@ -87,14 +97,32 @@ func set_health(value):
 		died.emit()
 		print("died emitted")
 
+func heal(value):
+	set_health(min(_health+value, _max_health))
+
+func become_invulnerable(value):
+	invul_timer.start(value)
+	print("became invulnerable")
+
+func boost_speed(value):
+	speed_boost_timer.start(value)
+	print("became speed")
+
 func take_damage(value):
 	print("ouchy")
 	print(i_frame_timer.time_left)
 	if not i_frame_timer.is_stopped():
 		return
+	print(invul_timer.time_left, invul_timer.is_stopped())
+	if not invul_timer.is_stopped():
+		return
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
 	target = position
+
+func increase_dash_time(value):
+	dash_time_max += value
+	dash_time += value
 
 func _on_i_frame_timeout():
 	i_frame_timer.stop()

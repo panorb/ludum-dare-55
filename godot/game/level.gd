@@ -14,6 +14,13 @@ var size
 var total_level_width := 0.0
 
 const BOOK = preload("res://game/entities/book.tscn")
+const POWERUP_HEAL = preload("res://game/entities/powerup_heal.tscn")
+const POWERUP_HEALTH_BOOST = preload("res://game/entities/powerup_health_boost.tscn")
+const POWERUP_DASH_INCREASE = preload("res://game/entities/powerup_dash_boost.tscn")
+const POWERUP_SPEED_BOOST = preload("res://game/entities/powerup_speed_boost.tscn")
+const POWERUP_INVULNERABILITY = preload("res://game/entities/powerup_invulnerability.tscn")
+
+enum PowerUps {HEAL, HEALTH_BOOST, DASH_INCREASE, SPEED_BOOST, INVULNERABILITY}
 
 func _ready():
 	player.target_marker = target_marker_p_1
@@ -44,6 +51,22 @@ func _add_book(x, y, speed_x=0.0, speed_y=0.0):
 	#book._create_copies(total_level_width)
 	book.connect_signals(self)
 	entities.add_child(book)
+
+func _add_powerup(x, y, speed_x, speed_y, type=PowerUps.HEAL):
+	var powerup = null
+	if type == PowerUps.HEALTH_BOOST:
+		powerup = POWERUP_HEALTH_BOOST.instantiate()
+	elif type == PowerUps.DASH_INCREASE:
+		powerup = POWERUP_DASH_INCREASE.instantiate()
+	elif type == PowerUps.SPEED_BOOST:
+		powerup = POWERUP_SPEED_BOOST.instantiate()
+	elif type == PowerUps.INVULNERABILITY:
+		powerup = POWERUP_INVULNERABILITY.instantiate()
+	else:
+		powerup = POWERUP_HEAL.instantiate()
+	powerup.init(x, y, speed_x, speed_y)
+	powerup.connect_signals(self)
+	entities.add_child(powerup)
 
 func move_indicator(pos):
 	indicator.position = pos
