@@ -5,11 +5,13 @@ extends Node3D
 @onready var camera_focus: Marker3D = get_node("%CameraFocus")
 @onready var camera_follow: PathFollow3D = %PathFollow3D
 @onready var laser_origin = %LaserOrigin
+@onready var win_animation_scene = %WinAnimationScene
 # TODO: eventually this needs to be removed
 @onready var pentagram: MeshInstance3D = $vfx/Pentagram
 @onready var storm: MeshInstance3D = $vfx/Storm
 
 signal uniform_changed
+signal win_finisched
 
 var game_progress = 0.
 var pent_bright = 0.
@@ -19,9 +21,12 @@ var global_time = 0.
 var damage_time = 0.
 var health = 0.
 
+# see set_game_progress_ratio
+const spawn_sandwich_at_progress = 0.85
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	win_animation_scene.win_animation_finisched.connect(_on_win_animation_finisched)
 
 func get_camera_position():
 	return camera_origin.rotation_degrees.y / 360.0
@@ -90,6 +95,10 @@ func set_game_progress_ratio(progress: float):
 	game_progress = progress
 	camera_follow.progress_ratio = progress;
 
+	# If progress for sandwich spawning is reached spawn it
+	if progress >= spawn_sandwich_at_progress:
+		win_animation_scene.play_spawn_animation()
+
 func feedback(name: String):
 	if name == "spawn_object":
 		pent_bright = 2
@@ -101,3 +110,10 @@ func on_player_health_changed(old_value,new_value):
 	health = new_value
 	if new_value < old_value:
 		damage_time = 1.
+
+func win():
+	win_animation_scene.play_win_animation()
+
+func _on_win_animation_finisched():
+	win_finisched.emit()
+

@@ -1,11 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://36yf2lknh4wl"]
+[gd_scene load_steps=10 format=3 uid="uid://36yf2lknh4wl"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_swjmm"]
+[ext_resource type="Texture2D" uid="uid://bcsurtirug22h" path="res://entity/Iron_fly.png" id="2_f7rtm"]
 [ext_resource type="SpriteFrames" uid="uid://c32bqp8hslp6e" path="res://entity/fly.tres" id="2_t1qj1"]
+[ext_resource type="Texture2D" uid="uid://dtpg4tye45us4" path="res://entity/invulnerability_shield.png" id="4_ygynb"]
+[ext_resource type="Texture2D" uid="uid://bjyvn7dlflxgk" path="res://entity/Fly_dash.png" id="5_p78o1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ds8wa"]
 radius = 21.7694
 height = 81.6351
+
+[sub_resource type="Animation" id="Animation_6r10s"]
+resource_name = "dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DashSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_3w6pp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DashSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mia2"]
+_data = {
+"RESET": SubResource("Animation_3w6pp"),
+"dash": SubResource("Animation_6r10s")
+}
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.367489, 0.367489)
@@ -13,7 +53,14 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_swjmm")
 
+[node name="IFrame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(0.723715, 0.723715)
+texture = ExtResource("2_f7rtm")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ds8wa")
 
@@ -27,3 +74,21 @@ animation = &"Flying"
 autoplay = "Flying"
 frame = 8
 frame_progress = 0.792901
+
+[node name="InvulShield" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("4_ygynb")
+
+[node name="DashSprite" type="Sprite2D" parent="."]
+visible = false
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_p78o1")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2mia2")
+}

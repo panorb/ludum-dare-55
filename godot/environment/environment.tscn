@@ -68,6 +68,7 @@ transparent_bg = true
 size = Vector2i(1920, 360)
 
 [node name="WinAnimationScene" parent="WinAnimationBillboard/SubViewport" instance=ExtResource("2_hbdu1")]
+unique_name_in_owner = true
 
 [node name="Camera" type="Node" parent="."]
 
