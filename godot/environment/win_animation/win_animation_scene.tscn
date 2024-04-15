@@ -1,0 +1,170 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5gmgjo0lqr3t"]
+
+[ext_resource type="Texture2D" uid="uid://dlj5st58rod6h" path="res://gui/logo/logo_fly.tres" id="1_76xks"]
+[ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="1_bfx36"]
+[ext_resource type="Script" path="res://environment/win_animation/win_animation_scene.gd" id="1_xoicf"]
+[ext_resource type="Texture2D" uid="uid://cuiukwq47v5cs" path="res://environment/win_animation/sandwich.png" id="3_7w6jj"]
+
+[sub_resource type="Animation" id="Animation_tlnxn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShakeAnchor/LogoFly:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-266, 72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShakeAnchor/LogoFly:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sandwich:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sandwich:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 360)]
+}
+
+[sub_resource type="Animation" id="Animation_cqoxh"]
+resource_name = "spawn"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sandwich:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, -102), Vector2(960, 360)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sandwich:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.95), Vector2(1, 0.95), Vector2(1.5, 0.7), Vector2(1.44375, 0.726458), Vector2(1.3, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tm745"]
+resource_name = "win"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShakeAnchor/LogoFly:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5, 7),
+"transitions": PackedFloat32Array(1, 1.51572, 1.23114),
+"update": 0,
+"values": [Vector2(-266, 72), Vector2(418, 72), Vector2(941, 245)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShakeAnchor/LogoFly:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.5, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.5708, 2.0944, 2.0944]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sandwich:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sandwich:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_alhxt"]
+_data = {
+"RESET": SubResource("Animation_tlnxn"),
+"spawn": SubResource("Animation_cqoxh"),
+"win": SubResource("Animation_tm745")
+}
+
+[node name="WinAnimationScene" type="Node2D"]
+script = ExtResource("1_xoicf")
+
+[node name="EdgeMarker" type="Sprite2D" parent="."]
+position = Vector2(1920, 360)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_bfx36")
+
+[node name="Sandwich" type="Sprite2D" parent="."]
+position = Vector2(960, 360)
+texture = ExtResource("3_7w6jj")
+offset = Vector2(0, -62)
+
+[node name="ShakeAnchor" type="Node2D" parent="."]
+
+[node name="LogoFly" type="Sprite2D" parent="ShakeAnchor"]
+position = Vector2(-266, 72)
+rotation = 1.5708
+texture = ExtResource("1_76xks")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_alhxt")
+}
+autoplay = "win"

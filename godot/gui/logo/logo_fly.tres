@@ -1,0 +1,11 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dlj5st58rod6h"]
+
+[ext_resource type="Texture2D" uid="uid://cld8sqvrqinmr" path="res://gui/logo/logo_fly1.png" id="1_n1jqo"]
+[ext_resource type="Texture2D" uid="uid://bkonw8k1k1pd6" path="res://gui/logo/logo_fly2.png" id="2_4o182"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_n1jqo")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("2_4o182")
+frame_1/duration = 0.2
