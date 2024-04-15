@@ -110,6 +110,10 @@ func _process(delta):
 	
 	if target_marker != null:
 		#target_marker.position = (position - target) * 4
+		var distance_from_player = position.distance_to(target)
+		if distance_from_player > 100:
+			var direction_reduced = (target - position).normalized()
+			target = position + direction_reduced * 100
 		target_marker.position = target
 
 func set_max_health(value):
