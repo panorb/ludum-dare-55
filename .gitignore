@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+.vscode
+addons/
+
+#.macOS
+.DS_Store
+godot/.DS_Store
+
+# translations
+godot/translations.en.translation
+godot/translations.de.translation
+
+# build
+godot/build/
+
+# idea
+.idea/

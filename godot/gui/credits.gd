@@ -21,3 +21,7 @@ func _ready():
 			person_names_rich_text_label.bbcode_enabled = true
 			person_names_rich_text_label.fit_content = true
 			main_v_box_container.add_child(person_names_rich_text_label)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		queue_free()

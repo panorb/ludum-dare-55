@@ -14,8 +14,9 @@ extends Control
 
 var game_timer
 
-const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
+const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
+const FREE_MOVEMENT_ZONE_WIDTH = 100
 
 var delay = 0.0
 
@@ -30,13 +31,18 @@ func _input(event):
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			level.move_indicator(Vector2(mouse_x, mouse_y))
 			aim_laser(event.position)
-			
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
-
-	environment.move_view(x_offset * delta * ENVIRONMENT_CAMERA_MOVEMENT_SCALE)
-	level.move_view(x_offset * -delta * LEVEL_VIEW_MOVEMENT_SCALE)
+	
+	if abs(x_offset) > FREE_MOVEMENT_ZONE_WIDTH:
+		if x_offset > 0:
+			x_offset -= FREE_MOVEMENT_ZONE_WIDTH
+		else:
+			x_offset += FREE_MOVEMENT_ZONE_WIDTH
+		x_offset += x_offset
+		environment.move_view(x_offset * delta * ENVIRONMENT_CAMERA_MOVEMENT_SCALE)
+		level.move_view(x_offset * -delta * LEVEL_VIEW_MOVEMENT_SCALE)
 	
 	%CameraPosLabel.text = "Camera: " + str(environment.get_camera_position())
 	%CalculatedCameraLabel.text = "Calc. Camera: " + str(get_environment_camera_pos_from_level_x(level.get_level_view_x()))
@@ -49,12 +55,12 @@ func _process(delta):
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
-		var warning_pos = Vector2(dir*300, y)
 		if dir == 0:
 			dir = -1
-		var x = (dir*300+player_pos.x)
-		var speed_x = -dir*(100+randi()%100)
-		var speed_y = randi() % 100-100
+		#var x = (dir*600+player_pos.x+level.get_player_offset())
+		var x = player_pos.x-level.get_player_offset()+dir*350
+		var speed_x = -dir*(100+randi()%300)
+		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 
 func get_level_x_from_environment_camera_pos(camera_pos: float):
@@ -116,8 +122,9 @@ func _on_player_death():
 	if player_alive_count <= 0:
 		game_timer.stop()
 		print("you lose")
+		get_tree().call_deferred("change_scene","res://gui/end_screen/lose_screen.tscn" )
 		
-		get_tree().change_scene_to_file("res://gui/end_screen/lose_screen.tscn")
+
 
 func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 	var camera = environment_viewport.get_camera_3d()

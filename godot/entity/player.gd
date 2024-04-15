@@ -10,7 +10,12 @@ var _active = false
 var _health = 1000
 var _max_health = 1000
 var inertia = Vector2.ZERO
-var i_frame_timer
+var i_frame_timer = null
+var target = Vector2.ZERO
+var target_marker = null
+var dashing = false
+var dash_time = 3.0
+var dash_time_max = 3.0
 
 const I_FRAME_DURATION = 0.5
 
@@ -18,38 +23,55 @@ func _ready():
 	i_frame_timer = Timer.new()
 	i_frame_timer.timeout.connect(_on_i_frame_timeout)
 	add_child(i_frame_timer)
+	target = position
 
 func _process(delta):
 	if not _active:
 		return
 	var direction = Vector2()
 	
-	if Input.is_action_pressed("ui_right"):
-		direction.x += 1
-	if Input.is_action_pressed("ui_left"):
-		direction.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		direction.y += 1
-	if Input.is_action_pressed("ui_up"):
-		direction.y -= 1
+	#if Input.is_action_pressed("fly1_right"):
+		#direction.x += 1
+	#if Input.is_action_pressed("fly1_left"):
+		#direction.x -= 1
+	#if Input.is_action_pressed("fly1_down"):
+		#direction.y += 1
+	#if Input.is_action_pressed("fly1_up"):
+		#direction.y -= 1
+	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
+	var speed = 12000
+	var target_speed = 300
+	if Input.is_action_pressed("fly1_dash"):
+		if dash_time > 0.0:
+			dash_time -= delta
+			speed += 12000
+			target_speed += 100
+	else:
+		if dash_time < dash_time_max:
+			dash_time += delta*0.5
+	
 	
 	#velocity = Vector2.ZERO
 	inertia /= 1.1
 	velocity = Vector2.ZERO + inertia
 	
-	if direction.length() > 0:
+	direction = direction.normalized()
+	target += direction * target_speed * delta * 1/(direction.length()/250+1)
+	
+	
+	direction = target - position
+	
+	
+	if direction.length() > 2:
 		direction = direction.normalized()
-		#position += direction * 200 * delta
-		
-		velocity += direction * 200# * delta
-		# when to the left, the sprite is flipped
-		if direction.x < 0:
-			$AnimatedSprite2D.flip_v = true
-		else:
-			$AnimatedSprite2D.flip_v = false
-
+	
+		velocity += direction * speed * delta
 		rotation = direction.angle()
 	move_and_slide()
+	
+	if target_marker != null:
+		#target_marker.position = (position - target) * 4
+		target_marker.position = target
 
 func set_max_health(value):
 	var old_value = _max_health
@@ -72,6 +94,7 @@ func take_damage(value):
 		return
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
+	target = position
 
 func _on_i_frame_timeout():
 	i_frame_timer.stop()

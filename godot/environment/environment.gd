@@ -39,6 +39,3 @@ func rotate_cam_to_pos(angle: float):
 
 func move_camera_forward(delta:float):
 	return
-	camera_follow.progress_ratio += delta * 0.025
-	if camera_follow.progress_ratio >= 1:
-		camera_follow.progress_ratio = 1

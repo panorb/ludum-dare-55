@@ -7,7 +7,6 @@ const main_menu_scene := preload("res://gui/main_menu.tscn")
 var scenes := {
 	'main_menu': main_menu_scene,
 	'game': preload("res://game/game.tscn"),
-	'credits': preload('res://gui/credits.tscn'),
 }
 
 @onready var current_scene_node: Node = null
@@ -27,13 +26,9 @@ var scenes := {
 		if next_scene_node is MainMenu:
 			var main_menu_node = next_scene_node as MainMenu
 			main_menu_node.start_game.connect(_on_game_start)
-			main_menu_node.show_credits.connect(_on_show_credits)
 
 func _ready():
 	self.current_scene = start_scene
 
 func _on_game_start():
 	self.current_scene = 'game'
-	
-func _on_show_credits():
-	self.current_scene = 'credits'

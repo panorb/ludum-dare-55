@@ -22,7 +22,7 @@ collision_mask = 4
 shape = SubResource("SegmentShape2D_qfpql")
 
 [node name="BottomBorder" type="CollisionShape2D" parent="EntityContainer/VerticalBoundaries"]
-position = Vector2(0, 295)
+position = Vector2(0, 360)
 shape = SubResource("SegmentShape2D_qfpql")
 
 [node name="Player" parent="EntityContainer" groups=["player"] instance=ExtResource("1_ex0qr")]
@@ -37,3 +37,17 @@ position = Vector2(160, 208)
 unique_name_in_owner = true
 scale = Vector2(0.0703125, 0.0703125)
 texture = ExtResource("3_2rxd3")
+
+[node name="TargetMarkerP1" type="Polygon2D" parent="EntityContainer"]
+unique_name_in_owner = true
+position = Vector2(-8.16351, 0)
+scale = Vector2(0.367, 0.367)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 8.16351, -8.16351, 16.327, 0, 8.16351, 8.16351)
+
+[node name="TargetMarkerP2" type="Polygon2D" parent="EntityContainer"]
+unique_name_in_owner = true
+position = Vector2(-8.16351, 0)
+scale = Vector2(0.367, 0.367)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 8.16351, -8.16351, 16.327, 0, 8.16351, 8.16351)
