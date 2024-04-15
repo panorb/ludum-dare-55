@@ -6,6 +6,9 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var main_sprite = $AnimatedSprite2D
 @onready var dash_sprite = $DashSprite
+@onready var hurt_sfx: AudioStreamPlayer = %DamageTaken
+@onready var healing: AudioStreamPlayer = %Healing
+@onready var boost: AudioStreamPlayer = %Boost
 
 signal health_changed(old_health, new_health)
 signal max_health_changed(old_maximum, new_maximum)
@@ -123,6 +126,7 @@ func _process(delta):
 func set_max_health(value):
 	var old_value = _max_health
 	_max_health = value
+	boost.play()
 	max_health_changed.emit(old_value, value)
 
 func set_health(value):
@@ -134,13 +138,16 @@ func set_health(value):
 		died.emit()
 
 func heal(value):
+	healing.play()
 	set_health(min(_health+value, _max_health))
 
 func become_invulnerable(value):
+	boost.play()
 	invul_timer.start(value)
 	invul_shield.visible = true
 
 func boost_speed(value):
+	boost.play()
 	speed_boost_timer.start(value)
 
 func take_damage(value):
@@ -161,6 +168,7 @@ func take_damage(value):
 	hitVoice.play()
 
 func increase_dash_time(value):
+	boost.play()
 	dash_time_max += value
 	dash_time += value
 	max_dash_changed.emit(dash_time_max)
