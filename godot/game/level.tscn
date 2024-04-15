@@ -7,7 +7,7 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qfpql"]
 b = Vector2(1281, 0)
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["level"]]
 script = ExtResource("1_ou5fb")
 
 [node name="EntityContainer" type="Node2D" parent="."]
