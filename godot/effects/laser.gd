@@ -6,6 +6,7 @@ extends Node3D
 @onready var laser_target: Node2D
 @onready var environment_viewport: SubViewport
 @onready var level_viewport: SubViewport
+@onready var laser_mesh:MeshInstance3D = %MeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,12 +48,54 @@ func _process(delta):
 	# with regards to the level_viewport
 
 	var level_coords = laser_target.global_position
+	var environment_screenspace_coords = level_to_environment_coords(level_coords)
 
+	var target_coords = project_screen_to_world(environment_screenspace_coords)
+
+	resize_laser()
+
+	look_at(target_coords)
+
+func level_to_environment_coords(level_coords: Vector2) -> Vector2:
 	var level_vp_size = Vector2(level_viewport.get_size())
 	var environment_vp_size = Vector2(environment_viewport.get_size())
 
 	var environment_screenspace_coords = environment_vp_size * level_coords / level_vp_size
 
-	var target_coords = project_screen_to_world(environment_screenspace_coords)
+	return environment_screenspace_coords
 
-	look_at(target_coords)
+func get_indicator_dimensions(node: Node2D)->Vector2:
+	if not is_instance_valid(node) or (node as LaserIndicator) == null:
+		return Vector2.ONE
+
+	
+	var laser_indicator = node as LaserIndicator
+
+	var indicator_x = laser_indicator.laser_radius_indicator.global_position.x
+	var laser_dimensions = (Vector2.ONE * indicator_x) - laser_indicator.global_position
+
+	return laser_dimensions
+
+func resize_laser():
+	if not is_instance_valid(laser_target) or \
+		not is_instance_valid(environment_viewport) or \
+		not is_instance_valid(level_viewport):
+		return
+	
+	var original_size = laser_mesh.get_aabb().size
+	var indicator_size = get_indicator_dimensions(laser_target)
+
+	var rightmost_position_gamespace = Vector2(indicator_size.x /2, 0) + laser_target.global_position
+
+	var rightmost_pos_global = project_screen_to_world(rightmost_position_gamespace)
+
+	var laser_center_global = project_screen_to_world(laser_target.global_position)
+
+	print("Scale: ", scale)
+	print("Indicator Size: ", indicator_size)
+
+	var new_scale = rightmost_pos_global.distance_to(laser_center_global) / original_size.x
+
+	var some_random_value_that_makes_it_fit = 2.6
+	scale.x = new_scale * some_random_value_that_makes_it_fit
+	scale.y = new_scale * some_random_value_that_makes_it_fit

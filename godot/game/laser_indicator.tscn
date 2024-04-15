@@ -10,3 +10,7 @@ script = ExtResource("1_4b2of")
 unique_name_in_owner = true
 scale = Vector2(0.0703125, 0.0703125)
 texture = ExtResource("1_dm5nm")
+
+[node name="TextureRadiusIndicator" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(22, 0)
