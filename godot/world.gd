@@ -7,6 +7,8 @@ const main_menu_scene := preload("res://gui/main_menu.tscn")
 var scenes := {
 	'main_menu': main_menu_scene,
 	'game': preload("res://game/game.tscn"),
+	'lose_screen': preload("res://gui/end_screen/lose_screen.tscn"),
+	'win_screen':  preload("res://gui/end_screen/win_screen.tscn"),
 }
 
 @onready var current_scene_node: Node = null
@@ -26,6 +28,9 @@ var scenes := {
 		if next_scene_node is MainMenu:
 			var main_menu_node = next_scene_node as MainMenu
 			main_menu_node.start_game.connect(_on_game_start)
+		elif next_scene_node is LoseScreen:
+			var lose_node = next_scene_node as LoseScreen
+			lose_node.start_game.connect(_on_game_start)
 
 func _ready():
 	self.current_scene = start_scene
