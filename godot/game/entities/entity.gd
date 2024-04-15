@@ -9,6 +9,9 @@ var damage = 50
 func _ready():
 	body_entered.connect(on_body_entered)
 
+func _move(delta):
+	pass
+
 func _create_copies(level_width):
 	if (has_node("Graphics")):
 		var left_copy = get_node("Graphics").duplicate(DUPLICATE_USE_INSTANTIATION)
@@ -21,17 +24,11 @@ func _create_copies(level_width):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	_move(delta)
 
 func on_body_entered(body):
 	body.take_damage(damage)
-	#collision.emit(self)
-
-
-#func on_player_entity_collision(hit_player, entity):
-	#hit_player.take_damage(50)
-	#pass
+	body.inertia += (body.position-position).normalized()*700
 
 func connect_signals(level):
-	#collision.connect(level.on_player_entity_collision)
 	pass
