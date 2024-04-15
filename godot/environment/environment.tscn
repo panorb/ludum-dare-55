@@ -149,6 +149,18 @@ light_energy = 12.167
 shadow_enabled = true
 shadow_reverse_cull_face = true
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.433659, 0.901077, 0, -0.901077, -0.433659, 0, 30.9228, 0)
+visible = false
+light_energy = 3.035
+shadow_enabled = true
+
+[node name="DayLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.51068, 0)
+visible = false
+light_energy = 2.833
+omni_range = 1522.19
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_enxjm")
 
