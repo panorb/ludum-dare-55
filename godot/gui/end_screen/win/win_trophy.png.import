@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du5olmj3fmpgs"
-path="res://.godot/imported/game_over_wings.png-5cd620005a2860f448560c3e8ae3f883.ctex"
+uid="uid://bnjjvvrxc7kns"
+path="res://.godot/imported/win_trophy.png-395da4a70a848ac16d26d16d400a15d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gui/end_screen/game_over_wings.png"
-dest_files=["res://.godot/imported/game_over_wings.png-5cd620005a2860f448560c3e8ae3f883.ctex"]
+source_file="res://gui/end_screen/win/win_trophy.png"
+dest_files=["res://.godot/imported/win_trophy.png-395da4a70a848ac16d26d16d400a15d0.ctex"]
 
 [params]
 

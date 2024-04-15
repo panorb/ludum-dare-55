@@ -254,7 +254,7 @@ vec4 raymarch(vec3 dir, vec3 origin, inout vec3 gnormal, inout bool ghit,inout v
 		//storm
 		//float stormStr = 1.; //TODO uniform
 		//float stime = TIME*2.; //TODO uniform
-		float stime = u_stormSpeed;
+		float stime = u_stormSpeed*2.;
 
 		pos = (rotationY(PI*.13*h+stime)*vec4(pos,1.)).xyz;
 

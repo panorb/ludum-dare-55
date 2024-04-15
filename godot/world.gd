@@ -7,8 +7,8 @@ const main_menu_scene := preload("res://gui/main_menu.tscn")
 var scenes := {
 	'main_menu': main_menu_scene,
 	'game': preload("res://game/game.tscn"),
-	'lose_screen': preload("res://gui/end_screen/lose_screen.tscn"),
-	'win_screen':  preload("res://gui/end_screen/win_screen.tscn"),
+	'lose_screen': preload("res://gui/end_screen/lose/lose_screen.tscn"),
+	'win_screen':  preload("res://gui/end_screen/win/win_screen.tscn"),
 }
 
 @onready var current_scene_node: Node = null
