@@ -39,12 +39,12 @@ func _process(delta):
 	#if Input.is_action_pressed("fly1_up"):
 		#direction.y -= 1
 	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
-	var speed = 200
+	var speed = 12000
 	var target_speed = 300
 	if Input.is_action_pressed("fly1_dash"):
 		if dash_time > 0.0:
 			dash_time -= delta
-			speed += 200
+			speed += 12000
 			target_speed += 100
 	else:
 		if dash_time < dash_time_max:
@@ -58,28 +58,15 @@ func _process(delta):
 	direction = direction.normalized()
 	target += direction * target_speed * delta * 1/(direction.length()/250+1)
 	
-	#if direction.length() > 0:
-	
-	#if not i_frame_timer.is_stopped():
-	#	target = position
 	
 	direction = target - position
 	
 	
 	if direction.length() > 2:
 		direction = direction.normalized()
-		#position += direction * 200 * delta
 	
-		velocity += direction * speed# * delta
-		print(position, velocity, inertia, target)
-		#velocity += direction * 1000# * delta
-		# when to the left, the sprite is flipped
-		#if direction.x < 0:
-			#$AnimatedSprite2D.flip_v = true
-		#else:
-			#$AnimatedSprite2D.flip_v = false
-
-	rotation = velocity.angle()+90
+		velocity += direction * speed * delta
+		rotation = direction.angle()
 	move_and_slide()
 	
 	if target_marker != null:
