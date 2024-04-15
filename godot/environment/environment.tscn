@@ -58,7 +58,7 @@ fog_light_energy = 0.11
 script = ExtResource("1_c4stx")
 
 [node name="WinAnimationBillboard" type="Sprite3D" parent="."]
-transform = Transform3D(-18, -0.00142123, -0.00640439, -3.52003e-09, 17.5718, -3.89975, 0.00656019, -3.8996, -17.5725, 0, 2.73, 0)
+transform = Transform3D(-18, -0.00142123, -0.00640438, -3.12891e-09, 17.5718, -3.89975, 0.00656018, -3.89959, -17.5725, 0, 2.73, 0)
 flip_h = true
 pixel_size = 0.0001
 texture = SubResource("ViewportTexture_l3c4r")
@@ -181,7 +181,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39499, 0)
 
 [node name="Laser" parent="LaserOrigin" instance=ExtResource("5_u8dhy")]
 unique_name_in_owner = true
-transform = Transform3D(-0.00124345, -0.00484292, -8.46762e-08, -0.00469077, 0.00120438, -0.24869, 0.00120438, -0.000309233, -0.968583, 0, 0, 0)
+transform = Transform3D(-0.0049738, -0.0193717, 3.7718e-07, -0.0187631, 0.00481754, -0.248689, 0.00481752, -0.00123694, -0.968583, 0, 0, 0)
 
 [node name="Bookshelf1" parent="." instance=ExtResource("10_26q08")]
 transform = Transform3D(0.747079, 0, 0.664735, 0, 1, 0, -0.664735, 0, 0.747079, -19.4391, 0, -0.261867)
