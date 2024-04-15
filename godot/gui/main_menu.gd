@@ -42,6 +42,7 @@ func _on_quit_button_pressed() -> void:
 
 func _on_sfx_sound_slider_value_changed(volume_value: float) -> void:
 	set_bus_volume(sfx_bus_name, volume_value, sfx_sound_percent_label)
+	$TestSoundPlayer.play()
 
 func _on_music_sound_slider_value_changed(volume_value: float) -> void:
 	set_bus_volume(music_bus_name, volume_value, music_sound_percent_label)
