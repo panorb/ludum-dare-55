@@ -26,6 +26,7 @@ func _update_edge_warns(viewport_size: Vector2, screen_center_level_position: Ve
 	
 	for i in range(get_child_count()):
 		var warn_indicator = get_child(i)
+
 		if i < warn_entities.size():
 			if viewport_rect.has_point(warn_entities[i].position):
 				warn_entities[i].entered_screen_once = true
