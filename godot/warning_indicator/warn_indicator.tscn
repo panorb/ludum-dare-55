@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtjptr7knagts"]
+[gd_scene load_steps=3 format=3 uid="uid://dtjptr7knagts"]
 
 [ext_resource type="Texture2D" uid="uid://b5c7tif2g8byy" path="res://warning_indicator/edge_warn.png" id="1_wuoil"]
+[ext_resource type="Script" path="res://warning_indicator/warn_indicator.gd" id="2_c5q6d"]
 
 [node name="WarnIndicator" type="Sprite2D"]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_wuoil")
+script = ExtResource("2_c5q6d")

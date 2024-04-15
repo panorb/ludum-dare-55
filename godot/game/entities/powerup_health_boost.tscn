@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/entities/powerup_health_boost.gd" id="1_jjyi0"]
 [ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="2_xht73"]
 
-[node name="PowerUpHealthBoost" type="Area2D" groups=["edge-warn"]]
+[node name="PowerUpHealthBoost" type="Area2D"]
 scale = Vector2(0.25, 0.25)
 collision_layer = 2
 collision_mask = 4
