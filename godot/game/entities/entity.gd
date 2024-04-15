@@ -4,6 +4,7 @@ extends Area2D
 signal collision(obstacle)
 
 var damage = 50
+var entered_screen_once = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

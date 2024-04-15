@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmig62geveost"
-path="res://.godot/imported/game_over_title_bottom.png-228b4b7ef581c9fe03075af13b3d73b5.ctex"
+uid="uid://cdjvx2gtfku75"
+path="res://.godot/imported/win_fly_13.png-ac80ff7136b3b56d318a7fe04b74ddfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gui/end_screen/game_over_title_bottom.png"
-dest_files=["res://.godot/imported/game_over_title_bottom.png-228b4b7ef581c9fe03075af13b3d73b5.ctex"]
+source_file="res://gui/end_screen/win/win_fly_13.png"
+dest_files=["res://.godot/imported/win_fly_13.png-ac80ff7136b3b56d318a7fe04b74ddfa.ctex"]
 
 [params]
 

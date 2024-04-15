@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=13 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
@@ -22,6 +22,15 @@ shader_parameter/u_vignette = 0.5
 shader_parameter/u_filmgrain = 1.0
 shader_parameter/u_abbrLevel = 0.5
 shader_parameter/u_abbrEnv = 1.5
+shader_parameter/u_shakeX = null
+shader_parameter/u_shakeY = null
+
+[sub_resource type="Theme" id="Theme_o4fla"]
+Label/colors/font_color = Color(0.635294, 0.243137, 0.54902, 1)
+Label/colors/font_outline_color = Color(0.145098, 0.337255, 0.180392, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 41
+Label/fonts/font = null
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -165,6 +174,26 @@ offset_bottom = 0.0
 scale = Vector2(-4, 4)
 size_flags_horizontal = 10
 size_flags_vertical = 2
+
+[node name="TimeMarginContainer" type="MarginContainer" parent="UIOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_o4fla")
+theme_override_constants/margin_top = 50
+
+[node name="TimerCenterContainer" type="CenterContainer" parent="UIOverlay/TimeMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="TimerLabel" type="Label" parent="UIOverlay/TimeMarginContainer/TimerCenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MainThemeSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

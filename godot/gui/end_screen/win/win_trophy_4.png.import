@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nmw5spcggjku"
-path="res://.godot/imported/game_over_text_restart.png-42dd45479c3ce70d91a779ad7349a668.ctex"
+uid="uid://ciouugeqpq0yh"
+path="res://.godot/imported/win_trophy_4.png-fc8b047169beacd38d560ee9e9cb818b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gui/end_screen/game_over_text_restart.png"
-dest_files=["res://.godot/imported/game_over_text_restart.png-42dd45479c3ce70d91a779ad7349a668.ctex"]
+source_file="res://gui/end_screen/win/win_trophy_4.png"
+dest_files=["res://.godot/imported/win_trophy_4.png-fc8b047169beacd38d560ee9e9cb818b.ctex"]
 
 [params]
 
