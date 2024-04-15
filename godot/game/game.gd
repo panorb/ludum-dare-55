@@ -40,6 +40,8 @@ func _input(event):
 			
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
+			var laserSound = %LaserImpactSound
+			laserSound.play()
 			spawn_laser(Vector2(mouse_x, mouse_y))
 
 func _process(delta):
