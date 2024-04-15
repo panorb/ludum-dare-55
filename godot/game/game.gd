@@ -19,10 +19,12 @@ extends Control
 @onready var laser_scene: PackedScene = preload("res://effects/laser.tscn")
 @onready var laser_indicator_scene: PackedScene = preload("res://game/laser_indicator.tscn")
 
+@onready var death_timer := %DeathTimer
+
 var game_end : bool = false
 
-var game_timer
-const max_game_time = 5.
+var game_timer: Timer
+const max_game_time = 180.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
@@ -131,32 +133,33 @@ func _ready():
 	level.viewport_size = level_viewport.size
 	level.total_level_width = abs(get_level_x_from_environment_camera_pos(1.0))
 	%TotalLevelWidthLabel.text = "Total level width: " + str(get_level_x_from_environment_camera_pos(1.0))
-	
+
 	var players = get_tree().get_nodes_in_group("player")
 	var health_bars = [health_bar_p1, health_bar_p2]
 	var player_count = 1
 
 	environment.set_game_progress_ratio(0.)
-	
+
 	for i in range(player_count):
 		players[i].set_active(true)
 		health_bars[i].set_player(players[i])
 		players[i].set_health(players[i]._max_health)
-	
+
 	for i in range(player_count, len(health_bars)):
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
-	
+
 	for player in players:
 		player.died.connect(_on_player_death)
-	
+
 	game_timer = Timer.new()
 	game_timer.one_shot = true
 	add_child(game_timer)
 
 	game_timer.start(max_game_time)
 	game_timer.timeout.connect(on_game_timeout)
-	
+	death_timer.timeout.connect(_on_game_end)
+
 	for i in range(player_count):
 		players[i].health_changed.connect(environment.on_player_health_changed)
 		players[i].health_changed.connect(music_switcher)
@@ -194,13 +197,11 @@ func music_switcher(_old_health, new_health):
 		%ThreatensToLoseSound.play()
 
 func _on_player_death():
-	var player_alive_count = 0
-	for player in get_tree().get_nodes_in_group("player"):
-		if player._active:
-			player_alive_count += 1
-	if player_alive_count <= 0:
-		game_timer.stop()
-		show_lose_screen.emit()
+	game_timer.paused = true
+	death_timer.start()
+
+func _on_game_end():
+	show_lose_screen.emit()
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size

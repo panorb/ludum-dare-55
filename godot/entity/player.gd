@@ -39,6 +39,7 @@ var can_take_damage: bool:
 		collision_shape_2d.disabled = !value
 
 var can_user_controll_vertical: bool = true
+var dead: bool = false
 
 const I_FRAME_DURATION = 0.5
 
@@ -56,13 +57,13 @@ func _ready():
 	add_child(invul_timer)
 
 func _process(delta):
-	if not _active:
-		return
 	var direction = Vector2()
 
 	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
 	if !can_user_controll_vertical:
 		direction.x = -1.0
+	elif dead:
+		direction.y = +0.4
 	var speed = fly_speed
 	var target_speed = 300
 	if Input.is_action_just_pressed("fly1_dash"):
@@ -129,7 +130,7 @@ func set_health(value):
 	_health = value
 	health_changed.emit(old_value, value)
 	if _health <= 0 and old_value > 0:
-		set_active(false)
+		set_dead(true)
 		died.emit()
 
 func heal(value):
@@ -178,3 +179,10 @@ func set_active(active):
 	if active:
 		set_health(_max_health)
 	collision_shape_2d.disabled = not active
+
+func set_dead(dead: bool):
+	self.dead = dead
+	self.fly_speed *= 2
+	target_marker.visible = false
+	collision_shape_2d.disabled = true
+	self.collision_mask = 0
