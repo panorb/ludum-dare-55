@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bdpn4xqbndjli"]
+
+[ext_resource type="Texture2D" uid="uid://bnnewykijk300" path="res://environment/mage-outline1.png" id="1_gsyog"]
+[ext_resource type="Texture2D" uid="uid://bhdmno1gm5kc4" path="res://environment/mage-outline2.png" id="2_4864m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gsyog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4864m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
