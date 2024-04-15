@@ -1,6 +1,6 @@
 extends Node2D
 
-var viewport_size = Vector2.ONE
+var viewport_size := Vector2.ONE
 var size
 #@onready var player := %EntityContainer/Player
 @onready var entities := %EntityContainer
