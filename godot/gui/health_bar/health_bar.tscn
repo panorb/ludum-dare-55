@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://colf3fgh55ffe"]
+[gd_scene load_steps=6 format=3 uid="uid://colf3fgh55ffe"]
 
 [ext_resource type="Script" path="res://gui/health_bar/health_bar.gd" id="1_yvs56"]
-[ext_resource type="Texture2D" uid="uid://bg1mtohi8wfpq" path="res://gui/health_bar/hp_frame_bg.png" id="2_caqxx"]
+[ext_resource type="Texture2D" uid="uid://c7nkeb31e3lxl" path="res://gui/health_bar/frame_bg.png" id="2_wiu7x"]
 [ext_resource type="Texture2D" uid="uid://b4a2cybfkbclq" path="res://gui/health_bar/hp_bar.png" id="3_ultje"]
-[ext_resource type="Texture2D" uid="uid://dthpouq0dnetr" path="res://gui/health_bar/hp_frame.png" id="4_umabe"]
+[ext_resource type="Texture2D" uid="uid://fkm4cho4axra" path="res://gui/health_bar/sta_bar.png" id="4_uokvh"]
+[ext_resource type="Texture2D" uid="uid://b80yhy8ajbmgi" path="res://gui/health_bar/frame.png" id="5_wfho3"]
 
 [node name="HealthBar" type="Control"]
 layout_mode = 3
@@ -21,14 +22,14 @@ offset_bottom = 33.0
 [node name="FrameBackground" type="Sprite2D" parent="AspectRatioContainer"]
 texture_filter = 1
 position = Vector2(10, 10)
-texture = ExtResource("2_caqxx")
+texture = ExtResource("2_wiu7x")
 centered = false
 
 [node name="FrameMask" type="Sprite2D" parent="AspectRatioContainer"]
 clip_children = 1
 texture_filter = 1
 position = Vector2(10, 10)
-texture = ExtResource("2_caqxx")
+texture = ExtResource("2_wiu7x")
 centered = false
 
 [node name="Bar" type="Sprite2D" parent="AspectRatioContainer/FrameMask"]
@@ -36,8 +37,13 @@ texture_filter = 1
 texture = ExtResource("3_ultje")
 centered = false
 
+[node name="DashBar" type="Sprite2D" parent="AspectRatioContainer/FrameMask"]
+texture_filter = 1
+texture = ExtResource("4_uokvh")
+centered = false
+
 [node name="Frame" type="Sprite2D" parent="AspectRatioContainer"]
 texture_filter = 1
 position = Vector2(10, 10)
-texture = ExtResource("4_umabe")
+texture = ExtResource("5_wfho3")
 centered = false
