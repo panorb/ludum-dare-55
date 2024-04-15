@@ -29,13 +29,6 @@ func _process(delta):
 func on_body_entered(body):
 	body.take_damage(damage)
 	body.inertia += (body.position-position).normalized()*1000
-	#collision.emit(self)
-
-
-#func on_player_entity_collision(hit_player, entity):
-	#hit_player.take_damage(50)
-	#pass
 
 func connect_signals(level):
-	#collision.connect(level.on_player_entity_collision)
 	pass

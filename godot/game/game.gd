@@ -53,7 +53,6 @@ func _process(delta):
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
-		var warning_pos = Vector2(dir*300, y)
 		if dir == 0:
 			dir = -1
 		#var x = (dir*600+player_pos.x+level.get_player_offset())
@@ -107,8 +106,9 @@ func _on_player_death():
 	if player_alive_count <= 0:
 		game_timer.stop()
 		print("you lose")
+		get_tree().call_deferred("change_scene","res://gui/end_screen/lose_screen.tscn" )
 		
-		get_tree().change_scene_to_file("res://gui/end_screen/lose_screen.tscn")
+
 
 func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 	var camera = environment_viewport.get_camera_3d()
