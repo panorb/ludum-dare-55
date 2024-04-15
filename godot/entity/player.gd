@@ -6,7 +6,6 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var main_sprite = $AnimatedSprite2D
 @onready var dash_sprite = $DashSprite
-@onready var hurt_sfx: AudioStreamPlayer = %DamageTaken
 @onready var healing: AudioStreamPlayer = %Healing
 @onready var boost: AudioStreamPlayer = %Boost
 
@@ -192,5 +191,4 @@ func set_dead(dead: bool):
 	self.dead = dead
 	self.fly_speed *= 2
 	target_marker.visible = false
-	collision_shape_2d.disabled = true
 	self.collision_mask = 0
