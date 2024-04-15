@@ -159,7 +159,7 @@ func increase_dash_time(value):
 	dash_time_max += value
 	dash_time += value
 	max_dash_changed.emit(dash_time_max)
-	dash_changed.emit(dash_changed)
+	dash_changed.emit(dash_time)
 
 func _on_i_frame_timeout():
 	i_frame_timer.stop()
