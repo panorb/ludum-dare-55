@@ -1,7 +1,70 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmim3kh568l0y"]
+[gd_scene load_steps=7 format=3 uid="uid://dmim3kh568l0y"]
 
 [ext_resource type="Script" path="res://game/entities/powerup_dash_boost.gd" id="1_6xtxp"]
-[ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="2_u8mgv"]
+[ext_resource type="Texture2D" uid="uid://ck8rec3by62c4" path="res://game/entities/power_ups_dash_inc.png" id="2_x6own"]
+[ext_resource type="Texture2D" uid="uid://dxk7sel3fesmu" path="res://game/power_ups_sparkle_8fps.png" id="3_ujb7d"]
+
+[sub_resource type="Animation" id="Animation_146ow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DAnim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ujb7d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2DAnim:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_aghif"]
+resource_name = "idle"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DAnim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ujb7d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2DAnim:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wjabx"]
+_data = {
+"RESET": SubResource("Animation_146ow"),
+"idle": SubResource("Animation_aghif")
+}
 
 [node name="PowerUpDashBoost" type="Area2D"]
 scale = Vector2(0.25, 0.25)
@@ -12,10 +75,23 @@ script = ExtResource("1_6xtxp")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
-modulate = Color(0, 0, 1, 1)
+texture_filter = 1
 position = Vector2(1.90735e-06, -1.90735e-06)
-scale = Vector2(0.3125, 0.3125)
-texture = ExtResource("2_u8mgv")
+scale = Vector2(4, 4)
+texture = ExtResource("2_x6own")
+
+[node name="Sprite2DAnim" type="Sprite2D" parent="Graphics"]
+texture_filter = 1
+position = Vector2(9.53675e-06, -9.53675e-06)
+scale = Vector2(4, 4)
+texture = ExtResource("3_ujb7d")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+libraries = {
+"": SubResource("AnimationLibrary_wjabx")
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(4, 4)
 polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)

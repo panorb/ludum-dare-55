@@ -1,5 +1,7 @@
 extends Entity
 
+@onready var animation_player = $Graphics/AnimationPlayer
+
 const GRAVITY = 9
 
 var speed
@@ -14,6 +16,8 @@ func init(start_x, start_y, speed_x, speed_y):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
+	animation_player.play("idle")
+	
 
 func _move(delta):
 	position += speed*delta
