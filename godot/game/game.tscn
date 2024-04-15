@@ -21,7 +21,9 @@ shader_parameter/u_invert = 0.0
 shader_parameter/u_vignette = 0.5
 shader_parameter/u_filmgrain = 1.0
 shader_parameter/u_abbrLevel = 0.5
-shader_parameter/u_abbrEnv = 1.5
+shader_parameter/u_abbrEnv = 1.0
+shader_parameter/u_shakeX = null
+shader_parameter/u_shakeY = null
 
 [node name="Game" type="Control"]
 layout_mode = 3

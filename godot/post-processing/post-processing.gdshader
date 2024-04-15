@@ -10,41 +10,44 @@ uniform float u_filmgrain;
 uniform float u_abbrLevel;
 uniform float u_abbrEnv;
 
+uniform float u_shakeX;
+uniform float u_shakeY;
+
 void fragment() {
 	// Called for every pixel the material is visible on.
 	vec4 col = vec4(0.);
 	
-	vec2 uv = SCREEN_UV;
+	vec2 uv = SCREEN_UV+vec2(u_shakeX,u_shakeY);
 	
 	//vec4 env = texture(environment_texture, SCREEN_UV);
 	//vec4 level = texture(level_texture, SCREEN_UV);
 	
 	// chromatic abberation
-	vec2 distFromCenter = SCREEN_UV - 0.5;
+	vec2 distFromCenter = uv - 0.5;
 	
-	float aberrationAmountEnv = .5; //TODO uniform
-	float aberrationAmountLevel = .3; //TODO uniform
+	float aberrationAmountEnv = .5;
+	float aberrationAmountLevel = .3;
 	
 	vec2 aberratedEnv = aberrationAmountEnv * pow(distFromCenter, vec2(3.0, 3.0))*u_abbrEnv;
 	vec4 env = vec4
 	(
-		texture(environment_texture, SCREEN_UV - aberratedEnv).r,
-		texture(environment_texture, SCREEN_UV).g,
-		texture(environment_texture, SCREEN_UV + aberratedEnv).b,
+		texture(environment_texture, uv - aberratedEnv).r,
+		texture(environment_texture, uv).g,
+		texture(environment_texture, uv + aberratedEnv).b,
 		1.0
 	);
 	
 	vec2 aberratedLevel = aberrationAmountLevel * pow(distFromCenter, vec2(3.0, 3.0))*u_abbrLevel;
 	vec4 level = vec4
 	(
-		texture(level_texture, SCREEN_UV - aberratedLevel).r,
-		texture(level_texture, SCREEN_UV).g,
-		texture(level_texture, SCREEN_UV + aberratedLevel).b,
+		texture(level_texture, uv - aberratedLevel).r,
+		texture(level_texture, uv).g,
+		texture(level_texture, uv + aberratedLevel).b,
 		1.0
 	);
 	
 	col = level;
-	col.xyz = col.xyz*col.a + (1.-col.a)*env.xyz;
+	col.xyz = col.xyz*(1.-env.a) + env.a*env.xyz;
 	
 	// grain from https://www.shadertoy.com/view/4sXSWs
 	float strength = 16.0; //TODO uniform
@@ -56,9 +59,7 @@ void fragment() {
 	// vingette
 	col.xyz *= 1.-1.5*u_vignette*min(1.,-.25+length(SCREEN_UV*2.-1.));
 	
-	//TODO uniform
 	// invert
-	
 	col.xyz = col.xyz*(1.-u_invert)+u_invert*(vec3(1.)-col.xyz);
 	
 	COLOR = col;
