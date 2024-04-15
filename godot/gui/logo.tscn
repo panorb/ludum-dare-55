@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c1ntvyjxu8wn0"]
+[gd_scene load_steps=15 format=3 uid="uid://c1ntvyjxu8wn0"]
 
 [ext_resource type="Shader" path="res://gui/white_out.gdshader" id="1_4eeip"]
 [ext_resource type="Texture2D" uid="uid://bpqufuc7mceyg" path="res://gui/logo/logo.png" id="1_wfhr3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://tcgevbmwav7h" path="res://gui/logo/logo_i.png" id="4_a0fam"]
 [ext_resource type="Texture2D" uid="uid://cld8sqvrqinmr" path="res://gui/logo/logo_fly1.png" id="6_rhi6j"]
 [ext_resource type="Texture2D" uid="uid://bkonw8k1k1pd6" path="res://gui/logo/logo_fly2.png" id="7_5ceod"]
+[ext_resource type="AudioStream" uid="uid://dkwpbtbdlaoby" path="res://gui/logo_swish.ogg" id="8_cm7r3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sjuu7"]
 shader = ExtResource("1_4eeip")
@@ -270,6 +271,21 @@ tracks/9/keys = {
 "update": 0,
 "values": [0.0, 0.0, 0.6, 0.0]
 }
+tracks/10/type = "audio"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AudioStreamPlayer")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_cm7r3")
+}],
+"times": PackedFloat32Array(0.5)
+}
+tracks/10/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ibmkj"]
 _data = {
@@ -331,3 +347,6 @@ libraries = {
 "": SubResource("AnimationLibrary_ibmkj")
 }
 autoplay = "startup"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
