@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmim3kh568l0y"]
+
+[ext_resource type="Script" path="res://game/entities/powerup_dash_boost.gd" id="1_6xtxp"]
+[ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="2_u8mgv"]
+
+[node name="PowerUpDashBoost" type="Area2D" groups=["edge-warn"]]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_6xtxp")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+modulate = Color(0, 0, 1, 1)
+position = Vector2(1.90735e-06, -1.90735e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_u8mgv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
