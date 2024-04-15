@@ -153,12 +153,18 @@ func _ready():
 	
 	for i in range(player_count):
 		players[i].health_changed.connect(environment.on_player_health_changed)
+		players[i].health_changed.connect(music_switcher)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
 func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
 	show_win_screen.emit()
+
+func music_switcher(_old_health, new_health):
+	if new_health < 200 && %MainThemeSound.playing:
+		%MainThemeSound.stop()
+		%ThreatensToLoseSound.play()
 
 func _on_player_death():
 	var player_alive_count = 0
