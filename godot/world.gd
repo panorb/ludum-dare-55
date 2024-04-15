@@ -29,6 +29,7 @@ var scenes := {
 
 func _ready():
 	self.current_scene = start_scene
+	TranslationServer.set_locale("en")
 
 func _on_game_start():
 	self.current_scene = 'game'
