@@ -1,7 +1,86 @@
-[gd_scene load_steps=3 format=3 uid="uid://brvfogodmq4lt"]
+[gd_scene load_steps=8 format=3 uid="uid://brvfogodmq4lt"]
 
 [ext_resource type="Script" path="res://game/entities/book.gd" id="1_1g6qc"]
 [ext_resource type="Texture2D" uid="uid://c5etd2p6161dk" path="res://game/entities/book_placeholder.png" id="2_p4cxu"]
+[ext_resource type="Texture2D" uid="uid://bidg5gsgb81o7" path="res://game/entities/deathbook-animation.png" id="3_ud2ha"]
+
+[sub_resource type="Animation" id="Animation_q1qwr"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DAnim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5625),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ud2ha")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2DAnim:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_dyo3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DAnim:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ud2ha")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2DAnim:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_qfei4"]
+resource_name = "page_spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DAnim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbwgw"]
+_data = {
+"RESET": SubResource("Animation_dyo3p"),
+"idle": SubResource("Animation_q1qwr"),
+"page_spawn": SubResource("Animation_qfei4")
+}
 
 [node name="Book" type="Area2D" groups=["edge-warn"]]
 position = Vector2(1, -1)
@@ -13,7 +92,19 @@ script = ExtResource("1_1g6qc")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+visible = false
 texture = ExtResource("2_p4cxu")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+libraries = {
+"": SubResource("AnimationLibrary_lbwgw")
+}
+
+[node name="Sprite2DAnim" type="Sprite2D" parent="Graphics"]
+position = Vector2(24, 40)
+texture = ExtResource("3_ud2ha")
+hframes = 10
+frame = 1
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-35, -32, 14, -64, 34, -64, 60, 10, 0, 59, -33, 62, -60, 56)
+polygon = PackedVector2Array(-35, -32, 14, -64, 34, -64, 72, 0, 8, 44, -33, 62, -60, 56)
