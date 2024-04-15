@@ -40,6 +40,6 @@ func _process(delta):
 	if laser_target == null || environment_viewport == null:
 		return
 
-	var level_coords = project_screen_to_world(laser_target.position)
+	var level_coords = project_screen_to_world(laser_target.global_position)
 
 	look_at(level_coords)
