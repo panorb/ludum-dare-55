@@ -147,11 +147,13 @@ _data = {
 script = ExtResource("1_xoicf")
 
 [node name="EdgeMarker" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1920, 360)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_bfx36")
 
 [node name="Sandwich" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(960, 360)
 texture = ExtResource("3_7w6jj")
 offset = Vector2(0, -62)
@@ -159,6 +161,7 @@ offset = Vector2(0, -62)
 [node name="ShakeAnchor" type="Node2D" parent="."]
 
 [node name="LogoFly" type="Sprite2D" parent="ShakeAnchor"]
+unique_name_in_owner = true
 position = Vector2(-266, 72)
 rotation = 1.5708
 texture = ExtResource("1_76xks")
@@ -167,4 +170,3 @@ texture = ExtResource("1_76xks")
 libraries = {
 "": SubResource("AnimationLibrary_alhxt")
 }
-autoplay = "win"

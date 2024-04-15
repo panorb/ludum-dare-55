@@ -19,6 +19,8 @@ extends Control
 @onready var laser_scene: PackedScene = preload("res://effects/laser.tscn")
 @onready var laser_indicator_scene: PackedScene = preload("res://game/laser_indicator.tscn")
 
+var game_end : bool = false
+
 var game_timer
 const max_game_time = 180.
 
@@ -37,15 +39,15 @@ func _input(event):
 		if event.pressed:
 			var scaled_mouse_pos = event.position / get_viewport_rect().size
 			# scaled_mouse_pos = (scaled_mouse_pos) * 2.0 - Vector2(1.0, 1.0)
-			
+
 			var mouse_x = -level.get_level_view_x() + (scaled_mouse_pos.x * level_viewport.size.x)
 			var mouse_y = scaled_mouse_pos.y * level_viewport.size.y
 			spawn_laser(Vector2(mouse_x, mouse_y))
 
 func _process(delta):
 	var x_offset = level.get_player_offset()
-	
-	if abs(x_offset) > FREE_MOVEMENT_ZONE_WIDTH:
+
+	if abs(x_offset) > FREE_MOVEMENT_ZONE_WIDTH && !game_end:
 		if x_offset > 0:
 			x_offset -= FREE_MOVEMENT_ZONE_WIDTH
 		else:
@@ -154,6 +156,7 @@ func _ready():
 		player.died.connect(_on_player_death)
 	
 	game_timer = Timer.new()
+	game_timer.one_shot = true
 	add_child(game_timer)
 
 	game_timer.start(max_game_time)
@@ -163,6 +166,8 @@ func _ready():
 		players[i].health_changed.connect(environment.on_player_health_changed)
 		players[i].health_changed.connect(music_switcher)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
+
+	environment.win_finisched.connect(_on_win_finisched)
 
 func initialize_laser(laser:Node3D, indicator: Node2D):
 	laser.laser_target = indicator
@@ -183,8 +188,12 @@ func spawn_laser(game_coords: Vector2):
 
 func on_game_timeout():
 	print("you win")
-	game_timer.queue_free()
-	show_win_screen.emit()
+
+	game_end = true
+	get_tree().get_nodes_in_group("player").all(func(player): player.can_take_damage = false)
+	get_tree().get_nodes_in_group("player").all(func(player): player.can_user_controll_vertical = false)
+
+	environment.win()
 
 func music_switcher(_old_health, new_health):
 	if new_health < 200 && %MainThemeSound.playing:
@@ -206,3 +215,6 @@ func _on_window_size_changed():
 
 func on_post_processing_uniform_changed(name: String, value: Variant):
 	post_processing_rect.material.set_shader_parameter(name,value)
+
+func _on_win_finisched():
+	show_win_screen.emit()

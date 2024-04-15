@@ -31,6 +31,14 @@ var speed_boost_target = 200
 var speed_boost_timer = null
 var invul_timer = null
 
+var can_take_damage: bool:
+	get:
+		return !collision_shape_2d.disabled
+	set(value):
+		collision_shape_2d.disabled = !value
+
+var can_user_controll_vertical: bool = true
+
 const I_FRAME_DURATION = 0.5
 
 func _ready():
@@ -50,8 +58,10 @@ func _process(delta):
 	if not _active:
 		return
 	var direction = Vector2()
-	
+
 	direction += Input.get_vector("fly1_left", "fly1_right", "fly1_up", "fly1_down")
+	if !can_user_controll_vertical:
+		direction.x = -1.0
 	var speed = fly_speed
 	var target_speed = 300
 	if Input.is_action_just_pressed("fly1_dash"):

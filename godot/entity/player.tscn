@@ -60,6 +60,7 @@ scale = Vector2(0.723715, 0.723715)
 texture = ExtResource("2_f7rtm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ds8wa")
 
