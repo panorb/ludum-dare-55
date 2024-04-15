@@ -59,7 +59,7 @@ layout_mode = 2
 [node name="SfxSoundLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "SFX"
+text = "SFX_SLIDER_LABEL"
 
 [node name="SfxSoundImage" type="TextureRect" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
 unique_name_in_owner = true
@@ -83,7 +83,7 @@ layout_mode = 2
 [node name="MusicSoundLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "Music"
+text = "MUSIC_SLIDER_LABEL"
 
 [node name="MusicSoundImage" type="TextureRect" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
 unique_name_in_owner = true
