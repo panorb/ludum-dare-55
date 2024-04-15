@@ -14,9 +14,6 @@ func _ready():
 	_max_health = MAX_HEALTH
 	_health = _max_health
 	_display_health = 100
-	#var player = get_tree().get_nodes_in_group("player")[0]
-	#
-	#print(player)
 
 # resets the health bar to its maximum. Providing a value allows setting the maximum directly
 func reset(value=null):

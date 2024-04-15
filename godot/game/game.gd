@@ -139,13 +139,11 @@ func _ready():
 	environment.set_game_progress_ratio(0.)
 	
 	for i in range(player_count):
-		print("Activating player "+str(i+1))
 		players[i].set_active(true)
 		health_bars[i].set_player(players[i])
 		players[i].set_health(players[i]._max_health)
 	
 	for i in range(player_count, len(health_bars)):
-		print("Deactivating player "+str(i+1))
 		players[i].set_active(false)
 		health_bars[i].set_player(null)
 	
@@ -184,8 +182,6 @@ func spawn_laser(game_coords: Vector2):
 	indicator.position = game_coords
 
 func on_game_timeout():
-	print("you win")
-
 	game_end = true
 	get_tree().get_nodes_in_group("player").all(func(player): player.can_take_damage = false)
 	get_tree().get_nodes_in_group("player").all(func(player): player.can_user_controll_vertical = false)
@@ -204,7 +200,6 @@ func _on_player_death():
 			player_alive_count += 1
 	if player_alive_count <= 0:
 		game_timer.stop()
-		print("you lose")
 		show_lose_screen.emit()
 
 func _on_window_size_changed():
