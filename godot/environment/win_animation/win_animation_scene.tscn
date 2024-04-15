@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5gmgjo0lqr3t"]
+[gd_scene load_steps=8 format=3 uid="uid://c5gmgjo0lqr3t"]
 
 [ext_resource type="Texture2D" uid="uid://dlj5st58rod6h" path="res://gui/logo/logo_fly.tres" id="1_76xks"]
-[ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="1_bfx36"]
 [ext_resource type="Script" path="res://environment/win_animation/win_animation_scene.gd" id="1_xoicf"]
 [ext_resource type="Texture2D" uid="uid://cuiukwq47v5cs" path="res://environment/win_animation/sandwich.png" id="3_7w6jj"]
 
@@ -145,12 +144,6 @@ _data = {
 
 [node name="WinAnimationScene" type="Node2D"]
 script = ExtResource("1_xoicf")
-
-[node name="EdgeMarker" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(1920, 360)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bfx36")
 
 [node name="Sandwich" type="Sprite2D" parent="."]
 unique_name_in_owner = true
