@@ -11,7 +11,10 @@ extends Control
 @onready var health_bar_p1 = $UIOverlay/Grid/Player1/HealthBar
 @onready var health_bar_p2 = $UIOverlay/Grid/Player2/HealthBar
 
+@onready var post_processing_rect := $CanvasLayer/ColorRect
+
 var game_timer
+const max_game_time = 60.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
@@ -61,6 +64,9 @@ func _process(delta):
 		var speed_x = -dir*(100+randi()%300)
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
+		environment.feedback("spawn_object")
+	
+	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
 
 func get_level_x_from_environment_camera_pos(camera_pos: float):
 	return -(camera_pos / ENVIRONMENT_CAMERA_MOVEMENT_SCALE) * LEVEL_VIEW_MOVEMENT_SCALE
@@ -88,6 +94,8 @@ func _ready():
 	var players = get_tree().get_nodes_in_group("player")
 	var health_bars = [health_bar_p1, health_bar_p2]
 	var player_count = 1
+
+	environment.set_game_progress_ratio(0.)
 	
 	for i in range(player_count):
 		print("Activating player "+str(i+1))
@@ -105,8 +113,12 @@ func _ready():
 	
 	game_timer = Timer.new()
 	add_child(game_timer)
-	game_timer.start(60)
+	game_timer.start(max_game_time)
 	game_timer.connect("timeout", on_game_timeout)
+	
+	for i in range(player_count):
+		players[i].health_changed.connect(environment.on_player_health_changed)
+	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
 func on_game_timeout():
 	print("you win")
@@ -122,7 +134,6 @@ func _on_player_death():
 		game_timer.stop()
 		print("you lose")
 		get_tree().call_deferred("change_scene","res://gui/end_screen/lose_screen.tscn" )
-		
 
 
 func project_screen_to_world(screen_pos: Vector2) -> Vector3:
@@ -159,3 +170,6 @@ func aim_laser(screen_space: Vector2):
 
 func _on_window_size_changed():
 	environment_viewport.size = get_tree().get_root().size
+
+func on_post_processing_uniform_changed(name: String, value: Variant):
+	post_processing_rect.material.set_shader_parameter(name,value)

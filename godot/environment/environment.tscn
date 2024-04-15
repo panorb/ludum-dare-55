@@ -73,7 +73,7 @@ curve = SubResource("Curve3D_pj54b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Camera/CameraOrigin/CameraPath"]
 unique_name_in_owner = true
-transform = Transform3D(0.999976, 0, 0, 0, 0.997044, 0.0765091, 0, -0.0765091, 0.997045, 0.00366211, 2.23651, 9.49927)
+transform = Transform3D(0.999972, 0, 0, 0, 0.997037, 0.0765091, 0, -0.0765085, 0.997044, 0.00366211, 2.23651, 9.49927)
 loop = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin/CameraPath/PathFollow3D"]
@@ -156,17 +156,18 @@ transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
 [node name="vfx" type="Node" parent="."]
 
 [node name="Pentagram" type="MeshInstance3D" parent="vfx"]
+unique_name_in_owner = true
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, 4.23614, 0)
 material_override = ExtResource("5_4y8s5")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_qw3t7")
 
 [node name="Storm" type="MeshInstance3D" parent="vfx"]
+unique_name_in_owner = true
 transform = Transform3D(19, 0, 0, 0, 5, 0, 0, 0, 19, 0, 5.1, 0)
-visible = false
+material_override = ExtResource("6_804ct")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_3vo8l")
-surface_material_override/0 = ExtResource("6_804ct")
 
 [node name="LaserOrigin" type="Marker3D" parent="."]
 unique_name_in_owner = true

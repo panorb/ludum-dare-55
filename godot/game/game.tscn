@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=12 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
@@ -21,7 +21,9 @@ shader_parameter/u_invert = 0.0
 shader_parameter/u_vignette = 0.5
 shader_parameter/u_filmgrain = 1.0
 shader_parameter/u_abbrLevel = 0.5
-shader_parameter/u_abbrEnv = 1.5
+shader_parameter/u_abbrEnv = 1.0
+shader_parameter/u_shakeX = null
+shader_parameter/u_shakeY = null
 
 [node name="Game" type="Control"]
 layout_mode = 3
