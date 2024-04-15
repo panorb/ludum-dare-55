@@ -1,11 +1,10 @@
 extends Control
 
 @onready var level_viewport := %LevelViewport
-@onready var environment_viewport := %EnvironmentViewport
-@onready var environment_texture: TextureRect = $EnvironmentTexture
-@onready var level_texture: TextureRect = $LevelTexture
-@onready var level_subviewport: SubViewport = %LevelViewport
-@onready var environment := %Environment
+@onready var environment_viewport := %EnvironmentTexture/EnvironmentViewport
+@onready var environment_texture: TextureRect = %EnvironmentTexture
+@onready var level_texture: TextureRect = %LevelTexture
+@onready var environment := %EnvironmentTexture/EnvironmentViewport/Environment
 @onready var level := %Level
 @onready var main_theme_sound = %MainThemeSound
 

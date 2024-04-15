@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
 [ext_resource type="Texture2D" uid="uid://bhdmno1gm5kc4" path="res://environment/mage-outline2.png" id="3_xb2hv"]
 [ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
-[ext_resource type="PackedScene" uid="uid://cgh5s1sog4oqk" path="res://effects/laser.tscn" id="5_u8dhy"]
+[ext_resource type="PackedScene" path="res://effects/laser.tscn" id="5_u8dhy"]
 [ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
@@ -95,11 +95,10 @@ light_volumetric_fog_energy = 1.646
 light_size = 9.32
 light_specular = 0.0
 light_bake_mode = 1
-shadow_enabled = true
 omni_range = 14.905
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29056, 2.20671, -0.106066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22628, 2.20671, -0.106066)
 light_color = Color(0.419608, 0.72549, 0.831373, 1)
 light_energy = 5.166
 light_indirect_energy = 5.0
@@ -107,7 +106,7 @@ light_volumetric_fog_energy = 1.035
 omni_range = 380.546
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="OmniLight3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64856, 2.20671, 8.53097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.35583, 2.20671, 9.15946)
 light_color = Color(0.419608, 0.72549, 0.831373, 1)
 light_energy = 1.666
 light_indirect_energy = 5.0
@@ -115,7 +114,7 @@ light_volumetric_fog_energy = 1.035
 omni_range = 380.546
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="OmniLight3D3/OmniLight3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88034, -1.45683, -7.93929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9514, -1.52629, -8.51773)
 light_color = Color(0.419608, 0.72549, 0.831373, 1)
 light_energy = 1.666
 light_indirect_energy = 5.0

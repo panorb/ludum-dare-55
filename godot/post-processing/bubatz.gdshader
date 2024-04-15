@@ -1,7 +1,9 @@
 shader_type spatial;
 render_mode cull_disabled;
 
-//uniform float u_height;
+uniform float u_stormStr;
+uniform float u_stormSpeed;
+uniform float u_stormOpacity;
 
 varying vec3 CAMPOS;
 varying flat mat4 modelViewMatrix;
@@ -11,7 +13,7 @@ void vertex() {
 	modelViewMatrix = MODELVIEW_MATRIX;
 }
 
-const int NUMSTEPS = 6;
+const int NUMSTEPS = 1;
 const float MINHIT = 0.02;
 const float MAXDIST = 1000.0;
 const float infinity = 1.0 / 0.0;
@@ -240,38 +242,39 @@ vec4 raymarch(vec3 dir, vec3 origin, inout vec3 gnormal, inout bool ghit,inout v
 	vec4 cylI = cylIntersect( rotOrg, rotDir, capA, capB, capR );
 	float begin_dist = cylI.x;
 	
-	dist = max(0.,begin_dist);
+	dist = max(0.3,begin_dist);
 	vec3 rotCirc = (rotationX(PI*.5)*vec4(origin,1.)).xyz;
 	if (dstCylinder(rotCirc,roomRadius,roomHeight) < 0.)
-		dist = 0.;
+		dist = 0.3;
 	 
 	for (int i = 0; i < NUMSTEPS; i++) {
 		vec3 pos = origin + dist * dir;
 		float h = pos.y;
 
 		//storm
-		float stormStr = 1.; //TODO uniform
-		float stime = TIME*2.; //TODO uniform
+		//float stormStr = 1.; //TODO uniform
+		//float stime = TIME*2.; //TODO uniform
+		float stime = u_stormSpeed;
 
 		pos = (rotationY(PI*.13*h+stime)*vec4(pos,1.)).xyz;
 
-		float time = TIME * stormStr*10.;
+		float time = TIME * u_stormStr*10.;
 		float nScale = 2.5;
-		float n = 2.5*fbm(pos.yx*4.*nScale+vec2(time*.2))*fbm(pos.yz*2.*nScale-vec2(.2*time));
+		//float n = 2.5*fbm(pos.yx*4.*nScale+vec2(time*.2))*fbm(pos.yz*2.*nScale-vec2(.2*time));
 		//float n = fbm3f(pos+vec3(0.,0.,0.)*.02);
+		float n = 2.5*fbm(pos.yx*4.*nScale+vec2(time*.2));
 		
 		n = n+.05;
 	
-		rotCirc = (rotationX(PI*.5)*vec4(pos,1.)).xyz;
-		flameCol += 1.5*vec3(n/float(NUMSTEPS));//*(-h/roomHeight+.3);
+		flameCol += .4*vec3(n/float(NUMSTEPS));//*(-h/roomHeight+.3);
 		
 		dist += n;//len_march/float(NUMSTEPS);
-		if (flameCol.x > 1.) {
-			gpos = pos;
-			break;
-		}
+		//if (flameCol.x > 1.) {
+		//	gpos = pos;
+		//	break;
+		//}
 	}
-	flameCol = 1.-flameCol;
+	//flameCol = 1.-flameCol;
 
 	return vec4(vec3(0.),0.);
 }
@@ -291,10 +294,14 @@ void fragment() {
 	
 	col += 2.*vec4(flameCol,0.);//vec4(gpos-vec3(.5),1.);
 	
-	ALBEDO = col.xyz;//vec3(0.,1.,0.);
+	ALBEDO = col.xyz*u_stormOpacity;//vec3(0.,1.,0.);
 	
-	ALPHA = col.x;
+	ALPHA = col.x*.5*u_stormOpacity;
 	DEPTH = 1./length(gpos-CAMPOS);
 	//DEPTH = 1./length(gpos-CAMPOS+vec3(0.,-2.4,0.));
 	//DEPTH = 1./length(gpos-CAMPOS+vec3(0.,-2.4,0.));
+}
+
+void light() {
+	
 }

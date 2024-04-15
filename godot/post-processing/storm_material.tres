@@ -5,3 +5,6 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_v3p0k")
+shader_parameter/u_stormStr = null
+shader_parameter/u_stormSpeed = 1.0
+shader_parameter/u_stormOpacity = 0.5

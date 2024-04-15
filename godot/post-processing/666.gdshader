@@ -1,7 +1,7 @@
 shader_type spatial;
 render_mode cull_disabled;
 
-//uniform float u_height;
+uniform float u_height;
 
 varying vec3 CAMPOS;
 varying flat mat4 modelViewMatrix;
@@ -12,6 +12,7 @@ void vertex() {
 }
 
 const int NUMSTEPS = 32;
+const int NUMSTEPS_VOL = 16;
 const float MINHIT = 0.025;
 const float MAXDIST = 1000.0;
 const float infinity = 1.0 / 0.0;
@@ -150,21 +151,20 @@ vec4 raymarch(vec3 dir, vec3 origin, inout vec3 gnormal, inout bool ghit,inout v
 	
 	flameCol = vec3(0.);
 	
-	float u_height = 1.;
-	
 	vec3 scale = vec3(0.85);
 	
 	// u_height from 0 to 1 float height = .5+.5*sin(u_time)+.1;
 	float dist = 0.0;
-	for (int i = 0; i < NUMSTEPS; i++) {
+	for (int i = 0; i < NUMSTEPS_VOL; i++) {
 		vec3 pos = origin + dist * dir;
 
 		float closest = distMarch(pos*scale,gpos,u_height+.1);
 		if (closest < MINHIT) {
-			flameCol += vec3(.02*(2.-.5*pos.y),0.,0.);
+			float scale = 32./float(NUMSTEPS_VOL);
+			flameCol += vec3(.02*(2.-.5*pos.y),0.,0.)*scale;
 			float gradeUp = clamp(pos.y,0.,1.)*.3-.4;
-			flameCol += vec3(0.,gradeUp*.1,gradeUp*.1);
-			dist += .2;
+			flameCol += vec3(0.,gradeUp*.1,gradeUp*.1)*scale;
+			dist += 5./float(NUMSTEPS_VOL);
 		} else
 			dist += closest;
 	}
