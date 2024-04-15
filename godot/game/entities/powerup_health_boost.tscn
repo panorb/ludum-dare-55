@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmri4nw0c701o"]
+
+[ext_resource type="Script" path="res://game/entities/powerup_health_boost.gd" id="1_jjyi0"]
+[ext_resource type="Texture2D" uid="uid://b06a5xutca41y" path="res://icon.svg" id="2_xht73"]
+
+[node name="PowerUpHealthBoost" type="Area2D" groups=["edge-warn"]]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_jjyi0")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(1.90735e-06, -1.90735e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_xht73")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)

@@ -1,14 +1,21 @@
-[gd_scene load_steps=19 format=3 uid="uid://wwe1ojobhi71"]
+[gd_scene load_steps=22 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
-[ext_resource type="Texture2D" uid="uid://bnnewykijk300" path="res://environment/mage-outline1.png" id="2_7qpax"]
+[ext_resource type="Material" uid="uid://ch6p6o1xbi5f6" path="res://environment/mage_billboard_material.tres" id="2_321os"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
+[ext_resource type="PackedScene" uid="uid://c5gmgjo0lqr3t" path="res://environment/win_animation/win_animation_scene.tscn" id="2_hbdu1"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
 [ext_resource type="PackedScene" uid="uid://dxitsec5pp67h" path="res://environment/Pentagram Table.glb" id="3_1oegr"]
-[ext_resource type="Texture2D" uid="uid://bhdmno1gm5kc4" path="res://environment/mage-outline2.png" id="3_xb2hv"]
+[ext_resource type="Script" path="res://environment/billboard.gd" id="3_ee5kh"]
 [ext_resource type="Material" uid="uid://0i3kxhgxppcg" path="res://post-processing/pentagram_material.tres" id="5_4y8s5"]
-[ext_resource type="PackedScene" path="res://effects/laser.tscn" id="5_u8dhy"]
+[ext_resource type="PackedScene" uid="uid://cgh5s1sog4oqk" path="res://effects/laser.tscn" id="5_u8dhy"]
 [ext_resource type="Material" uid="uid://cca7a0l7ulmd" path="res://post-processing/storm_material.tres" id="6_804ct"]
+[ext_resource type="PackedScene" uid="uid://cpftgwfki4n16" path="res://environment/bookshelf filled 1.glb" id="10_26q08"]
+[ext_resource type="PackedScene" uid="uid://bgc8ijvhm5vf0" path="res://environment/bookshelf filled 2.glb" id="11_30u5s"]
+[ext_resource type="PackedScene" uid="uid://cs2nfotm4ai17" path="res://environment/stool.glb" id="12_sea02"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l3c4r"]
+viewport_path = NodePath("WinAnimationBillboard/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_pj54b"]
 _data = {
@@ -17,20 +24,8 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_nn1f6"]
-frames = 2
-frame_0/texture = ExtResource("2_7qpax")
-frame_1/texture = ExtResource("3_xb2hv")
-frame_1/duration = 1.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4v11"]
-transparency = 1
-cull_mode = 2
-albedo_texture = SubResource("AnimatedTexture_nn1f6")
-billboard_mode = 1
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_k2xbn"]
-material = SubResource("StandardMaterial3D_x4v11")
+[sub_resource type="PlaneMesh" id="PlaneMesh_toryi"]
+material = ExtResource("2_321os")
 size = Vector2(3.5, 7)
 orientation = 2
 
@@ -62,6 +57,19 @@ fog_light_energy = 0.11
 [node name="Environment" type="Node3D"]
 script = ExtResource("1_c4stx")
 
+[node name="WinAnimationBillboard" type="Sprite3D" parent="."]
+transform = Transform3D(-18, -0.00142123, -0.00640439, -3.52003e-09, 17.5718, -3.89975, 0.00656019, -3.8996, -17.5725, 0, 2.73, 0)
+flip_h = true
+pixel_size = 0.0001
+texture = SubResource("ViewportTexture_l3c4r")
+script = ExtResource("3_ee5kh")
+
+[node name="SubViewport" type="SubViewport" parent="WinAnimationBillboard"]
+transparent_bg = true
+size = Vector2i(1920, 360)
+
+[node name="WinAnimationScene" parent="WinAnimationBillboard/SubViewport" instance=ExtResource("2_hbdu1")]
+
 [node name="Camera" type="Node" parent="."]
 
 [node name="CameraOrigin" type="Node3D" parent="Camera"]
@@ -73,7 +81,7 @@ curve = SubResource("Curve3D_pj54b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Camera/CameraOrigin/CameraPath"]
 unique_name_in_owner = true
-transform = Transform3D(0.999972, 0, 0, 0, 0.997037, 0.0765091, 0, -0.0765085, 0.997044, 0.00366211, 2.23651, 9.49927)
+transform = Transform3D(0.999975, 0, 0, 0, 0.997043, 0.0765092, 0, -0.076509, 0.997046, 0.00366211, 2.23651, 9.49927)
 loop = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera/CameraOrigin/CameraPath/PathFollow3D"]
@@ -86,7 +94,7 @@ near = 0.1
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50482, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="TableLamp" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5306, 0)
 light_color = Color(1, 0.396078, 0.329412, 1)
 light_energy = 5.097
@@ -97,32 +105,32 @@ light_specular = 0.0
 light_bake_mode = 1
 omni_range = 14.905
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22628, 2.20671, -0.106066)
+[node name="WindowLamp1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8551, 2.88713, 2.26532)
+light_color = Color(0.419608, 0.72549, 0.831373, 1)
+light_energy = 1.666
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 1.035
+omni_range = 380.546
+
+[node name="WindowLamp2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12955, 4.41342, 12.9624)
+light_color = Color(0.419608, 0.72549, 0.831373, 1)
+light_energy = 1.666
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 1.035
+omni_range = 380.546
+
+[node name="WindowLamp3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4458, 2.20671, -0.106066)
 light_color = Color(0.419608, 0.72549, 0.831373, 1)
 light_energy = 5.166
 light_indirect_energy = 5.0
 light_volumetric_fog_energy = 1.035
 omni_range = 380.546
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="OmniLight3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.35583, 2.20671, 9.15946)
-light_color = Color(0.419608, 0.72549, 0.831373, 1)
-light_energy = 1.666
-light_indirect_energy = 5.0
-light_volumetric_fog_energy = 1.035
-omni_range = 380.546
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="OmniLight3D3/OmniLight3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9514, -1.52629, -8.51773)
-light_color = Color(0.419608, 0.72549, 0.831373, 1)
-light_energy = 1.666
-light_indirect_energy = 5.0
-light_volumetric_fog_energy = 1.035
-omni_range = 380.546
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40997, 1.10336, -7.23513)
+[node name="WindowLamp4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.471828, 1.10336, -9.72679)
 light_color = Color(0.419608, 0.72549, 0.831373, 1)
 light_energy = 8.5
 light_indirect_energy = 5.0
@@ -130,8 +138,8 @@ light_volumetric_fog_energy = 1.035
 omni_range = 380.546
 
 [node name="MageBillboard" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -3.2783e-07, 0, 3.2783e-07, 1, -4.13631, 3.18302, -3.82594)
-mesh = SubResource("PlaneMesh_k2xbn")
+transform = Transform3D(1, 0, 0, 0, 1, -3.2783e-07, 0, 3.2783e-07, 1, -4.13631, 3.18302, 4.47334)
+mesh = SubResource("PlaneMesh_toryi")
 skeleton = NodePath("")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -151,7 +159,7 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 10, 0)
 transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Wall" parent="." instance=ExtResource("2_dyitu")]
-transform = Transform3D(1, 0, 0, 0, 1.08109, 0, 0, 0, 1, 0, 10.6648, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.2, 0, 0, 0, 1.5, 0, 10.6648, 0)
 
 [node name="vfx" type="Node" parent="."]
 
@@ -176,3 +184,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39499, 0)
 [node name="Laser" parent="LaserOrigin" instance=ExtResource("5_u8dhy")]
 unique_name_in_owner = true
 transform = Transform3D(-0.00124345, -0.00484292, -8.46762e-08, -0.00469077, 0.00120438, -0.24869, 0.00120438, -0.000309233, -0.968583, 0, 0, 0)
+
+[node name="Bookshelf1" parent="." instance=ExtResource("10_26q08")]
+transform = Transform3D(0.747079, 0, 0.664735, 0, 1, 0, -0.664735, 0, 0.747079, -19.4391, 0, -0.261867)
+
+[node name="Bookshelf2" parent="." instance=ExtResource("11_30u5s")]
+transform = Transform3D(0.987873, 0, -0.155262, 0, 1, 0, 0.155262, 0, 0.987873, 3.92392, 0, -12.4985)
+
+[node name="Stool" parent="." instance=ExtResource("12_sea02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98853, 0, -11.6853)

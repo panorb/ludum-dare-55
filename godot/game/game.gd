@@ -14,14 +14,13 @@ extends Control
 @onready var post_processing_rect := $CanvasLayer/ColorRect
 
 var game_timer
-const max_game_time = 60.
+const max_game_time = 180.
 
 const LEVEL_VIEW_MOVEMENT_SCALE = 0.9
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
-const FREE_MOVEMENT_ZONE_WIDTH = 100
+const FREE_MOVEMENT_ZONE_WIDTH = 50
 
 var delay = 0.0
-
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -53,7 +52,8 @@ func _process(delta):
 	
 	%Harbinger.update(level.viewport_size, get_level_position_from_normalized_screen_position(Vector2(0.5, 0.5)))
 	
-	if randi()%30 == 0:
+	var r = randi()%300
+	if r > 0 and r <= 10:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
@@ -67,6 +67,28 @@ func _process(delta):
 		environment.feedback("spawn_object")
 	
 	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
+	
+	if r == 0:
+		var player_pos = get_tree().get_nodes_in_group("player")[0].position
+		var dir = (randi() % 2)
+		var y = randi()%180
+		if dir == 0:
+			dir = -1
+		#var x = (dir*600+player_pos.x+level.get_player_offset())
+		var x = player_pos.x-level.get_player_offset()+dir*350
+		var speed_x = -dir*(50+randi()%150)
+		var speed_y = randi() % 100-100
+		var type = randi()%10
+		if type == 0:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.HEALTH_BOOST)
+		elif type == 1:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.DASH_INCREASE)
+		elif type == 2:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.SPEED_BOOST)
+		elif type == 3:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.INVULNERABILITY)
+		else:
+			level._add_powerup(x, y, speed_x, speed_y, level.PowerUps.HEAL)
 
 func get_level_x_from_environment_camera_pos(camera_pos: float):
 	return -(camera_pos / ENVIRONMENT_CAMERA_MOVEMENT_SCALE) * LEVEL_VIEW_MOVEMENT_SCALE

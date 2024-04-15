@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkonw8k1k1pd6"
-path.s3tc="res://.godot/imported/logo_fly2.png-8356439a8837866510248cc01cd31545.s3tc.ctex"
+uid="uid://bdi6nubl43iyh"
+path.s3tc="res://.godot/imported/bookshelf filled 2_Book textures.png-7f7830da55782bf0ec603282ae2d1a6a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://gui/logo/logo_fly2.png"
-dest_files=["res://.godot/imported/logo_fly2.png-8356439a8837866510248cc01cd31545.s3tc.ctex"]
+source_file="res://environment/bookshelf filled 2_Book textures.png"
+dest_files=["res://.godot/imported/bookshelf filled 2_Book textures.png-7f7830da55782bf0ec603282ae2d1a6a.s3tc.ctex"]
 
 [params]
 
