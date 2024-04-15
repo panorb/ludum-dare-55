@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bimr6vox3j4xt"]
+[gd_scene load_steps=9 format=3 uid="uid://bimr6vox3j4xt"]
 
 [ext_resource type="Theme" uid="uid://dcf3ucut4uyki" path="res://gui/end_screen/end_screen_theme.tres" id="1_1lmos"]
 [ext_resource type="Texture2D" uid="uid://ia0aln3qa5ww" path="res://gui/end_screen/game_over_bg.png" id="2_7pr8t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pe6vh4skjrbx" path="res://gui/end_screen/game_over_title_top.png" id="4_u6cax"]
 [ext_resource type="Texture2D" uid="uid://dmig62geveost" path="res://gui/end_screen/game_over_title_bottom.png" id="5_egpnw"]
 [ext_resource type="Texture2D" uid="uid://du5olmj3fmpgs" path="res://gui/end_screen/game_over_wings.png" id="6_ekav1"]
+[ext_resource type="Texture2D" uid="uid://nmw5spcggjku" path="res://gui/end_screen/game_over_text_restart.png" id="8_tnlx2"]
 
 [node name="LoseScreen" type="Control"]
 layout_mode = 3
@@ -72,3 +73,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_ekav1")
 expand_mode = 2
+
+[node name="RestartInfo" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_tnlx2")
