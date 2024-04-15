@@ -10,6 +10,8 @@ extends CharacterBody2D
 signal health_changed(old_health, new_health)
 signal max_health_changed(old_maximum, new_maximum)
 signal died
+signal dash_changed(dash)
+signal max_dash_changed(max_dash)
 
 var _active = false
 var _health = 1000
@@ -73,6 +75,7 @@ func _process(delta):
 	if Input.is_action_pressed("fly1_dash"):
 		if dash_time > 0.0:
 			dash_time -= delta
+			dash_changed.emit(dash_time)
 			speed += dash_increase
 			target_speed += 100
 		if dash_time <= 0.0:
@@ -81,6 +84,7 @@ func _process(delta):
 	else:
 		if dash_time < dash_time_max:
 			dash_time += delta*0.5
+			dash_changed.emit(dash_time)
 	
 	
 	#velocity = Vector2.ZERO
@@ -158,6 +162,8 @@ func take_damage(value):
 func increase_dash_time(value):
 	dash_time_max += value
 	dash_time += value
+	max_dash_changed.emit(dash_time_max)
+	dash_changed.emit(dash_time)
 
 func _on_i_frame_timeout():
 	i_frame_timer.stop()
