@@ -7,8 +7,8 @@
 [ext_resource type="Theme" uid="uid://b0ci0o4ry5ldo" path="res://gui/debug_theme.tres" id="4_1vvct"]
 [ext_resource type="PackedScene" uid="uid://colf3fgh55ffe" path="res://gui/health_bar/health_bar.tscn" id="5_0c5jd"]
 [ext_resource type="PackedScene" uid="uid://bpi3hyw3wfasa" path="res://game/harbinger.tscn" id="5_vkoai"]
-[ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
-[ext_resource type="AudioStream" uid="uid://ckjujkos4hxr2" path="res://game/bone_rattle.mp3" id="7_h8hqd"]
+[ext_resource type="AudioStream" uid="uid://o4m1rueexvjv" path="res://game/main_theme.ogg" id="8_epd81"]
+[ext_resource type="AudioStream" uid="uid://dbtmc16rwu01l" path="res://game/bone_rattle.ogg" id="9_0r2lr"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
 viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
@@ -171,13 +171,13 @@ size_flags_vertical = 2
 
 [node name="MainThemeSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_1xwjt")
+stream = ExtResource("8_epd81")
 autoplay = true
 bus = &"Music"
 
 [node name="BoneRattleSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_h8hqd")
+stream = ExtResource("9_0r2lr")
 
 [node name="MagicianMurmurSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
