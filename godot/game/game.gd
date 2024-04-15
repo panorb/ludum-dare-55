@@ -18,7 +18,7 @@ const LEVEL_VIEW_MOVEMENT_SCALE = 1.45
 const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
 
 var delay = 0.0
-
+var sec_since_last_magician_sfx = 0.0
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -42,6 +42,12 @@ func _process(delta):
 	%CalculatedCameraLabel.text = "Calc. Camera: " + str(get_environment_camera_pos_from_level_x(level.get_level_view_x()))
 	%LevelViewLabel.text = "Level: " + str(level.get_level_view_x())
 	%CalculatedLevelViewLabel.text = "Calc. Level: " + str(get_level_x_from_environment_camera_pos(environment.get_camera_position()))
+	
+	sec_since_last_magician_sfx += delta
+	if sec_since_last_magician_sfx > 5 && randi()%50 == 0:
+		var sound: AudioStreamPlayer = %BoneRattleSound# if randi()%2 == 0 else %MagicianMurmurSound
+		sound.play()
+		sec_since_last_magician_sfx = -sound.stream.get_length()
 	
 	if randi()%30 == 0:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
