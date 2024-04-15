@@ -1,7 +1,9 @@
 extends Entity
+class_name LaserIndicator
 
 
 @onready var indicator = %Indicator
+@onready var laser_radius_indicator = %TextureRadiusIndicator
 
 enum {STATE_IDLE, STATE_FOLLOWING, STATE_DYING}
 
@@ -29,6 +31,7 @@ func _process(delta):
 	if lifetime <= 0.0:
 		queue_free()
 	indicator.rotate(delta * 1.0)
+	scale = Vector2.ONE * (sin(Time.get_ticks_msec() / 1000.0) * 0.5 + 1.0)
 	
 	handle_current_state(delta)
 	
