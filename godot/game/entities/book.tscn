@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/entities/book.gd" id="1_1g6qc"]
 [ext_resource type="Texture2D" uid="uid://c5etd2p6161dk" path="res://game/entities/book_placeholder.png" id="2_p4cxu"]
 
-[node name="Book" type="Area2D"]
+[node name="Book" type="Area2D" groups=["edge-warn"]]
 position = Vector2(1, -1)
 scale = Vector2(0.25, 0.25)
 collision_layer = 2

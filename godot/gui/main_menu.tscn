@@ -53,20 +53,49 @@ text = "QUIT_BUTTON"
 [node name="Spacer" type="Control" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="SfxHBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SoundImage" type="TextureRect" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SfxSoundLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "SFX_SLIDER_LABEL"
+
+[node name="SfxSoundImage" type="TextureRect" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SoundSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SfxSoundSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 scrollable = false
 
-[node name="SoundPercentLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SfxSoundPercentLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/SfxHBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="MusicHBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicSoundLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "MUSIC_SLIDER_LABEL"
+
+[node name="MusicSoundImage" type="TextureRect" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MusicSoundSlider" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+scrollable = false
+
+[node name="MusicSoundPercentLabel" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicHBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2

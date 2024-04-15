@@ -1,6 +1,6 @@
 extends Entity
 
-const GRAVITY = 2
+const GRAVITY = 9
 
 var speed
 

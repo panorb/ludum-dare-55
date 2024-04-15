@@ -8,7 +8,7 @@ addons/
 godot/.DS_Store
 
 # translations
-´godot/translations.en.translation
+godot/translations.en.translation
 godot/translations.de.translation
 
 # build

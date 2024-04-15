@@ -1,15 +1,23 @@
 extends Node2D
 
-var viewport_size = Vector2.ONE
+var viewport_size := Vector2.ONE
 var size
 #@onready var player := %EntityContainer/Player
 @onready var entities := %EntityContainer
 @onready var indicator := %Indicator
 @onready var vertical_boundaries := %VerticalBoundaries
+@onready var player = %Player
+@onready var player_2 = %Player2
+@onready var target_marker_p_1 = %TargetMarkerP1
+@onready var target_marker_p_2 = %TargetMarkerP2
 
 var total_level_width := 0.0
 
 const BOOK = preload("res://game/entities/book.tscn")
+
+func _ready():
+	player.target_marker = target_marker_p_1
+	player_2.target_marker = target_marker_p_2
 
 func _process(delta):
 	if vertical_boundaries:
@@ -33,7 +41,7 @@ func _add_book(x, y, speed_x=0.0, speed_y=0.0):
 	var book = BOOK.instantiate()
 	book.init(x, y, speed_x, speed_y)
 	book.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	book._create_copies(total_level_width)
+	#book._create_copies(total_level_width)
 	book.connect_signals(self)
 	entities.add_child(book)
 
