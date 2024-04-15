@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bimr6vox3j4xt"]
+[gd_scene load_steps=20 format=3 uid="uid://bimr6vox3j4xt"]
 
 [ext_resource type="Script" path="res://gui/end_screen/lose/lose_screen.gd" id="1_0371o"]
 [ext_resource type="Texture2D" uid="uid://ia0aln3qa5ww" path="res://gui/end_screen/lose/game_over_bg.png" id="2_wvvrp"]
@@ -8,6 +8,39 @@
 [ext_resource type="Texture2D" uid="uid://du5olmj3fmpgs" path="res://gui/end_screen/lose/game_over_wings.png" id="6_1rt7m"]
 [ext_resource type="Texture2D" uid="uid://nmw5spcggjku" path="res://gui/end_screen/lose/game_over_text_restart.png" id="7_dmmjp"]
 [ext_resource type="AudioStream" uid="uid://dolg0bm4c612g" path="res://gui/end_screen/lose/lose_music.ogg" id="8_f72hg"]
+[ext_resource type="AudioStream" uid="uid://c8mh4k2uoeyqd" path="res://gui/end_screen/lose/lost_sound/lost-01.ogg" id="9_cfiwx"]
+[ext_resource type="AudioStream" uid="uid://ccbasrql05oij" path="res://gui/end_screen/lose/lost_sound/lost-02.ogg" id="10_so6v4"]
+[ext_resource type="AudioStream" uid="uid://8t8lo5nb4rn0" path="res://gui/end_screen/lose/lost_sound/lost-03.ogg" id="11_uu1c4"]
+[ext_resource type="AudioStream" uid="uid://bvrt4i7sdhyen" path="res://gui/end_screen/lose/lost_sound/lost-04.ogg" id="12_cralf"]
+[ext_resource type="AudioStream" uid="uid://ca6k0e60hppcj" path="res://gui/end_screen/lose/lost_sound/lost-05.ogg" id="13_d10rm"]
+[ext_resource type="AudioStream" uid="uid://bp4i0cfu1lck4" path="res://gui/end_screen/lose/lost_sound/lost-06.ogg" id="14_plspq"]
+[ext_resource type="AudioStream" uid="uid://c06d7wi3gy5qr" path="res://gui/end_screen/lose/lost_sound/lost-07.ogg" id="15_7j02b"]
+[ext_resource type="AudioStream" uid="uid://dahv0u8iunl5g" path="res://gui/end_screen/lose/lost_sound/lost-08.ogg" id="16_bsbxl"]
+[ext_resource type="AudioStream" uid="uid://obspcbkyjiem" path="res://gui/end_screen/lose/lost_sound/lost-09.ogg" id="17_0lgbu"]
+[ext_resource type="AudioStream" uid="uid://df21s4d1ntgfd" path="res://gui/end_screen/lose/lost_sound/lost-10.ogg" id="18_so3t6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4qn7e"]
+streams_count = 10
+stream_0/stream = ExtResource("9_cfiwx")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("10_so6v4")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("11_uu1c4")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("12_cralf")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("13_d10rm")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("14_plspq")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("15_7j02b")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("16_bsbxl")
+stream_7/weight = 1.0
+stream_8/stream = ExtResource("17_0lgbu")
+stream_8/weight = 1.0
+stream_9/stream = ExtResource("18_so3t6")
+stream_9/weight = 1.0
 
 [node name="LoseScreen" type="Control"]
 layout_mode = 3
@@ -88,3 +121,8 @@ texture = ExtResource("7_dmmjp")
 stream = ExtResource("8_f72hg")
 autoplay = true
 bus = &"Music"
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_4qn7e")
+autoplay = true
+bus = &"SFX"
