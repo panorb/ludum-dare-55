@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://wwe1ojobhi71"]
 
 [ext_resource type="Script" path="res://environment/environment.gd" id="1_c4stx"]
-[ext_resource type="Material" uid="uid://ch6p6o1xbi5f6" path="res://environment/mage_billboard_material.tres" id="2_321os"]
+[ext_resource type="Material" uid="uid://cnnhv5mwin3tm" path="res://environment/mage_billboard_material.tres" id="2_321os"]
 [ext_resource type="PackedScene" uid="uid://da2xdlh66qcg7" path="res://environment/Wall.glb" id="2_dyitu"]
 [ext_resource type="PackedScene" uid="uid://c5gmgjo0lqr3t" path="res://environment/win_animation/win_animation_scene.tscn" id="2_hbdu1"]
 [ext_resource type="PackedScene" uid="uid://b40j3r10ixkal" path="res://environment/floor.glb" id="2_wtw0m"]
