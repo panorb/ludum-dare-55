@@ -189,7 +189,9 @@ func project_screen_to_world(screen_pos: Vector2) -> Vector3:
 	return world_point
 
 func aim_laser(screen_space: Vector2):
-	var coords = project_screen_to_world(screen_space)
+	var environment_dimensions = Vector2(environment_viewport.size)
+	var environment_coords = screen_space * environment_dimensions / get_viewport_rect().size
+	var coords = project_screen_to_world(environment_coords)
 	print("Coords: ", coords)
 
 	# rotate the laser to point at the click
