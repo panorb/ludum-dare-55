@@ -27,6 +27,7 @@ const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
 const FREE_MOVEMENT_ZONE_WIDTH = 50
 
 var delay = 0.0
+var sec_since_last_magician_sfx = 0.0
 
 signal show_lose_screen
 signal show_win_screen
@@ -64,6 +65,12 @@ func _process(delta):
 	var left_minutes : int = game_timer.time_left / 60
 	var left_seconds : int = int(game_timer.time_left) % 60
 	timer_label.text = "%d:%02d" % [left_minutes, left_seconds]
+	
+	sec_since_last_magician_sfx += delta
+	if sec_since_last_magician_sfx > 5 && randi()%50 == 0:
+		var sound: AudioStreamPlayer = %BoneRattleSound if randi()%2 == 0 else %WizardSounds
+		sound.play()
+		sec_since_last_magician_sfx = -sound.stream.get_length()
 
 	var r = randi()%300
 	if r > 0 and r <= 10:
@@ -154,6 +161,7 @@ func _ready():
 	
 	for i in range(player_count):
 		players[i].health_changed.connect(environment.on_player_health_changed)
+		players[i].health_changed.connect(music_switcher)
 	environment.uniform_changed.connect(on_post_processing_uniform_changed)
 
 func initialize_laser(laser:Node3D, indicator: Node2D):
@@ -177,6 +185,11 @@ func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
 	show_win_screen.emit()
+
+func music_switcher(_old_health, new_health):
+	if new_health < 200 && %MainThemeSound.playing:
+		%MainThemeSound.stop()
+		%ThreatensToLoseSound.play()
 
 func _on_player_death():
 	var player_alive_count = 0
