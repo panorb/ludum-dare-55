@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=28 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
@@ -7,7 +7,22 @@
 [ext_resource type="Theme" uid="uid://b0ci0o4ry5ldo" path="res://gui/debug_theme.tres" id="4_1vvct"]
 [ext_resource type="PackedScene" uid="uid://colf3fgh55ffe" path="res://gui/health_bar/health_bar.tscn" id="5_0c5jd"]
 [ext_resource type="PackedScene" uid="uid://ddwbuwu7gq8h6" path="res://game/harbinger.tscn" id="5_vkoai"]
-[ext_resource type="AudioStream" uid="uid://c71i3uqounwi3" path="res://game/main_theme.mp3" id="6_1xwjt"]
+[ext_resource type="AudioStream" uid="uid://o4m1rueexvjv" path="res://game/main_theme.ogg" id="8_epd81"]
+[ext_resource type="AudioStream" uid="uid://dbtmc16rwu01l" path="res://game/bone_rattle.ogg" id="9_0r2lr"]
+[ext_resource type="AudioStream" uid="uid://ex6tdseyyhud" path="res://gui/main_menu_theme.ogg" id="9_rs726"]
+[ext_resource type="AudioStream" uid="uid://dp143f5im5tqh" path="res://game/wizard-audio/wizard-01.ogg" id="11_61ga1"]
+[ext_resource type="AudioStream" uid="uid://dofi6fj6foemm" path="res://game/wizard-audio/wizard-02.ogg" id="12_k6u8l"]
+[ext_resource type="AudioStream" uid="uid://bdo4llh8i24c6" path="res://game/wizard-audio/wizard-11.ogg" id="13_08x4h"]
+[ext_resource type="AudioStream" uid="uid://d35dxg86y1ink" path="res://game/wizard-audio/wizard-12.ogg" id="14_e76w2"]
+[ext_resource type="AudioStream" uid="uid://cr515yqw5kjts" path="res://game/wizard-audio/wizard-13.ogg" id="15_3ubq4"]
+[ext_resource type="AudioStream" uid="uid://cfwoxhbs86gbr" path="res://game/wizard-audio/wizard-03.ogg" id="16_uc183"]
+[ext_resource type="AudioStream" uid="uid://cw4na1h2ad735" path="res://game/wizard-audio/wizard-04.ogg" id="17_rtxmt"]
+[ext_resource type="AudioStream" uid="uid://wjv134f434xg" path="res://game/wizard-audio/wizard-05.ogg" id="18_dtfaw"]
+[ext_resource type="AudioStream" uid="uid://dy5c8j6ajp640" path="res://game/wizard-audio/wizard-06.ogg" id="19_41bxt"]
+[ext_resource type="AudioStream" uid="uid://cvhkuy0h5dko7" path="res://game/wizard-audio/wizard-07.ogg" id="20_cj05s"]
+[ext_resource type="AudioStream" uid="uid://dmr4v6fwrhrac" path="res://game/wizard-audio/wizard-08.ogg" id="21_2woqk"]
+[ext_resource type="AudioStream" uid="uid://qgjuni3ls25a" path="res://game/wizard-audio/wizard-09.ogg" id="22_3v1l7"]
+[ext_resource type="AudioStream" uid="uid://caqessixu0ian" path="res://game/wizard-audio/wizard-10.ogg" id="23_dmc8e"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
 viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
@@ -24,6 +39,35 @@ shader_parameter/u_abbrLevel = 0.5
 shader_parameter/u_abbrEnv = 1.5
 shader_parameter/u_shakeX = null
 shader_parameter/u_shakeY = null
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fi7l6"]
+streams_count = 13
+stream_0/stream = ExtResource("11_61ga1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_k6u8l")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("16_uc183")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("17_rtxmt")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("18_dtfaw")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("19_41bxt")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("20_cj05s")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("21_2woqk")
+stream_7/weight = 1.0
+stream_8/stream = ExtResource("22_3v1l7")
+stream_8/weight = 1.0
+stream_9/stream = ExtResource("23_dmc8e")
+stream_9/weight = 1.0
+stream_10/stream = ExtResource("13_08x4h")
+stream_10/weight = 1.0
+stream_11/stream = ExtResource("14_e76w2")
+stream_11/weight = 1.0
+stream_12/stream = ExtResource("15_3ubq4")
+stream_12/weight = 1.0
 
 [sub_resource type="Theme" id="Theme_o4fla"]
 Label/colors/font_color = Color(0.635294, 0.243137, 0.54902, 1)
@@ -197,8 +241,23 @@ vertical_alignment = 1
 
 [node name="MainThemeSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_1xwjt")
+stream = ExtResource("8_epd81")
 autoplay = true
 bus = &"Music"
+
+[node name="ThreatensToLoseSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_rs726")
+bus = &"Music"
+
+[node name="BoneRattleSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_0r2lr")
+bus = &"SFX"
+
+[node name="WizardSounds" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_fi7l6")
+bus = &"SFX"
 
 [connection signal="gui_input" from="LevelTexture" to="." method="_on_level_texture_gui_input"]
