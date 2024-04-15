@@ -4,6 +4,7 @@ class_name LaserIndicator
 
 @onready var indicator = %Indicator
 @onready var laser_radius_indicator = %TextureRadiusIndicator
+@onready var laser_cont_sound:AudioStreamPlayer = %LaserContSound
 
 enum {STATE_IDLE, STATE_FOLLOWING, STATE_DYING}
 
@@ -14,6 +15,7 @@ var state_time = 0.0
 func _ready():
 	damage = 50
 	change_state(STATE_FOLLOWING)
+	laser_cont_sound.play()
 	super()
 
 var lifetime = 25.0

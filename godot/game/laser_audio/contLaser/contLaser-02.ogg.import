@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/contLaser-02.ogg-d7dd11e4471df97e686ac87ce4b7
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
