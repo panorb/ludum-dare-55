@@ -128,29 +128,24 @@ func set_health(value):
 	if _health <= 0 and old_value > 0:
 		set_active(false)
 		died.emit()
-		print("died emitted")
 
 func heal(value):
 	set_health(min(_health+value, _max_health))
 
 func become_invulnerable(value):
 	invul_timer.start(value)
-	print("became invulnerable")
 	invul_shield.visible = true
 
 func boost_speed(value):
 	speed_boost_timer.start(value)
-	print("became speed")
 
 func take_damage(value):
-	print("ouchy")
-	print(i_frame_timer.time_left)
 	if not i_frame_timer.is_stopped():
 		return
-	print(invul_timer.time_left, invul_timer.is_stopped())
+  
 	if not invul_timer.is_stopped():
 		return
-
+  
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
 	i_frame_sprite.visible = true
