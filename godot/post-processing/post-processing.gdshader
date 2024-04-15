@@ -46,8 +46,8 @@ void fragment() {
 	// chromatic abberation
 	vec2 distFromCenter = uv - 0.5;
 
-	float aberrationAmountEnv = .5;
-	float aberrationAmountLevel = .3;
+	float aberrationAmountEnv = .2;
+	float aberrationAmountLevel = .1;
 
 	vec2 p = vec2(my_pow_22(distFromCenter.x),my_pow_22(distFromCenter.y));
 	vec2 aberratedEnv = aberrationAmountEnv * p*u_abbrEnv;
