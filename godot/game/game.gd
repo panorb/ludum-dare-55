@@ -1,3 +1,5 @@
+class_name Game
+
 extends Control
 
 @onready var level_viewport := %LevelViewport
@@ -18,6 +20,9 @@ const ENVIRONMENT_CAMERA_MOVEMENT_SCALE = 0.0005
 const FREE_MOVEMENT_ZONE_WIDTH = 50
 
 var delay = 0.0
+
+signal show_lose_screen
+signal show_win_screen
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -132,7 +137,7 @@ func _ready():
 func on_game_timeout():
 	print("you win")
 	game_timer.queue_free()
-	get_tree().change_scene_to_file("res://gui/end_screen/win_screen.tscn")
+	show_win_screen.emit()
 
 func _on_player_death():
 	var player_alive_count = 0
@@ -142,8 +147,8 @@ func _on_player_death():
 	if player_alive_count <= 0:
 		game_timer.stop()
 		print("you lose")
-		get_tree().call_deferred("change_scene","res://gui/end_screen/lose_screen.tscn" )
-		
+		show_lose_screen.emit()
+
 
 
 func project_screen_to_world(screen_pos: Vector2) -> Vector3:
