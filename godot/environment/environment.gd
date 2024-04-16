@@ -20,8 +20,9 @@ var storm_speed = 1.
 var global_time = 0.
 var damage_time = 0.
 var health = 0.
+var win_anim_started = false
 
-var win_anim_timer = 0.
+var win_anim_timer = 1.
 
 # see set_game_progress_ratio
 const spawn_sandwich_at_progress = 0.85
@@ -63,7 +64,7 @@ func _process(delta):
 		damage_time -= delta*3.;
 	if damage_time < 0:
 		damage_time = 0
-	if win_anim_timer > 0:
+	if win_anim_started and win_anim_timer > 0:
 		win_anim_timer -= delta;
 		$DirectionalLight3D2.set_visible(true)
 		$DayLight.set_visible(true)
@@ -135,4 +136,5 @@ func _on_win_animation_finisched():
 	win_finisched.emit()
 
 func _on_win_animation_started():
+	win_anim_started = true
 	win_anim_timer = 1.
