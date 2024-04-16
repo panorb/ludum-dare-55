@@ -72,6 +72,11 @@ func _add_powerup(x, y, speed_x, speed_y, type=PowerUps.HEAL):
 func get_laser_count():
 	return laser_target_container.get_child_count()
 
+func kill_lasers():
+	for laser in laser_target_container.get_children():
+		laser_target_container.remove_child(laser)
+		laser.queue_free() 
+
 func page_spawn(book):
 	var page = PAGE.instantiate()
 	page.position = book.position
