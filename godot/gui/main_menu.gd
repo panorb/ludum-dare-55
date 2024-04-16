@@ -43,6 +43,10 @@ func _ready():
 		sfx_sound_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(sfx_bus_name))) * 100
 		music_sound_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(music_bus_name))) * 100
 
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		start_game.emit()
+
 func _on_credits_button_pressed() -> void:
 	var credits := credits_scene.instantiate()
 	add_child(credits)
