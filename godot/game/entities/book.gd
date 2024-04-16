@@ -12,7 +12,7 @@ var page_spawn_timer = null
 var has_spawned = false
 
 func init(start_x, start_y, speed_x, speed_y):
-	damage = 200
+	damage = 45
 	position.x = start_x
 	position.y = start_y
 	speed = Vector2(speed_x, speed_y)
@@ -31,7 +31,8 @@ func _ready():
 
 func _move(delta):
 	position += speed*delta
-	speed.y += GRAVITY
+	#speed.y += GRAVITY
+	speed.y = min(speed.y+GRAVITY, 200)
 	rotation += rot_speed
 	if position.y > 400:
 		queue_free()

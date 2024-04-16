@@ -75,15 +75,15 @@ func _process(delta):
 			dir = -1
 		#var x = (dir*600+player_pos.x+level.get_player_offset())
 		var x = player_pos.x-level.get_player_offset()+dir*350
-		var speed_x = -dir*(100+randi()%300)
-		x -= speed_x/4
+		var speed_x = -dir*(100+randi()%200)
+		x -= speed_x/2
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 		environment.feedback("spawn_object")
 	if r == 8 and level.get_laser_count() < 4:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var laser_pos = Vector2(randi()%1280-640, randi()%720-360)
-		if (player_pos-laser_pos).length() > 100:
+		if (player_pos-laser_pos).length() > 200:
 			spawn_laser(player_pos+laser_pos)
 	
 	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
