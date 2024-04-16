@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://b6vdodg7abiu4" path="res://game/book_audio/book-03.ogg" id="32_0talu"]
 [ext_resource type="AudioStream" uid="uid://dxms26h0xht4b" path="res://game/book_audio/book-04.ogg" id="33_robl4"]
 [ext_resource type="AudioStream" uid="uid://bj7pesvxxoand" path="res://game/book_audio/book-05.ogg" id="34_bm7dj"]
+[ext_resource type="AudioStream" uid="uid://bju4whw5tytcg" path="res://entity/fly_sounds/death.ogg" id="30_f5yum"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
 viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
@@ -318,6 +319,8 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_3oysr")
 volume_db = -9.079
+[node name="FlyDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_f5yum")
 bus = &"SFX"
 
 [connection signal="gui_input" from="LevelTexture" to="." method="_on_level_texture_gui_input"]

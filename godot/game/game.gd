@@ -64,7 +64,8 @@ func _process(delta):
 	sec_since_last_magician_sfx += delta
 	if sec_since_last_magician_sfx > 5 && randi()%50 == 0:
 		var sound: AudioStreamPlayer = %BoneRattleSound if randi()%2 == 0 else %WizardSounds
-		sound.play()
+		if death_timer.is_stopped():
+			sound.play()
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
 	
@@ -77,7 +78,8 @@ func _process(delta):
 			dir = -1
 		#var x = (dir*600+player_pos.x+level.get_player_offset())
 		var x = player_pos.x-level.get_player_offset()+dir*350
-		var speed_x = -dir*(100+randi()%300)
+		var speed_x = -dir*(100+randi()%200)
+		x -= speed_x/2
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
 		var bookSound: AudioStreamPlayer = %BookSpawnSound
@@ -86,7 +88,7 @@ func _process(delta):
 	if r == 8 and level.get_laser_count() < 4:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var laser_pos = Vector2(randi()%1280-640, randi()%720-360)
-		if (player_pos-laser_pos).length() > 100:
+		if (player_pos-laser_pos).length() > 200:
 			spawn_laser(player_pos+laser_pos)
 			var impactSound: AudioStreamPlayer = %LaserImpactSound
 			impactSound.play()
@@ -199,9 +201,13 @@ func music_switcher(_old_health, new_health):
 	if new_health < 200 && %MainThemeSound.playing:
 		%MainThemeSound.stop()
 		%ThreatensToLoseSound.play()
+	elif new_health <= 0:
+		%MainThemeSound.stop()
+		%ThreatensToLoseSound.stop()
 
 func _on_player_death():
 	game_timer.paused = true
+	$FlyDeathSound.play()
 	death_timer.start()
 
 func _on_game_end():
