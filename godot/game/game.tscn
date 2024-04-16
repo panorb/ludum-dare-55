@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=43 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
@@ -30,6 +30,11 @@
 [ext_resource type="AudioStream" uid="uid://df47u5bpotubu" path="res://game/laser_audio/contLaser-03.ogg" id="28_4p5kd"]
 [ext_resource type="AudioStream" uid="uid://drcuprebyty71" path="res://game/laser_audio/contLaser-04.ogg" id="29_ogutq"]
 [ext_resource type="AudioStream" uid="uid://bju4whw5tytcg" path="res://entity/fly_sounds/death.ogg" id="30_f5yum"]
+[ext_resource type="AudioStream" uid="uid://bt4sckkvhw0ft" path="res://game/book_audio/book-01.ogg" id="30_l006m"]
+[ext_resource type="AudioStream" uid="uid://5eh7kf2l1ske" path="res://game/book_audio/book-02.ogg" id="31_8qwrp"]
+[ext_resource type="AudioStream" uid="uid://b6vdodg7abiu4" path="res://game/book_audio/book-03.ogg" id="32_0talu"]
+[ext_resource type="AudioStream" uid="uid://dxms26h0xht4b" path="res://game/book_audio/book-04.ogg" id="33_robl4"]
+[ext_resource type="AudioStream" uid="uid://bj7pesvxxoand" path="res://game/book_audio/book-05.ogg" id="34_bm7dj"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
 viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
@@ -93,6 +98,19 @@ stream_2/stream = ExtResource("28_4p5kd")
 stream_2/weight = 1.0
 stream_3/stream = ExtResource("29_ogutq")
 stream_3/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3oysr"]
+streams_count = 5
+stream_0/stream = ExtResource("30_l006m")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("31_8qwrp")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("32_0talu")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("33_robl4")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("34_bm7dj")
+stream_4/weight = 1.0
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -296,6 +314,11 @@ stream = SubResource("AudioStreamRandomizer_04udv")
 volume_db = -10.0
 max_polyphony = 2
 bus = &"SFX"
+
+[node name="BookSpawnSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_3oysr")
+volume_db = -9.079
 
 [node name="FlyDeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_f5yum")

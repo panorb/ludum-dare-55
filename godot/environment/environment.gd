@@ -66,16 +66,16 @@ func _process(delta):
 		damage_time = 0
 	if win_anim_started and win_anim_timer > 0:
 		win_anim_timer -= delta;
-		$DirectionalLight3D2.set_visible(true)
-		$DayLight.set_visible(true)
-		$DirectionalLight3D2.light_energy = (1.-win_anim_timer)*3.
-		$DayLight.light_energy = (1.-win_anim_timer)*2.
-		$DirectionalLight3D.light_energy = win_anim_timer
-		$WindowLamp1.light_energy = win_anim_timer
-		$WindowLamp2.light_energy = win_anim_timer
-		$WindowLamp3.light_energy = win_anim_timer
-		$WindowLamp4.light_energy = win_anim_timer
-		$TableLamp.light_energy = win_anim_timer
+		#$DirectionalLight3D2.set_visible(true)
+		#$DayLight.set_visible(true)
+		#$DirectionalLight3D2.light_energy = (1.-win_anim_timer)*3.
+		#$DayLight.light_energy = (1.-win_anim_timer)*2.
+		#$DirectionalLight3D.light_energy = win_anim_timer
+		#$WindowLamp1.light_energy = win_anim_timer
+		#$WindowLamp2.light_energy = win_anim_timer
+		#$WindowLamp3.light_energy = win_anim_timer
+		#$WindowLamp4.light_energy = win_anim_timer
+		#$TableLamp.light_energy = win_anim_timer
 	if win_anim_timer < 0:
 		win_anim_timer = 0
 	
