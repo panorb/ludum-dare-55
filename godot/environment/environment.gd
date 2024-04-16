@@ -25,7 +25,7 @@ var win_anim_started = false
 var win_anim_timer = 1.
 
 # see set_game_progress_ratio
-const spawn_sandwich_at_progress = 0.85
+const spawn_sandwich_at_progress = 0.96
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

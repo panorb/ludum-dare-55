@@ -69,7 +69,7 @@ func _process(delta):
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
 	var r = randi()%(450+int(game_timer.time_left*1.5))
-	if game_timer.time_left < 25.0:
+	if game_timer.time_left < 9.0:
 		r = 10
 		level.kill_lasers()
 	if r > 0 and r <= 7:
