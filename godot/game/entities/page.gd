@@ -11,7 +11,7 @@ var rot_speed = 0.0
 var has_spawned = false
 
 func init(start_x, start_y, speed_x, speed_y):
-	damage = 100
+	damage = 15
 	position.x = start_x
 	position.y = start_y
 	speed = Vector2(speed_x, speed_y)
@@ -26,7 +26,7 @@ func _ready():
 
 func _move(delta):
 	position += speed*delta
-	speed.y += GRAVITY
+	speed.y = min(speed.y+GRAVITY, 150)
 	rotation += rot_speed
 	if position.y < -200:
 		queue_free()
