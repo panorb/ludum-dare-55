@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dayu6wxnccwhm"]
+[gd_scene load_steps=43 format=3 uid="uid://dayu6wxnccwhm"]
 
 [ext_resource type="PackedScene" uid="uid://wwe1ojobhi71" path="res://environment/environment.tscn" id="1_vykj5"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_y27ob"]
@@ -29,12 +29,12 @@
 [ext_resource type="AudioStream" uid="uid://bnlajf1citqu6" path="res://game/laser_audio/contLaser-02.ogg" id="27_q6vvj"]
 [ext_resource type="AudioStream" uid="uid://df47u5bpotubu" path="res://game/laser_audio/contLaser-03.ogg" id="28_4p5kd"]
 [ext_resource type="AudioStream" uid="uid://drcuprebyty71" path="res://game/laser_audio/contLaser-04.ogg" id="29_ogutq"]
+[ext_resource type="AudioStream" uid="uid://bju4whw5tytcg" path="res://entity/fly_sounds/death.ogg" id="30_f5yum"]
 [ext_resource type="AudioStream" uid="uid://bt4sckkvhw0ft" path="res://game/book_audio/book-01.ogg" id="30_l006m"]
 [ext_resource type="AudioStream" uid="uid://5eh7kf2l1ske" path="res://game/book_audio/book-02.ogg" id="31_8qwrp"]
 [ext_resource type="AudioStream" uid="uid://b6vdodg7abiu4" path="res://game/book_audio/book-03.ogg" id="32_0talu"]
 [ext_resource type="AudioStream" uid="uid://dxms26h0xht4b" path="res://game/book_audio/book-04.ogg" id="33_robl4"]
 [ext_resource type="AudioStream" uid="uid://bj7pesvxxoand" path="res://game/book_audio/book-05.ogg" id="34_bm7dj"]
-[ext_resource type="AudioStream" uid="uid://bju4whw5tytcg" path="res://entity/fly_sounds/death.ogg" id="30_f5yum"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tjoow"]
 viewport_path = NodePath("EnvironmentTexture/EnvironmentViewport")
@@ -319,6 +319,7 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_3oysr")
 volume_db = -9.079
+
 [node name="FlyDeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_f5yum")
 bus = &"SFX"
