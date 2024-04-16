@@ -107,9 +107,9 @@ texture = ExtResource("5_vprr0")
 custom_minimum_size = Vector2(180, 216)
 layout_mode = 0
 offset_left = 913.0
-offset_top = -10.0
+offset_top = 12.0
 offset_right = 1093.0
-offset_bottom = 206.0
+offset_bottom = 228.0
 texture = SubResource("AnimatedTexture_1xdyh")
 
 [node name="WinMusic" type="AudioStreamPlayer" parent="."]
