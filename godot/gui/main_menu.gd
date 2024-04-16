@@ -16,6 +16,9 @@ signal start_game
 @onready var music_bus_name := 'Music'
 
 const credits_scene := preload("res://gui/credits.tscn")
+
+# Check if menu initilized sound
+static var initilized_sounds = false
 const START_SFX_VOLUME_PERCENTAGE = 60
 const START_MUSIC_VOLUME_PERCENTAGE = 20
 
@@ -30,10 +33,15 @@ func _ready():
 	if OS.has_feature('web'):
 		quit_button.visible = false
 
-	sfx_sound_slider.value = START_SFX_VOLUME_PERCENTAGE
-	music_sound_slider.value = START_MUSIC_VOLUME_PERCENTAGE
-	set_bus_volume(sfx_bus_name, START_SFX_VOLUME_PERCENTAGE, sfx_sound_percent_label)
-	set_bus_volume(music_bus_name, START_MUSIC_VOLUME_PERCENTAGE, music_sound_percent_label)
+	if !initilized_sounds:
+		sfx_sound_slider.value = START_SFX_VOLUME_PERCENTAGE
+		music_sound_slider.value = START_MUSIC_VOLUME_PERCENTAGE
+		set_bus_volume(sfx_bus_name, START_SFX_VOLUME_PERCENTAGE, sfx_sound_percent_label)
+		set_bus_volume(music_bus_name, START_MUSIC_VOLUME_PERCENTAGE, music_sound_percent_label)
+		initilized_sounds = true
+	else:
+		sfx_sound_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(sfx_bus_name))) * 100
+		music_sound_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(music_bus_name))) * 100
 
 func _on_credits_button_pressed() -> void:
 	var credits := credits_scene.instantiate()

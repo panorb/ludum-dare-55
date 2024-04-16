@@ -20,6 +20,9 @@ var storm_speed = 1.
 var global_time = 0.
 var damage_time = 0.
 var health = 0.
+var win_anim_started = false
+
+var win_anim_timer = 1.
 
 # see set_game_progress_ratio
 const spawn_sandwich_at_progress = 0.85
@@ -27,6 +30,7 @@ const spawn_sandwich_at_progress = 0.85
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	win_animation_scene.win_animation_finisched.connect(_on_win_animation_finisched)
+	win_animation_scene.win_animation_started.connect(_on_win_animation_started)
 
 func get_camera_position():
 	return camera_origin.rotation_degrees.y / 360.0
@@ -60,30 +64,44 @@ func _process(delta):
 		damage_time -= delta*3.;
 	if damage_time < 0:
 		damage_time = 0
+	if win_anim_started and win_anim_timer > 0:
+		win_anim_timer -= delta;
+		$DirectionalLight3D2.set_visible(true)
+		$DayLight.set_visible(true)
+		$DirectionalLight3D2.light_energy = (1.-win_anim_timer)*3.
+		$DayLight.light_energy = (1.-win_anim_timer)*2.
+		$DirectionalLight3D.light_energy = win_anim_timer
+		$WindowLamp1.light_energy = win_anim_timer
+		$WindowLamp2.light_energy = win_anim_timer
+		$WindowLamp3.light_energy = win_anim_timer
+		$WindowLamp4.light_energy = win_anim_timer
+		$TableLamp.light_energy = win_anim_timer
+	if win_anim_timer < 0:
+		win_anim_timer = 0
 	
 	# set uniforms
-	pentagram.material_override["shader_parameter/u_height"] = pent_bright
-	storm.material_override["shader_parameter/u_stormOpacity"] = .25+.5*game_progress
+	pentagram.material_override["shader_parameter/u_height"] = pent_bright*win_anim_timer
+	storm.material_override["shader_parameter/u_stormOpacity"] = .25+.5*game_progress*win_anim_timer
 	storm.material_override["shader_parameter/u_stormSpeed"] = storm_timer
 	storm.material_override["shader_parameter/u_stormStr"] = game_progress
 	
 	if int(global_time) % 5 < .25:
-		uniform_changed.emit("u_invert",abs(sin(global_time*10.))*.15)
+		uniform_changed.emit("u_invert",abs(sin(global_time*10.))*.15*win_anim_timer)
 	else:
-		uniform_changed.emit("u_invert",-abs(sin(global_time))*.05)
+		uniform_changed.emit("u_invert",-abs(sin(global_time))*.05*win_anim_timer)
 	
-	uniform_changed.emit("u_filmgrain",0.5+game_progress*.5)
-	uniform_changed.emit("u_vignette",-game_progress)
+	uniform_changed.emit("u_filmgrain",(0.5+game_progress*.5)*win_anim_timer)
+	uniform_changed.emit("u_vignette",-game_progress*win_anim_timer)
 	
 	#uniform_changed.emit("u_abbrLevel",sin(global_time))
 	if damage_time > 0:
 		var rx = randf()
 		var ry = randf()
-		uniform_changed.emit("u_abbrEnv",.5+2*damage_time)
-		uniform_changed.emit("u_shakeX",rx*damage_time*.02)
-		uniform_changed.emit("u_shakeY",ry*damage_time*.02)
+		uniform_changed.emit("u_abbrEnv",.5*win_anim_timer+2*damage_time*win_anim_timer)
+		uniform_changed.emit("u_shakeX",rx*damage_time*.02*win_anim_timer)
+		uniform_changed.emit("u_shakeY",ry*damage_time*.02*win_anim_timer)
 	else:
-		uniform_changed.emit("u_abbrEnv",.5)
+		uniform_changed.emit("u_abbrEnv",.5*win_anim_timer)
 		uniform_changed.emit("u_shakeX",0.)
 		uniform_changed.emit("u_shakeY",0.)
 
@@ -117,3 +135,6 @@ func win():
 func _on_win_animation_finisched():
 	win_finisched.emit()
 
+func _on_win_animation_started():
+	win_anim_started = true
+	win_anim_timer = 1.
