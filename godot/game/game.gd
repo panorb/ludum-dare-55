@@ -80,6 +80,8 @@ func _process(delta):
 		var speed_x = -dir*(100+randi()%300)
 		var speed_y = randi() % 200-200
 		level._add_book(x, y, speed_x, speed_y)
+		var bookSound: AudioStreamPlayer = %BookSpawnSound
+		bookSound.play()
 		environment.feedback("spawn_object")
 	if r == 8 and level.get_laser_count() < 4:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
