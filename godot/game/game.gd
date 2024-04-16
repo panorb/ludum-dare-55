@@ -64,7 +64,8 @@ func _process(delta):
 	sec_since_last_magician_sfx += delta
 	if sec_since_last_magician_sfx > 5 && randi()%50 == 0:
 		var sound: AudioStreamPlayer = %BoneRattleSound if randi()%2 == 0 else %WizardSounds
-		sound.play()
+		if death_timer.is_stopped():
+			sound.play()
 		sec_since_last_magician_sfx = -sound.stream.get_length()
 
 	
@@ -197,9 +198,13 @@ func music_switcher(_old_health, new_health):
 	if new_health < 200 && %MainThemeSound.playing:
 		%MainThemeSound.stop()
 		%ThreatensToLoseSound.play()
+	elif new_health <= 0:
+		%MainThemeSound.stop()
+		%ThreatensToLoseSound.stop()
 
 func _on_player_death():
 	game_timer.paused = true
+	$FlyDeathSound.play()
 	death_timer.start()
 
 func _on_game_end():
