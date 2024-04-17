@@ -71,6 +71,7 @@ frame_progress = 0.792901
 [node name="ExplainerPanel" type="Panel" parent="MarginContainer"]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 layout_mode = 2
 
 [node name="BackgroundRect" type="TextureRect" parent="MarginContainer/ExplainerPanel"]
