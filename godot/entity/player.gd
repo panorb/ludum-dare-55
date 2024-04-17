@@ -108,7 +108,7 @@ func _process(delta):
 	if direction.length() > 2:
 		direction = direction.normalized()
 	
-		velocity += direction * speed * delta
+		velocity += direction * speed * 1./60.
 		rotation = direction.angle()
 	i_frame_sprite.rotation = -rotation
 	invul_shield.rotation = -rotation
@@ -152,10 +152,10 @@ func boost_speed(value):
 func take_damage(value):
 	if not i_frame_timer.is_stopped():
 		return
-  
+	
 	if not invul_timer.is_stopped():
 		return
-  
+	
 	set_health(_health-value)
 	i_frame_timer.start(I_FRAME_DURATION)
 	i_frame_sprite.visible = true
