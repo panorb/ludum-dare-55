@@ -96,7 +96,7 @@ func _process(delta):
 		bookSound.play()
 		environment.feedback("spawn_object")
 	
-	if randf()*masterProbability < 1: #r == 8 and level.get_laser_count() < 4:
+	if randf()*masterProbability < 1 and level.get_laser_count() < 4: #r == 8 and level.get_laser_count() < 4:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var laser_pos = Vector2(randi()%1280-640, randi()%720-360)
 		if (player_pos-laser_pos).length() > 200:
