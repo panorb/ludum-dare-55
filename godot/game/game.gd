@@ -67,12 +67,26 @@ func _process(delta):
 		if death_timer.is_stopped():
 			sound.play()
 		sec_since_last_magician_sfx = -sound.stream.get_length()
-
-	var r = randi()%(450+int(game_timer.time_left*1.5))
+	
+	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
+	
+	# spawn objects
+	
+	# range used for random calculations
+	# scale with time to increase likelyhood of objects spawning near the end
+	var master_probability = 450.+game_timer.time_left*1.5
+	# increase range on higher refreshrates
+	#TODO this should ideally be the inverse multiplied onto the probabilities itself
+	master_probability = master_probability*(1./60.)/delta
+	
+	#TODO rewrite return / move into function
 	if game_timer.time_left < 9.0:
-		r = 10
 		level.kill_lasers()
-	if r > 0 and r <= 7:
+		return
+	
+	#TODO reusing rand makes for uncleaner code but is less efficient, maybe there is another approach?
+	#TODO define proper probabilities
+	if randf()*master_probability < 7:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
@@ -87,7 +101,8 @@ func _process(delta):
 		var bookSound: AudioStreamPlayer = %BookSpawnSound
 		bookSound.play()
 		environment.feedback("spawn_object")
-	if r == 8 and level.get_laser_count() < 4:
+	
+	if randf()*master_probability < 1 and level.get_laser_count() < 4:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var laser_pos = Vector2(randi()%1280-640, randi()%720-360)
 		if (player_pos-laser_pos).length() > 200:
@@ -95,9 +110,7 @@ func _process(delta):
 			var impactSound: AudioStreamPlayer = %LaserImpactSound
 			impactSound.play()
 	
-	environment.set_game_progress_ratio(1.-game_timer.time_left/max_game_time)
-	
-	if r == 0:
+	if randf()*master_probability < 1:
 		var player_pos = get_tree().get_nodes_in_group("player")[0].position
 		var dir = (randi() % 2)
 		var y = randi()%180
