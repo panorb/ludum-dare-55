@@ -26,6 +26,9 @@ jobs:
       - name: Unpacke Godot
         run: unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 
+      - name: Create Godot export files
+        run: ./Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --quit --editor ./godot/project.godot
+
       - name: Export for Web
         run: |
           mkdir -p ./build/web/
