@@ -1,0 +1,33 @@
+name: Web Export
+on: [ push ]
+
+env:
+  GODOT_VERSION: 4.2.2
+
+jobs:
+  web-export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Godot (v${{ env.GODOT_VERSION }})
+        run: wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+
+      - name: Download Godot Templates (v${{ env.GODOT_VERSION }})
+        run: wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+
+      - name: Unpackage Template
+        run: |
+          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          cp templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Unpacke Godot
+        run: unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+
+      - name: Export for Web
+        run: |
+          mkdir -p ./build/web/
+          ./Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless ./godot/project.godot --export-release "Web" ../build/web/index.html
+
